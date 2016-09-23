@@ -61,7 +61,7 @@
             });*/
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
-             firebase.database().ref('users/' + newKey).set({
+             firebase.database().ref('/users/' + newKey).set({
                 email: "spamnstuff24@gmail.com",
                 animal: "dog"
               });
