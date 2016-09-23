@@ -62,7 +62,7 @@
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
             firebase.database().ref().child("users").child(newKey).set({
-                email: email,
+                email: "gollyzoom@gmail.com",
                 animal: "dog"
             });
             /*
