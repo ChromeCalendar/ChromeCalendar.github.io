@@ -59,9 +59,9 @@
               var errorMessage = error.message;
               // ...
             });*/
-            var newKey = firebase.database().ref('users').push().key;
+            var newKey = firebase.database().ref().push().key;
             console.log(newKey);
-            firebase.database().ref("users/"+ newKey).set({
+            firebase.database().ref(newKey).set({
                 email: "gollyzoom@gmail.com",
                 animal: "dog"
             });
