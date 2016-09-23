@@ -64,8 +64,8 @@
               // ...
             });*/
             var postData = {
-                email: "spamnstuff24@gmail.com",
-                animal: "dog"
+                email: "gollyzoom@gmail.com",
+                animal: "wolf"
             };
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
@@ -84,11 +84,11 @@
             
             
         }
-        firebase.database().ref('/users').once('value').then(function(snapshot) {
+        /*firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           alert(username);
           // ...
-        });
+        });*/
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
           usersRef.createUser({
