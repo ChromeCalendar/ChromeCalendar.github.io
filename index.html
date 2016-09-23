@@ -59,13 +59,19 @@
               var errorMessage = error.message;
               // ...
             });*/
+            var postData = {
+                email: "spamnstuff24@gmail.com",
+                animal: "dog"
+            };
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
             alert(newKey);
-             firebase.database().ref('/users/' + newKey).set({
-                email: "spamnstuff24@gmail.com",
-                animal: "dog"
-              });
+            var updates = {};
+          updates['/users/' + newKey] = postData;
+          return firebase.database().ref().update(updates);
+             /*firebase.database().ref('/users/' + newKey).set({
+               
+              });*/
             /*
               firebase.database().ref('users/' + newKey).set({
                 email: email,
