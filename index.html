@@ -50,7 +50,7 @@
         function myFunction(){
             var email = $('#email').val();
             var pasword = $('#password').val();
-            console.log("clap your hands if you're pissed off");
+            console.log("xox");
             console.log(email);
             console.log(password);
             firebase.auth().createUserWithEmailAndPassword(email, pasword).catch(function(error) {
@@ -59,12 +59,13 @@
               var errorMessage = error.message;
               // ...
             });
-            var usersRef = firebase.database("chrome-calendar").child("users");
-            var newUserRef = usersRef.push();
-            postsRef.push().set({
+            var newKey = firebase.database().ref().child('users').push().key;
+            console.log(newKey);
+              firebase.database().ref('users/' + newKey).set({
                 email: email,
-                name: "fuck this shit"
-            });
+                animal: dog
+              });
+            
             
         }
     
