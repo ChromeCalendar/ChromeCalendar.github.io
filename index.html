@@ -60,7 +60,12 @@
               // ...
             });*/
             var newKey = firebase.database().ref().child('users').push().key;
-            console.log(newKey);/*
+            console.log(newKey);
+            firebase.database().ref().child("users").child(newKey).set({
+                email: email;
+                animal: dog
+            });
+            /*
               firebase.database().ref('users/' + newKey).set({
                 email: email,
                 animal: dog
