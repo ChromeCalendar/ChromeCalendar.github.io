@@ -63,7 +63,7 @@
             console.log(newKey);
             firebase.database().ref().child("users").child(newKey).set({
                 email: email,
-                animal: dog
+                animal: "dog"
             });
             /*
               firebase.database().ref('users/' + newKey).set({
