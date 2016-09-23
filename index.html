@@ -59,7 +59,7 @@
               var errorMessage = error.message;
               // ...
             });
-            var usersRef = ref.child("users");
+            var usersRef = firebase.database(chrome-calendar).child("users");
             var newUserRef = usersRef.push();
             postsRef.push().set({
                 email: email,
