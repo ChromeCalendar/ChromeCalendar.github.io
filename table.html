@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #3</th>
+            <th>Period #4</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -80,7 +80,7 @@
             this.numID = numID;
             this.color = color;
         }
-        var clicked = 0;
+        
         for(var j = 0;j < 4;j++){
             for(var k = 0;k < 5;k++){
                 //var temp = Math.floor((Math.random() * 2));
@@ -114,9 +114,13 @@
                 });
                
             }
+            if(j == 3){
+                myFunction();
+            }
         }
-        myFunction();
+        //myFunction();
         function myFunction(){
+         var clicked = 0;
          console.log("yoyoy");
             for(var i = 0;i < 4;i++){
                 var one = taken[clicked][0];
