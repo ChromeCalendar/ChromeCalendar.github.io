@@ -4,10 +4,10 @@ body{
     background-size: cover;
 }
 td{
-    background-color:cornflowerblue;
+    background-color: rgba(6,53,69,1);
 }
 thead{
-    background-color: midnightblue;
+    background-color: #09092a;
     color:white;
 }
 table{
@@ -19,11 +19,11 @@ table{
     background-color: deepskyblue;
     color: black;
 }
-#yes{
+.yes{
     background-color: #00ccff;
     color: black;
 }
-#no{
+.no{
     background-color: #0d1a26;
     
 }

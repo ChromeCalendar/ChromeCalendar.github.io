@@ -23,10 +23,12 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
     </head>
     <body>
+    <button class="btn btn-primary" onclick="Clear()">Clear</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
+            <th>Period #</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -53,8 +55,13 @@
     <script>
         
         var taken = [];
+        var selected = [];
         for(var p = 0;p < 4;p++){
             taken[p] = [];
+        }
+        function Clickable (numID, color) {
+            this.numID = numID;
+            this.color = color;
         }
         var clicked = 0;
         for(var j = 0;j < 4;j++){
@@ -73,15 +80,42 @@
         myFunction();
         function myFunction(){
          console.log("yoyoy");
-            for(var i = 1;i <= 4;i++){
+            for(var i = 0;i < 4;i++){
                 var one = taken[clicked][0];
                 var two = taken[clicked][1];
                 var three = taken[clicked][2];
                 var four = taken[clicked][3];
                 var five = taken[clicked][4];
                 clicked++;
-                $('#myTable tr:last').after('<tr><td id=' + one +'>'+i+'</td><td id=' + two +'>'+i+'</td><td id=' + three +'>'+i+'</td><td id=' + four +'>'+i+'</td><td id=' + five +'>'+i+'</td></tr>'); 
+                $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'>'+(1+i*5).toString()+'</td><td class=' + two +' id= '+(2+i*5).toString()+'>'+(2+i*5).toString()+'</td><td class=' + three +' id= '+(3+i*5).toString()+'>'+(3+i*5).toString()+'</td><td class=' + four +' id= '+(4+i*5).toString()+'>'+(4+i*5).toString()+'</td>'+(5+i*5).toString()+'<td class=' + five +' id=  '+(5+i*5).toString()+'>'+(5+i*5).toString()+'</td></tr>'); 
             }
+        }
+        $(document).ready(function() {
+            $("table").click(function(event) {
+                alert(event.target.id);
+                var ID = event.target.id;
+                var Color = $('#'+ID).attr("class");
+                //alert(Color);
+                $('#'+ID).css('background-color','gold');
+                $('#'+ID).css('color','black');
+                selected.push(new Clickable(ID,Color));
+            });
+        });
+        
+        function Clear(){
+            console.log("sup");
+            for(var q = 0;q < selected.length;q++){
+                console.log("x0x");
+                if(selected[q].color === "no"){
+                    $('#'+selected[q].numID).css('background-color','#0d1a26');
+                    $('#'+selected[q].numID).css('color','white');
+                }
+                else{
+                    $('#'+selected[q].numID).css('background-color','#00ccff');
+                    $('#'+selected[q].numID).css('color','black');
+                }
+            }
+            selected.length = 0;
         }
     </script>
     </body>
