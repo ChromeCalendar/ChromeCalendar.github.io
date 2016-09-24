@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #2</th>
+            <th>Period #4</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -82,12 +82,20 @@
         }
         var j = 0;
         var k = 0;
+        var dfd = $.Deferred();
         for(j = 0;j < 4;j++){
             for(k = 0;k < 5;k++){
+                
+                checkAvailable(j,k);
                 //var temp = Math.floor((Math.random() * 2));
                 //console.log("temp "+temp);
-                console.log("really " + k +"what " + j);
-                var freeCarts = false;
+                console.log("really " + j +"what " + k);
+                
+               
+            }
+        }
+        function checkAvailable(j,k){
+            var freeCarts = false;
                 var cartsRef = firebase.database().ref().child('carts');
                 cartsRef.on("value", function(snapshot) {
                     var numCarts = snapshot.numChildren();
@@ -125,8 +133,6 @@
                   });
                     
                 });
-               
-            }
         }
         //myFunction();
         function myFunction(){
