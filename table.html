@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #10</th>
+            <th>Period #11</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -106,7 +106,6 @@
                         console.log("yo12");
                         freeCarts = true;
                     }
-                  });
                     if(freeCarts == true){
                         console.log("we are about to say yes");
                         taken[j][k] = "yes";
@@ -115,12 +114,14 @@
                         taken[j][k] = "no";
                     }
                     console.log("j" + j);
-                       console.log("k" + k);
-                        console.log("count" + count);
-                        console.log("numcarts" + numCarts);
-                       if((j === 4) && (k === 5) && (count === numCarts)){
+                    console.log("k" + k);
+                    console.log("count" + count);
+                    console.log("numcarts" + numCarts);
+                    if((j === 4) && (k === 5) && (count === numCarts)){
                            myFunction();
-                       }
+                     }
+                  });
+                    
                 });
                
             }
