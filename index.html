@@ -87,7 +87,7 @@
             
         }
         var userRef = firebase.database().ref('/users');
-        userRefRef.on('child_added', function(snapshot) {
+        userRef.on('child_added', function(snapshot) {
           //userRef(postElement, snapshot.val());
             var newUser = snapshot.val();
             alert(newUser.keyCode);
