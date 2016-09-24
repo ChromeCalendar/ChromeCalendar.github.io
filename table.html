@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #6</th>
+            <th>Period #7</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -71,10 +71,60 @@
         Ref.on("value", function(snapshot) {
               var reset = snapshot.val();
               alert(reset.beenSet);
+               if(reset.beenSet === "false"){
+                   refill();
+                   firebase.database().ref().set({
+                       beenSet = "true";
+                   });
+               }
         });
-        
         var UID = sessionStorage.getItem('UID');
         alert("UID " + UID);
+        function refill(){
+             for(var n = 0;n < 5;n++){
+                 var cartLink;
+                 if(n === 0){
+                     cartLink = "cartOne";
+                 }
+                 else if(n === 1){
+                     cartLink = "cartTwo";
+                 }
+                 else if(n === 2){
+                     cartLink = "cartThree";
+                 }
+                 else if(n === 3){
+                     cartLink = "cartFour";
+                 }
+                 else if(n === 4){
+                     cartLink = "cartFive";
+                 }
+                 else if(n === 5){
+                     cartLink = "cartSix";
+                 }
+                 firebase.database().ref('/carts/' + cartLink + "/availability").set({
+                    one: "true",
+                    two: "true",
+                    three: "true",
+                    four: "true",
+                    five: "true",
+                    six: "true",
+                    seven: "true",
+                    eight: "true",
+                    nine: "true",
+                    ten: "true",
+                    eleven: "true",
+                    twelve: "true",
+                    thirteen: "true",
+                    fourteen: "true",
+                    fifteen: "true",
+                    sixteen: "true",
+                    seventeen: "true",
+                    eighteen: "true",
+                    nineteen: "true",
+                    twenty: "true"
+                  });
+             }
+        }
         var taken = [];
         var selected = [];
         for(var p = 0;p < 5;p++){
