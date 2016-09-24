@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #1</th>
+            <th>Period #2</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -86,7 +86,7 @@
             for(k = 0;k < 5;k++){
                 //var temp = Math.floor((Math.random() * 2));
                 //console.log("temp "+temp);
-                
+                console.log("really " + k +"what " + j);
                 var freeCarts = false;
                 var cartsRef = firebase.database().ref().child('carts');
                 cartsRef.on("value", function(snapshot) {
