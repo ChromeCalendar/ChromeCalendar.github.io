@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button id = "submit" class="btn btn-primary" onclick="myFunction()"><a href="table.html">Sign Up2</a></button>
+          <button class="btn btn-primary" onclick="myFunction()"><a id = "submit" href="table.html">Sign Up3</a></button>
         </form>
 
     </body>
@@ -51,7 +51,8 @@
       firebase.initializeApp(config);
         $(document).keypress(function(event){
             if(event.keyCode == 13){
-                $("#submit").click();   //OR $("#Enter").trigger('click');
+                alert("enter pressed");
+                $("#submit").trigger('click');
             }
         });
         function myFunction(){
