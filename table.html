@@ -104,28 +104,14 @@
                  else if(n === 5){
                      cartLink = "cartSix";
                  }
-                 firebase.database().ref('/carts/' + cartLink + "/availability").set({
-                    one: "true",
-                    two: "true",
-                    three: "true",
-                    four: "true",
-                    five: "true",
-                    six: "true",
-                    seven: "true",
-                    eight: "true",
-                    nine: "true",
-                    ten: "true",
-                    eleven: "true",
-                    twelve: "true",
-                    thirteen: "true",
-                    fourteen: "true",
-                    fifteen: "true",
-                    sixteen: "true",
-                    seventeen: "true",
-                    eighteen: "true",
-                    nineteen: "true",
-                    twenty: "true"
-                  });
+                 for(var w = 0;w < 5;w++){
+                     firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
+                        one: "true",
+                        two: "true",
+                        three: "true",
+                        four: "true",
+                      });
+                 }
              }
         }
         var taken = [];
