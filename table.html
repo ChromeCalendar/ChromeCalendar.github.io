@@ -67,10 +67,10 @@
           //alert(username);
           // ...
         });
-        var resetRef = firebase.database().ref().child('beenSet');
-        resetRef.on("value", function(snapshot) {
-              var reset = snapshot.val().beenSet;
-              alert(reset);
+        var Ref = firebase.database().ref();
+        Ref.on("value", function(snapshot) {
+              var reset = snapshot.val();
+              alert(reset.beenSet);
         });
         
         var UID = sessionStorage.getItem('UID');
