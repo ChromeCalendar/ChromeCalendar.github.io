@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #2</th>
+            <th>Period #3</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -104,10 +104,11 @@
                         freeCarts = true;
                     }
                   });
-                    if(freeCarts === true){
+                    if(freeCarts == true){
+                        console.log("we are about to say yes");
                         taken[j][k] = "yes";
                     }
-                    else if(freeCarts === false){
+                    else if(freeCarts == false){
                         taken[j][k] = "no";
                     }
                 });
