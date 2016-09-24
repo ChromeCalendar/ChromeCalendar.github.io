@@ -86,11 +86,18 @@
             
             
         }
+        /*var userRef = firebase.database().ref('/users');
+        userRefRef.on('child_added', function(snapshot) {
+          //userRef(postElement, snapshot.val());
+            var newUser = snapshot.val();
+            alert(newUser.keyCode);
+        });*/
         firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           //alert(username);
           // ...
         });
+        
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
           usersRef.createUser({
