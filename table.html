@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #8</th>
+            <th>Period #9</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -89,9 +89,12 @@
                 var freeCarts = false;
                 var cartsRef = firebase.database().ref().child('carts');
                 cartsRef.on("value", function(snapshot) {
+                    var numCarts = snapshot.numChildren();
+                    var count = 0;
                   // The callback function will get called twice, once for "fred" and once for "barney"
                     console.log("in cartsref");
                     snapshot.forEach(function(childSnapshot) {
+                    count++;
                     console.log("per cart");
                     // key will be "fred" the first time and "barney" the second time
                     //var key = childSnapshot.key();
@@ -111,13 +114,15 @@
                     else if(freeCarts == false){
                         taken[j][k] = "no";
                     }
-                    
+                    console.log("j" + j);
+                       console.log("k" + k);
+                        console.log("count" + count);
+                        console.log("numcarts" + numCarts);
+                       if((j === 4) && (k === 5) && (count === numCarts)){
+                           myFunction();
+                       }
                 });
-               console.log("j" + j);
-               console.log("k" + k);
-               if((j === 4) && (k === 5)){
-                   myFunction();
-               }
+               
             }
         }
         //myFunction();
