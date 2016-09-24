@@ -83,15 +83,10 @@
         var clicked = 0;
         for(var j = 0;j < 4;j++){
             for(var k = 0;k < 5;k++){
-                var temp = Math.floor((Math.random() * 2));
-                console.log("temp "+temp);
-                if(temp === 1){
-                    taken[j][k] = "yes";
-                }
-                if(temp === 0){
-                    taken[j][k] = "no";
-                }
+                //var temp = Math.floor((Math.random() * 2));
+                //console.log("temp "+temp);
                 
+                var freeCarts = false;
                 var cartsRef = firebase.database().ref().child('carts');
                 cartsRef.on("value", function(snapshot) {
                   // The callback function will get called twice, once for "fred" and once for "barney"
@@ -103,10 +98,18 @@
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
                     var available = childData.available;
+                    if(available === "true"){
+                        freeCarts = true;
+                    }
                     console.log(available);
                   });
                 });
-                
+                if(freeCarts === true){
+                    taken[j][k] = "yes";
+                }
+                if(temp === false){
+                    taken[j][k] = "no";
+                }
             }
         }
         myFunction();
