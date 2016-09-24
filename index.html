@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Sign Up</button>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up1</button>
         </form>
 
     </body>
@@ -86,12 +86,12 @@
             
             
         }
-        /*var userRef = firebase.database().ref('/users');
+        var userRef = firebase.database().ref('/users');
         userRefRef.on('child_added', function(snapshot) {
           //userRef(postElement, snapshot.val());
             var newUser = snapshot.val();
             alert(newUser.keyCode);
-        });*/
+        });
         firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           //alert(username);
