@@ -73,9 +73,12 @@
               alert(reset.beenSet);
                if(reset.beenSet === "false"){
                    refill();
-                   firebase.database().ref().set({
+                   var updates = {};
+                   updates['/beenSet'] = "true";
+                   firebase.database().ref().update(updates);
+                   /*firebase.database().ref().set({
                        beenSet = "true"
-                   });
+                   });*/
                }
         });
         var UID = sessionStorage.getItem('UID');
