@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #5</th>
+            <th>Period #6</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -67,7 +67,11 @@
           //alert(username);
           // ...
         });
-        
+        var resetRef = firebase.database().ref().child('beenSet');
+        resetRef.on("value", function(snapshot) {
+              var reset = snapshot.val().beenSet;
+              alert(reset);
+        });
         
         var UID = sessionStorage.getItem('UID');
         alert("UID " + UID);
