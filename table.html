@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #</th>
+            <th>Period #1</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -99,7 +99,7 @@
                     var childData = childSnapshot.val();
                     var available = childData.available;
                     console.log(available);
-                    if(available === true){
+                    if(available === "true"){
                         console.log("yo12");
                         freeCarts = true;
                     }
