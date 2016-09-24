@@ -11,7 +11,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta name="google-signin-client_id" content="583488732443-0qrkltufodphbtveim4vv0nhsf5qijog.apps.googleusercontent.com">
-
+<link rel="stylesheet" type="text/css" href="index.css">
 <html>
     <head>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -19,24 +19,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
         
-        
+        <link href="https://fonts.googleapis.com/css?family=Alegreya|Courgette|Lobster+Two" rel="stylesheet">
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
     </head>
     <body>
-        <p>??r??</p>
         <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
         
         <form>
             <div class = "form-group">
-              <p>email:</p>
+              <div id="whiteText">email:</div>
               <input type="text" name="email" id="email">
-              <p>password:</p>
+              <div id="whiteText">password:</div>
               <input type="text" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Free cookies</button>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up</button>
         </form>
 
     </body>
@@ -53,11 +52,11 @@
         
         function myFunction(){
             var email = $('#email').val();
-            var pasword = $('#password').val();
+            var password = $('#password').val();
             console.log("xox");
             console.log(email);
             console.log(password);
-            firebase.auth().createUserWithEmailAndPassword(email, pasword).catch(function(error) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
@@ -69,7 +68,7 @@
             };
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
-            alert(newKey);
+            //alert(newKey);
             var updates = {};
           updates['/users/' + newKey] = postData;
           return firebase.database().ref().update(updates);
