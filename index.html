@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()"><a href="table.html">Sign Up2</a></button>
+          <button id = "submit" class="btn btn-primary" onclick="myFunction()"><a href="table.html">Sign Up2</a></button>
         </form>
 
     </body>
@@ -49,7 +49,11 @@
         messagingSenderId: "583488732443"
       };
       firebase.initializeApp(config);
-        
+        $(document).keypress(function(event){
+            if(event.keyCode == 13){
+                $("#submit").click();   //OR $("#Enter").trigger('click');
+            }
+        });
         function myFunction(){
             var email = $('#email').val();
             var password = $('#password').val();
