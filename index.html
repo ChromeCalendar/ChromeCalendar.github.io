@@ -69,6 +69,7 @@
             };
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
+            sessionStorage.setItem('UID', newKey);
             //alert(newKey);
             var updates = {};
           updates['/users/' + newKey] = postData;
