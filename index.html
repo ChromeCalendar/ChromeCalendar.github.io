@@ -54,13 +54,13 @@
             var email = $('#email').val();
             var password = $('#password').val();
             console.log("xox");
-            alert(email);
+            //alert(email);
             console.log(password);
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
-              alert(error.message);
+              //alert(error.message);
               // ...
             });
             var postData = {
@@ -75,7 +75,7 @@
           //return firebase.database().ref().update(updates);
           //window.location.replace("table.html");    
             firebase.database().ref().update(updates);
-            alert("let's try");
+            //alert("let's try");
             //window.location.replace("https://chromecalendar.github.io/table.html");    
              /*firebase.database().ref('/users/' + newKey).set({
                
