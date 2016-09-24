@@ -98,7 +98,7 @@
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
                     var available = childData.available;
-                    if(available === "true"){
+                    if(available === true){
                         freeCarts = true;
                     }
                     console.log(available);
@@ -107,7 +107,7 @@
                 if(freeCarts === true){
                     taken[j][k] = "yes";
                 }
-                if(freeCarts === false){
+                else if(freeCarts === false){
                     taken[j][k] = "no";
                 }
             }
