@@ -1,0 +1,35 @@
+body{
+    font-family: 'Courgette', cursive;
+    background-image: url(https://static.pexels.com/photos/29859/pexels-photo-29859.jpg);
+    background-size: cover;
+}
+td{
+    background-color:cornflowerblue;
+}
+thead{
+    background-color: midnightblue;
+    color:white;
+}
+table{
+   /* margin: 60px;*/
+    
+}
+.btn-primary{
+    background-image:none;
+    background-color: deepskyblue;
+    color: black;
+}
+#yes{
+    background-color: #00ccff;
+    color: black;
+}
+#no{
+    background-color: #0d1a26;
+    
+}
+.container{
+    margin: 60px;
+    padding: 30;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,.4);
+}
