@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #7</th>
+            <th>Period #8</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -135,7 +135,6 @@
         }
         function Clickable (numID, color) {
             this.numID = numID;
-            this.color = color;
         }
         var j = 0;
         var k = 0;
@@ -158,22 +157,22 @@
                     var numCarts = snapshot.numChildren();
                     var count = 0;
                   // The callback function will get called twice, once for "fred" and once for "barney"
-                    console.log("in cartsref");
+                    //console.log("in cartsref");
                     snapshot.forEach(function(childSnapshot) {
                     count++;
-                    console.log("per cart");
+                   // console.log("per cart");
                     // key will be "fred" the first time and "barney" the second time
                     //var key = childSnapshot.key();
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
                     var available = childData.available;
-                    console.log(available);
+                    //console.log(available);
                     if(available === "true"){
-                        console.log("yo12");
+                        //console.log("yo12");
                         freeCarts = true;
                     }
                     if(freeCarts == true){
-                        console.log("we are about to say yes");
+                        //console.log("we are about to say yes");
                         taken[j][k] = "yes";
                     }
                     else if(freeCarts == false){
@@ -184,7 +183,7 @@
                     console.log("count" + count);
                     console.log("numcarts" + numCarts);
                     if((j === 3) && (k === 4) && (count === numCarts)){
-                           console.log("we are making a call");
+                           console.log("WE ARE MAKING A CALL");
                            myFunction();
                      }
                   });
