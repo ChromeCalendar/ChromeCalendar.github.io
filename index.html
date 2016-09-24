@@ -96,6 +96,7 @@
         }
         firebase.auth().onAuthStateChanged(function(user) {
           alert("auth state changed");
+          alert(user);
           if (user) {
             // User is signed in.
               alert("we are going");
