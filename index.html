@@ -42,13 +42,13 @@
     <script>
       // Initialize Firebase
        var config = {
-    apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
-    authDomain: "chrome-calendar.firebaseapp.com",
-    databaseURL: "https://chrome-calendar.firebaseio.com",
-    storageBucket: "chrome-calendar.appspot.com",
-    messagingSenderId: "583488732443"
-  };
-  firebase.initializeApp(config);
+        apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+        authDomain: "chrome-calendar.firebaseapp.com",
+        databaseURL: "https://chrome-calendar.firebaseio.com",
+        storageBucket: "chrome-calendar.appspot.com",
+        messagingSenderId: "583488732443"
+      };
+      firebase.initializeApp(config);
         
         function myFunction(){
             var email = $('#email').val();
@@ -72,6 +72,8 @@
             var updates = {};
           updates['/users/' + newKey] = postData;
           return firebase.database().ref().update(updates);
+          window.location.replace("table.html");    
+            
              /*firebase.database().ref('/users/' + newKey).set({
                
               });*/

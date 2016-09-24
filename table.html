@@ -54,6 +54,22 @@
     </div>
     <script>
         
+        var config = {
+          apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+          authDomain: "chrome-calendar.firebaseapp.com",
+          databaseURL: "https://chrome-calendar.firebaseio.com",
+          storageBucket: "chrome-calendar.appspot.com",
+          messagingSenderId: "583488732443"
+        };
+        firebase.initializeApp(config);
+        firebase.database().ref('/users').once('value').then(function(snapshot) {
+          var username = snapshot.val();
+          //alert(username);
+          // ...
+        });
+        
+        
+        
         var taken = [];
         var selected = [];
         for(var p = 0;p < 4;p++){
@@ -92,13 +108,15 @@
         }
         $(document).ready(function() {
             $("table").click(function(event) {
-                alert(event.target.id);
+                //alert(event.target.id);
                 var ID = event.target.id;
                 var Color = $('#'+ID).attr("class");
                 //alert(Color);
-                $('#'+ID).css('background-color','gold');
-                $('#'+ID).css('color','black');
-                selected.push(new Clickable(ID,Color));
+                if(Color === 'yes'){
+                    $('#'+ID).css('background-color','gold');
+                    $('#'+ID).css('color','black');
+                    selected.push(new Clickable(ID,Color));
+                }
             });
         });
         
