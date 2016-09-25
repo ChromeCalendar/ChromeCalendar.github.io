@@ -98,6 +98,7 @@
         function Create(email,password){
             localStorage.setItem('ready', 1);
             alert(localStorage.getItem('ready'));
+            changedCount = 1;
             console.log("creating");
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
@@ -112,8 +113,9 @@
         firebase.auth().onAuthStateChanged(function(user) {
           alert("auth state changed");
           alert(user);
-          var temp = localStorage.getItem('ready');
-          alert("temp" + temp);
+          alert("bro " + changedCount);
+          //var temp = localStorage.getItem('ready');
+          alert("temp " + localStorage.getItem('ready'));
           if(temp == 1){
               alert("switch time, bitches");
           }
