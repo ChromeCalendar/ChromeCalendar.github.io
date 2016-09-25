@@ -254,7 +254,7 @@
                  var updates = {};
                   updates['/carts/cartOne/availability/' + tagOne + '/' + tagTwo] = "false";
                   return firebase.database().ref().update(updates);
-                ClearTable(4);
+                
                 console.log("x0x");
                 if(selected[q].color === "no"){
                     $('#'+selected[q].numID).css('background-color','#0d1a26');
@@ -266,6 +266,7 @@
                 }
             }
             selected.length = 0;
+            ClearTable(4);
             //startFunc();
         }
         function ClearTable(until){
