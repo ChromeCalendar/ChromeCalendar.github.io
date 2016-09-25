@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #1</th>
+            <th>Period #2</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -211,6 +211,40 @@
         function Clear(){
             console.log("sup");
             for(var q = 0;q < selected.length;q++){
+                var tagOne;
+                var tagTwo;
+                var tempInt = parseInt(selected[q].numID,10);
+                if((tempInt >= 1) && (tempInt <= 5)){
+                    tagOne = '0';
+                    tagTwo = tempInt ;
+                }
+                else if((tempInt  >= 6) && (tempInt <= 10)){
+                    tagOne = '1';
+                    tagTwo = tempInt  - 5;
+                }
+                else if((tempInt  >= 11) && (tempInt  <= 15)){
+                    tagOne = '2';
+                    tagTwo = tempInt  - 10;
+                }
+                else if((tempInt >= 16) && (tempInt  <= 20)){
+                    tagOne = '3';
+                    tagTwo = tempInt - 15;
+                }
+                
+                if(tagTwo === 1){
+                    tagTwo = "one";
+                }
+                else if(tagTwo === 2){
+                    tagTwo = "two";
+                }
+                else if(tagTwo === 3){
+                    tagTwo = "three";
+                }
+                else if(tagTwo === 3){
+                    tagTwo = "four";
+                }
+                alert(tagOne);
+                alert(tagTwo);
                 
                 console.log("x0x");
                 if(selected[q].color === "no"){
