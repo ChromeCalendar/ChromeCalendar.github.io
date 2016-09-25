@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #9</th>
+            <th>Period #1</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -104,12 +104,13 @@
                  else if(n === 5){
                      cartLink = "cartSix";
                  }
-                 for(var w = 0;w < 5;w++){
+                 for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
                         one: "true",
                         two: "true",
                         three: "true",
-                        four: "true"
+                        four: "true",
+                        five: "true"
                       });
                  }
              }
@@ -210,6 +211,7 @@
         function Clear(){
             console.log("sup");
             for(var q = 0;q < selected.length;q++){
+                
                 console.log("x0x");
                 if(selected[q].color === "no"){
                     $('#'+selected[q].numID).css('background-color','#0d1a26');
@@ -221,6 +223,7 @@
                 }
             }
             selected.length = 0;
+            //startFunc();
         }
     </script>
     </body>
