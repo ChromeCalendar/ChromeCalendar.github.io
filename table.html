@@ -122,18 +122,21 @@
         function Clickable (numID, color) {
             this.numID = numID;
         }
-        var j = 0;
-        var k = 0;
-        var dfd = $.Deferred();
-        for(j = 0;j < 4;j++){
-            for(k = 0;k < 5;k++){
-                
-                checkAvailable(j,k);
-                //var temp = Math.floor((Math.random() * 2));
-                //console.log("temp "+temp);
-                console.log("really " + j +"what " + k);
-                
-               
+        startFunc();
+        function startFunc(){
+            var j = 0;
+            var k = 0;
+            var dfd = $.Deferred();
+            for(j = 0;j < 4;j++){
+                for(k = 0;k < 5;k++){
+
+                    checkAvailable(j,k);
+                    //var temp = Math.floor((Math.random() * 2));
+                    //console.log("temp "+temp);
+                    console.log("really " + j +"what " + k);
+
+
+                }
             }
         }
         function checkAvailable(j,k){
