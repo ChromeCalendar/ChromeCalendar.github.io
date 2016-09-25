@@ -41,6 +41,7 @@
 
     </body>
     <script>
+        setItem('ready', 0);
       // Initialize Firebase
        var changedCount = 0;
        jQuery.ajaxSetup({async:false});
@@ -95,6 +96,7 @@
             
         }
         function Create(email,password){
+            sessionStorage.setItem('ready', 1);
             console.log("creating");
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
@@ -109,18 +111,10 @@
         firebase.auth().onAuthStateChanged(function(user) {
           alert("auth state changed");
           alert(user);
-          changedCount++;
-          alert(changedCount);
-          if(changedCount == 1){
-              alert("in loop");
-              var tempMail = $('#email').val();
-              var tempPass = $('#password').val();
-              if(tempMail != ''){
-                  if(tempPass != ''){
-                      alert("switch time bitches");
-                  }
-              }
-              
+          var temp = sessionStorage.getItem('ready');
+          if(temp == 1){
+              alert("switch time, bitches");
+          }
           }
           if (user) {
             // User is signed in.
