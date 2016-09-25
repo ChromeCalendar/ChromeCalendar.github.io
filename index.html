@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Sign Up10</button>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up11</button>
           <a id = "submit" href="table.html"></a>
         </form>
 
@@ -97,7 +97,7 @@
         }
         function Create(email,password){
             localStorage.setItem('ready', 1);
-            alert(localStorage.getItem('ready'));
+            //alert(localStorage.getItem('ready'));
             changedCount = 1;
             console.log("creating");
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
@@ -117,7 +117,7 @@
           //var temp = localStorage.getItem('ready');
           //alert("temp " + localStorage.getItem('ready'));
           if(localStorage.getItem('ready') == 1){
-              alert("switch time, bitches");
+              //alert("switch time, bitches");
               localStorage.setItem('ready',0);
               window.location.href="table.html";
           }
