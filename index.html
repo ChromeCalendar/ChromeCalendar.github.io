@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Sign Up9</button>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up10</button>
           <a id = "submit" href="table.html"></a>
         </form>
 
@@ -119,11 +119,12 @@
           if(localStorage.getItem('ready') == 1){
               alert("switch time, bitches");
               localStorage.setItem('ready',0);
+              window.location.href="table.html";
           }
           if (user) {
             // User is signed in.
               alert("we are going");
-              window.location.href="table.html";
+             
           } else {
             // No user is signed in.
           }
