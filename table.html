@@ -211,7 +211,7 @@
         function Clear(){
             console.log("sup");
             for(var q = 0;q < selected.length;q++){
-                console.log("rawr");
+                console.log("rawr" + selected.length);
                 var tagOne;
                 var tagTwo;
                 var tempInt = parseInt(selected[q].numID,10);
@@ -232,8 +232,6 @@
                     tagOne = '3';
                     tagTwo = tempInt - 15;
                 }
-                
-                
                 
                 if(tagTwo === 1){
                     tagTwo = "one";
@@ -273,7 +271,7 @@
             for(var t = 0; t < until;t++){
                 $('#myTable tr:last').remove();
             }
-            startFunc();
+            //startFunc();
         }
     </script>
     </body>
