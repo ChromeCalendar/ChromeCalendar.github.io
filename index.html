@@ -36,6 +36,7 @@
               <input type="password" name="password" id="password">
             </div>
           <button class="btn btn-primary" onclick="myFunction()">Sign Up5</button>
+          <a id = "shift" href="table.html"></a>
         </form>
 
     </body>
@@ -51,12 +52,12 @@
         messagingSenderId: "583488732443"
       };
       firebase.initializeApp(config);
-        $(document).keypress(function(event){
+        /*$(document).keypress(function(event){
             if(event.keyCode == 13){
                 //alert("enter pressed");
                 $("#submit").trigger('click');
             }
-        });
+        });*/
         function myFunction(){
             var email = $('#email').val();
             var password = $('#password').val();
@@ -70,7 +71,8 @@
               //alert(error.message);
               // ...
             });
-            window.location.href="table.html";
+            reDirect();
+            //window.location.href="table.html";
             var postData = {
                 email: email,
                 animal: "wolf"
@@ -119,7 +121,9 @@
           //alert(username);
           // ...
         });
-        
+        function reDirect(){
+            $("#submit").trigger('click');
+        }
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
           usersRef.createUser({
