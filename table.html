@@ -251,7 +251,7 @@
                 
                  var updates = {};
                   updates['/carts/cartOne/availability/' + tagOne + '/' + tagTwo] = "false";
-                  return firebase.database().ref().update(updates);
+                  firebase.database().ref().update(updates);
                 
                 console.log("x0x");
                 if(selected[q].color === "no"){
@@ -269,6 +269,7 @@
         }
         function ClearTable(until){
             for(var t = 0; t < until;t++){
+                console.log("trying to clear here");
                 $('#myTable tr:last').remove();
             }
             //startFunc();
