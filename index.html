@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Sign Up8</button>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up9</button>
           <a id = "submit" href="table.html"></a>
         </form>
 
@@ -111,9 +111,12 @@
           alert(user);
           changedCount++;
           alert(changedCount);
-          if(changedCount === 1){
-              if($('#email').val() !== ''){
-                  if($('#password').val() !== ''){
+          if(changedCount == 1){
+              alert("in loop");
+              var tempMail = $('#email').val();
+              var tempPass = $('#password').val();
+              if(tempMail != ''){
+                  if(tempPass != ''){
                       alert("switch time bitches");
                   }
               }
