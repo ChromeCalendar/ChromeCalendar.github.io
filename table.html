@@ -28,7 +28,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #5</th>
+            <th>Period #6</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -193,7 +193,7 @@
                 clicked++;
                 $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'>'+(1+i*5).toString()+'</td><td class=' + two +' id= '+(2+i*5).toString()+'>'+(2+i*5).toString()+'</td><td class=' + three +' id= '+(3+i*5).toString()+'>'+(3+i*5).toString()+'</td><td class=' + four +' id= '+(4+i*5).toString()+'>'+(4+i*5).toString()+'</td>'+(5+i*5).toString()+'<td class=' + five +' id=  '+(5+i*5).toString()+'>'+(5+i*5).toString()+'</td></tr>'); 
             }
-            $('#myTable tr:last').remove();
+            //$('#myTable tr:last').remove();
         }
         $(document).ready(function() {
             $("table").click(function(event) {
@@ -265,7 +265,7 @@
                 }
             }
             selected.length = 0;
-            ClearTable(4);
+            //ClearTable(4);
             //startFunc();
         }
         function ClearTable(until){
