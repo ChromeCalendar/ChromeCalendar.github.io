@@ -102,6 +102,7 @@
               //alert(error.message);
               // ...
             });
+            setTimeout(reDirect, 3000)
         }
         firebase.auth().onAuthStateChanged(function(user) {
           alert("auth state changed");
@@ -125,10 +126,10 @@
           //alert(username);
           // ...
         });
-        /*function reDirect(){
+        function reDirect(){
             alert("i hope we get here");
             document.location.href = "table.html";
-        }*/
+        }
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
           usersRef.createUser({
