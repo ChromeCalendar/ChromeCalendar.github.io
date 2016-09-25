@@ -42,7 +42,7 @@
     </body>
     <script>
       // Initialize Firebase
-        changedCount = 0;
+       var changedCount = 0;
        jQuery.ajaxSetup({async:false});
         
        var config = {
@@ -110,7 +110,8 @@
           alert("auth state changed");
           alert(user);
           changedCount++;
-          if(changedCount==2){
+          alert(changedCount);
+          if(changedCount === 2){
               alert("switch time bitches");
           }
           if (user) {
