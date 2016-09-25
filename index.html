@@ -111,8 +111,13 @@
           alert(user);
           changedCount++;
           alert(changedCount);
-          if(changedCount === 2){
-              alert("switch time bitches");
+          if(changedCount === 1){
+              if($('#email').val() !== ''){
+                  if($('#password').val() !== ''){
+                      alert("switch time bitches");
+                  }
+              }
+              
           }
           if (user) {
             // User is signed in.
