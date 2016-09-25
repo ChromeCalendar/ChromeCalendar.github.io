@@ -214,6 +214,7 @@
                 var tagOne;
                 var tagTwo;
                 var tempInt = parseInt(selected[q].numID,10);
+                alert("wup");
                 if((tempInt >= 1) && (tempInt <= 5)){
                     tagOne = '0';
                     tagTwo = tempInt ;
@@ -231,6 +232,9 @@
                     tagTwo = tempInt - 15;
                 }
                 
+                alert(tagOne);
+                alert(tagTwo);
+                
                 if(tagTwo === 1){
                     tagTwo = "one";
                 }
@@ -243,8 +247,6 @@
                 else if(tagTwo === 3){
                     tagTwo = "four";
                 }
-                alert(tagOne);
-                alert(tagTwo);
                 
                 console.log("x0x");
                 if(selected[q].color === "no"){
