@@ -41,7 +41,7 @@
 
     </body>
     <script>
-        sessionStorage.setItem('ready', 0);
+        localStorage.setItem('ready', 0);
       // Initialize Firebase
        var changedCount = 0;
        jQuery.ajaxSetup({async:false});
@@ -75,7 +75,7 @@
             };
             var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
-            sessionStorage.setItem('UID', newKey);
+            localStorage.setItem('UID', newKey);
             //alert(newKey);
             var updates = {};
           updates['/users/' + newKey] = postData;
@@ -96,7 +96,8 @@
             
         }
         function Create(email,password){
-            sessionStorage.setItem('ready', 1);
+            localStorage.setItem('ready', 1);
+            alert(localStorage.getItem('ready'));
             console.log("creating");
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
@@ -111,7 +112,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
           alert("auth state changed");
           alert(user);
-          var temp = sessionStorage.getItem('ready');
+          var temp = localStorage.getItem('ready');
           alert("temp" + temp);
           if(temp == 1){
               alert("switch time, bitches");
