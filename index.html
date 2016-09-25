@@ -111,11 +111,11 @@
             //setTimeout(reDirect, 3000)
         }
         firebase.auth().onAuthStateChanged(function(user) {
-          alert("auth state changed");
-          alert(user);
-          alert("bro " + changedCount);
+          //alert("auth state changed");
+          //alert(user);
+          //alert("bro " + changedCount);
           //var temp = localStorage.getItem('ready');
-          alert("temp " + localStorage.getItem('ready'));
+          //alert("temp " + localStorage.getItem('ready'));
           if(localStorage.getItem('ready') == 1){
               alert("switch time, bitches");
               localStorage.setItem('ready',0);
@@ -123,7 +123,7 @@
           }
           if (user) {
             // User is signed in.
-              alert("we are going");
+              //alert("we are going");
              
           } else {
             // No user is signed in.
