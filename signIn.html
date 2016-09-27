@@ -1,0 +1,116 @@
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<meta name="google-signin-client_id" content="583488732443-0qrkltufodphbtveim4vv0nhsf5qijog.apps.googleusercontent.com">
+<link rel="stylesheet" type="text/css" href="index.css">
+<html>
+    <head>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
+        
+        <link href="https://fonts.googleapis.com/css?family=Alegreya|Courgette|Lobster+Two" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+    </head>
+    <body>
+        <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+        
+        <form>
+            <div class = "form-group">
+              <div id="whiteText">email:</div>
+              <input type="text" name="email" id="email">
+              <div id="whiteText">password:</div>
+              <input type="password" name="password" id="password">
+            </div>
+          <button class="btn btn-primary" onclick="myFunction()">Sign Up</button>
+          <a id = "submit" href="table.html"></a>
+        </form>
+
+    </body>
+    <script>
+        //localStorage.setItem('ready', 0);
+      // Initialize Firebase
+       var changedCount = 0;
+       jQuery.ajaxSetup({async:false});
+        
+       var config = {
+        apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+        authDomain: "chrome-calendar.firebaseapp.com",
+        databaseURL: "https://chrome-calendar.firebaseio.com",
+        storageBucket: "chrome-calendar.appspot.com",
+        messagingSenderId: "583488732443"
+      };
+      firebase.initializeApp(config);
+        function myFunction(){
+            var email = $('#email').val();
+            var password = $('#password').val();
+            console.log("xox");
+            //alert(email);
+            console.log(password);
+            Create(email,password);
+            //reDirect();
+            //window.location.href="table.html";
+            var postData = {
+                email: email,
+                animal: "wolf"
+            };
+            var newKey = firebase.database().ref().child('users').push().key;
+            console.log(newKey);
+            localStorage.setItem('UID', newKey);
+            //alert(newKey);
+            var updates = {};
+          updates['/users/' + newKey] = postData;
+            firebase.database().ref().update(updates);
+            
+            
+        }
+        function Create(email,password){
+            localStorage.setItem('ready', 1);
+            //alert(localStorage.getItem('ready'));
+            changedCount = 1;
+            console.log("creating");
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+                    }
+        firebase.auth().onAuthStateChanged(function(user) {
+         /* if(localStorage.getItem('ready') == 1){
+              localStorage.setItem('ready',0);
+              window.location.href="table.html";
+          }*/
+          if (user) {
+              window.location.href="table.html";
+            // User is signed in.
+              //alert("we are going");
+             
+          } else {
+            // No user is signed in.
+          }
+        });
+        firebase.database().ref('/users').once('value').then(function(snapshot) {
+          var username = snapshot.val();
+          //alert(username);
+          // ...
+        });
+        function reDirect(){
+            //alert("i hope we get here");
+            document.location.href = "table.html";
+        }
+    </script>
+</html>
