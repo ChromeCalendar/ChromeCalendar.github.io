@@ -1,0 +1,47 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+      <div class="container">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button id="btnSignUp" class="btn btn-secondary">Sign up</button>
+      </div>
+      <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js">
+          (function() {
+              
+              const config = {
+                apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+                authDomain: "chrome-calendar.firebaseapp.com",
+                databaseURL: "https://chrome-calendar.firebaseio.com",
+                storageBucket: "chrome-calendar.appspot.com",
+                //messagingSenderId: "583488732443"
+              };
+              firebase.initializeApp(config);
+              
+
+              const inputEmail = document.getElementById('email');
+              const inputPassword = document.getElementById('password');
+              const btnSignUp = document.getElementById('btnSignUp');
+
+              btnSignUp.addEventListener('click', e => {
+                const email = inputEmail.value;
+                const pass = inputPassword.value;
+                const auth = firebase.auth();
+
+                const promise = auth.createUserWithEmailAndPassword(email, pass);
+                promise.catch(e => console.log(e.message));
+              });
+
+              firebase.auth().onAuthStateChanged(firebaseUser => {
+                if(firebaseUser) {
+                  console.log(firebaseUser);
+                } else {
+                  console.log('not logged in');
+                }
+              });
+            }());
+      </script>
+</body>
+</html>
