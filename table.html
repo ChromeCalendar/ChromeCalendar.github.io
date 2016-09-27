@@ -87,7 +87,8 @@
         function signOut(){
             firebase.auth().signOut().then(function() {
               // Sign-out successful.
-                window.location.href="table.html";
+                //alert("yo signing out");
+                window.location.href="index.html";
             }, function(error) {
               // An error happened.
             });
