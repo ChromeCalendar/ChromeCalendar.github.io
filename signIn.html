@@ -81,7 +81,7 @@
             const promise = auth.signInUserWithEmailAndPassword(email, password);
             promise.catch(e => alert(e.message));
             /*const auth = firebase.auth();*/
-            firebase.authDomain = "https://chromecalendar.github.io";
+            //firebase.authDomain = "https://chromecalendar.github.io";
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
               alert(error.message);
