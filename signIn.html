@@ -63,17 +63,7 @@
             Create(email,password);
             //reDirect();
             //window.location.href="table.html";
-            var postData = {
-                email: email,
-                animal: "wolf"
-            };
-            var newKey = firebase.database().ref().child('users').push().key;
-            console.log(newKey);
-            localStorage.setItem('UID', newKey);
             //alert(newKey);
-            var updates = {};
-          updates['/users/' + newKey] = postData;
-            firebase.database().ref().update(updates);
             
             
         }
@@ -94,7 +84,10 @@
               localStorage.setItem('ready',0);
               window.location.href="table.html";
           }*/
+          alert("we're in");
           if (user) {
+              var uid = user.uid; 
+              alert(uid);
               window.location.href="table.html";
             // User is signed in.
               //alert("we are going");
