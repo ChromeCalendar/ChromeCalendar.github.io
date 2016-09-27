@@ -23,7 +23,8 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
     </head>
     <body>
-    <button class="btn btn-primary" onclick="Clear()">Clear</button>
+    <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -82,6 +83,15 @@
                }
         });
         var UID = sessionStorage.getItem('UID');
+        
+        function signOut(){
+            firebase.auth().signOut().then(function() {
+              // Sign-out successful.
+                window.location.href="table.html";
+            }, function(error) {
+              // An error happened.
+            });
+        }
         //alert("UID " + UID);
         function refill(){
              for(var n = 0;n < 6;n++){
