@@ -16,7 +16,7 @@
                 authDomain: "chrome-calendar.firebaseapp.com",
                 databaseURL: "https://chrome-calendar.firebaseio.com",
                 storageBucket: "chrome-calendar.appspot.com",
-                //messagingSenderId: "583488732443"
+                messagingSenderId: "583488732443"
               };
               firebase.initializeApp(config);
               
@@ -30,8 +30,8 @@
                 const pass = inputPassword.value;
                 const auth = firebase.auth();
 
-                const promise = auth.createUserWithEmailAndPassword(email, pass);
-                promise.catch(e => console.log(e.message));
+                const promise = auth.signInUserWithEmailAndPassword(email, pass);
+                promise.catch(e => alert(e.message));
               });
 
               firebase.auth().onAuthStateChanged(firebaseUser => {
