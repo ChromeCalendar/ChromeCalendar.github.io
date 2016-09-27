@@ -35,7 +35,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button class="btn btn-primary" onclick="myFunction()">Sign Up</button>
+          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign Up</button>
           <button class="btn btn-primary" ><a href="signIn.html">Sign In</a></button>
 
           <a id = "submit" href="table.html"></a>
@@ -118,12 +118,13 @@
           //alert("bro " + changedCount);
           //var temp = localStorage.getItem('ready');
           //alert("temp " + localStorage.getItem('ready'));
-          if(localStorage.getItem('ready') == 1){
+          /*if(localStorage.getItem('ready') == 1){
               //alert("switch time, bitches");
               localStorage.setItem('ready',0);
               window.location.href="table.html";
-          }
+          }*/
           if (user) {
+              window.location.href="table.html";
             // User is signed in.
               //alert("we are going");
              
