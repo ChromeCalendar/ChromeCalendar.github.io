@@ -6,7 +6,7 @@
       <div class="container">
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
-        <button id="btnSignUp" onclick = "click()" class="btn btn-secondary">Sign up</button>
+        <button id="btnSignUp" onclick = "click()" class="btn btn-secondary">Sign in</button>
       </div>
       <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js">
           (function() {
@@ -27,6 +27,7 @@
 
               //btnSignUp.addEventListener('click', e => {
               function click(){
+                alert("hey");
                 const email = inputEmail.value;
                 const pass = inputPassword.value;
                 const auth = firebase.auth();
