@@ -77,7 +77,11 @@
             changedCount = 1;
             console.log("creating");
             alert("email " + email + " password " + password);
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            const auth = firebase.auth();
+            const promise = auth.createUserWithEmailAndPassword(email, password);
+            promise.catch(e => console.log(e.message));
+            /*const auth = firebase.auth();
+            auth().signInWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
               alert(error.message);
               alert(error.code);
@@ -86,9 +90,16 @@
               var errorMessage = error.message;
                
               // ...
-            });
+            });*/
         }
-        firebase.auth().onAuthStateChanged(function(user) {
+          firebase.auth().onAuthStateChanged(firebaseUser => {
+            if(firebaseUser) {
+              console.log(firebaseUser);
+            } else {
+              console.log('not logged in');
+            }
+          });
+        /*firebase.auth().onAuthStateChanged(function(user) {
           if(localStorage.getItem('ready') == 1){
               localStorage.setItem('ready',0);
              // window.location.href="table.html";
@@ -106,7 +117,7 @@
           } else {
             // No user is signed in.
           }
-        });
+        });*/
         firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           //alert(username);
