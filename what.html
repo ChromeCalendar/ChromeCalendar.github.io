@@ -6,7 +6,7 @@
       <div class="container">
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
-        <button id="btnSignUp" class="btn btn-secondary">Sign up</button>
+        <button id="btnSignUp" onclick = "click()" class="btn btn-secondary">Sign up</button>
       </div>
       <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js">
           (function() {
@@ -25,14 +25,16 @@
               const inputPassword = document.getElementById('password');
               const btnSignUp = document.getElementById('btnSignUp');
 
-              btnSignUp.addEventListener('click', e => {
+              //btnSignUp.addEventListener('click', e => {
+              function click(){
                 const email = inputEmail.value;
                 const pass = inputPassword.value;
                 const auth = firebase.auth();
 
                 const promise = auth.signInUserWithEmailAndPassword(email, pass);
                 promise.catch(e => alert(e.message));
-              });
+              }
+              //});
 
               firebase.auth().onAuthStateChanged(firebaseUser => {
                 if(firebaseUser) {
