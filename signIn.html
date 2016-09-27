@@ -82,10 +82,11 @@
             });
                     }
         firebase.auth().onAuthStateChanged(function(user) {
-         /* if(localStorage.getItem('ready') == 1){
+          if(localStorage.getItem('ready') == 1){
               localStorage.setItem('ready',0);
-              window.location.href="table.html";
-          }*/
+             // window.location.href="table.html";
+              alert(user.uid);
+          }
           alert("we're in");
           if (user) {
               var uid = user.uid; 
