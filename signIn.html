@@ -36,7 +36,7 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign In1</button>
+          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign In2</button>
             
           <a id = "submit" href="table.html"></a>
         </form>
@@ -93,7 +93,7 @@
               // ...
             });
         }
-          firebase.auth().onAuthStateChanged(firebaseUser => {
+          /*firebase.auth().onAuthStateChanged(firebaseUser => {
             //alert("something is different");
             if(firebaseUser) {
                 alert("miracles are real");
@@ -102,14 +102,14 @@
             } else {
               console.log('not logged in');
             }
-          });
-        /*firebase.auth().onAuthStateChanged(function(user) {
-          if(localStorage.getItem('ready') == 1){
+          });*/
+        firebase.auth().onAuthStateChanged(function(user) {
+          /*if(localStorage.getItem('ready') == 1){
               localStorage.setItem('ready',0);
              // window.location.href="table.html";
               alert("user.uid" + user.uid);
               alert("we're in");
-          }
+          }*/
           
           if (user) {
               var uid = user.uid; 
@@ -121,7 +121,7 @@
           } else {
             // No user is signed in.
           }
-        });*/
+        });
         firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           //alert(username);
