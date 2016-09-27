@@ -44,8 +44,15 @@
     <script>
         //localStorage.setItem('ready', 0);
       // Initialize Firebase
-       var changedCount = 0;
-       jQuery.ajaxSetup({async:false});
+        var config = {
+            apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+            authDomain: "chrome-calendar.firebaseapp.com",
+            databaseURL: "https://chrome-calendar.firebaseio.com",
+            storageBucket: "chrome-calendar.appspot.com",
+            messagingSenderId: "583488732443"
+          };
+          firebase.initializeApp(config);
+          var changedCount = 0;
         
        
         function myFunction(){
@@ -62,17 +69,9 @@
             
         }
         function Create(email,password){
-            var config = {
-            apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
-            authDomain: "chrome-calendar.firebaseapp.com",
-            databaseURL: "https://chrome-calendar.firebaseio.com",
-            storageBucket: "chrome-calendar.appspot.com",
-            messagingSenderId: "583488732443"
-          };
-          firebase.initializeApp(config);
             
             alert("in create");
-            localStorage.setItem('ready', 1);
+            //localStorage.setItem('ready', 1);
             //alert(localStorage.getItem('ready'));
             changedCount = 1;
             console.log("creating");
