@@ -1,16 +1,17 @@
 
 <html>
 <head>
+    <script src="jquery-1.12.4.min.js"></script>
 <style>
-table, th, td {
-    border:1px solid black
-}
-th {
-    text-align: left;
-}    
-th, td {
-padding: 5px;
-}
+    table, th, td {
+        border:1px solid black
+    }
+    th {
+        text-align: left;
+    }    
+    th, td {
+        padding: 5px;
+    }
 </style>    
 </head>
 </html>
@@ -23,12 +24,12 @@ padding: 5px;
     <head>
         <script>
             import java.util.Calender;
-            public class calender {
-                Calender c = Calender.getInstance();
-                c.setTime(9/23/2016);
-                int dayOfWeek = c.get(Calender.DAY_OF_WEEK);
-                document.write("<tr>"+"<td>"+ dayOfWeek);
-            }
+            var today = new Date();
+            var day = today.getDate();
+            var month = today.getMonth();
+            var year = today.getFullYear();
+            var day = today.getDay();
+            
         </script>
     
         <table style="width:100%">
