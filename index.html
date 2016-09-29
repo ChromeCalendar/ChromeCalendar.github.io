@@ -36,7 +36,7 @@
               <input type="password" name="password" id="password">
             </div>
           <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign Up</button>
-          <button class="btn btn-primary" ><a href="signIn.html">Sign In2</a></button>
+          <button class="btn btn-primary" ><a href="signIn.html">Sign In3</a></button>
 
           <a id = "submit" href="table.html"></a>
         </form>
@@ -141,6 +141,7 @@
             window.location.href = newLoc;
         }
         function setInfo(email,callback){
+            alert("hello");
             alert("user.uid" + user.uid);
             firebase.database().ref('users/' + user.uid).set({
                     email: email,
