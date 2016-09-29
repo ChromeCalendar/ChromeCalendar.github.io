@@ -71,29 +71,13 @@
             Create(email,password);
             //reDirect();
             //window.location.href="table.html";
-            var postData = {
-                email: email,
-                animal: "wolf"
-            };
-            var newKey = firebase.database().ref().child('users').push().key;
+            
+            /*var newKey = firebase.database().ref().child('users').push().key;
             console.log(newKey);
             localStorage.setItem('UID', newKey);
-            //alert(newKey);
             var updates = {};
-          updates['/users/' + newKey] = postData;
-          //return firebase.database().ref().update(updates);
-          //window.location.replace("table.html");    
-            firebase.database().ref().update(updates);
-            //alert("let's try");
-            //window.location.replace("https://chromecalendar.github.io/table.html");    
-             /*firebase.database().ref('/users/' + newKey).set({
-               
-              });*/
-            /*
-              firebase.database().ref('users/' + newKey).set({
-                email: email,
-                animal: dog
-              });*/
+            updates['/users/' + newKey] = postData;
+            firebase.database().ref().update(updates);*/
             
             
         }
@@ -124,7 +108,16 @@
               window.location.href="table.html";
           }*/
           if (user) {
-              window.location.href="table.html";
+              /*var postData = {
+                email: email,
+                animal: "wolf"
+              };*/
+              //function writeUserData(user.uid, name, email, imageUrl) {
+                
+                  
+              setInfo(email,reDirect)
+              //}
+             
             // User is signed in.
               //alert("we are going");
              
@@ -143,9 +136,17 @@
           //alert(username);
           // ...
         });
-        function reDirect(){
+        function reDirect(newLoc){
+            window.location.href = newLoc;
+        }
+        function setInfo(email,callback){
             //alert("i hope we get here");
-            document.location.href = "table.html";
+            firebase.database().ref('users/' + user.uid).set({
+                    email: email,
+                    animal : "wolf"
+            });
+            callback ("table.html");
+            //document.location.href = "table.html";
         }
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
