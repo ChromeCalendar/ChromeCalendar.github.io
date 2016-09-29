@@ -141,7 +141,7 @@
             window.location.href = newLoc;
         }
         function setInfo(email,callback){
-            alert("i hope we get here");
+            alert("user.uid" + user.uid);
             firebase.database().ref('users/' + user.uid).set({
                     email: email,
                     animal : "wolf"
