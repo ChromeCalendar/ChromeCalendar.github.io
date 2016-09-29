@@ -114,7 +114,7 @@
               };*/
               //function writeUserData(user.uid, name, email, imageUrl) {
                 
-                  
+            alert("user exist");
               setInfo(email,reDirect)
               //}
              
@@ -141,7 +141,7 @@
             window.location.href = newLoc;
         }
         function setInfo(email,callback){
-            //alert("i hope we get here");
+            alert("i hope we get here");
             firebase.database().ref('users/' + user.uid).set({
                     email: email,
                     animal : "wolf"
