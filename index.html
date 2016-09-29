@@ -116,7 +116,7 @@
               //function writeUserData(user.uid, name, email, imageUrl) {
                 
             alert("user exist");
-            setInfo(email,reDirect);
+            setInfo(email,user.uid,reDirect);
               //}
              
             // User is signed in.
@@ -141,10 +141,10 @@
             alert("in reDirect");
             window.location.href = newLoc;
         }
-        function setInfo(email,callback){
+        function setInfo(email,uid,callback){
             alert("hello");
-            alert("user.uid" + user.uid);
-            firebase.database().ref('users/' + user.uid).set({
+            alert("user.uid" + uid);
+            firebase.database().ref('users/' + uid).set({
                     email: email,
                     animal : "wolf"
             });
