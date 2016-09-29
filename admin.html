@@ -18,6 +18,9 @@
                 messagingSenderId: "583488732443"
                 };
             firebase.initializeApp(config);
+        firebase.database().ref('/users').once('value').then(function(snapshot){
+            var snap = snapshot.val();
+        });
     
         
     function setCarts (floor)
@@ -48,6 +51,7 @@
         var cartnum1 = 3;
         var cartnum2 = 4;
         var cartnum3 = 5;
+        
         $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset</button></td></tr>');
         $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum2+'</td></tr>');
         $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum3+'</td></tr>');
