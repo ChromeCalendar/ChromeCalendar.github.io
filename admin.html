@@ -48,19 +48,31 @@
     </table>
     <script>
         var cartnum1;
-        var cartnum2 = 4;
-        var cartnum3 = 5;
+        var cartnum2=5;
+        var cartnum3=5;
         var watcher = firebase.database().ref('floornum/1');
-        watcher.on('value', function(snapshot) {
+        watcher.once('value', function(snapshot) {
             var info = snapshot.val();
-            alert(info.cartnum);
             cartnum1=(info.cartnum);
+            $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
             });
+                $('#carts tr:last').after('<td><button class="editbtn1">Reset</button></td></tr>');
+        var watcher = firebase.database().ref('floornum/2');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
+            });
+               // $('#carts tr:last').after('<td><button class="editbtn2">Reset</button></td></tr>');
+        var watcher = firebase.database().ref('floornum/3');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
+            });
+            //    $('#carts tr:last').after('<td><button class="editbtn3">Reset</button></td></tr>');
         
-        $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset</button></td></tr>');
-        $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum2+'</td><td><button class="editbtn2">Reset</button></td></tr>');
-        $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum3+'</td><td><button class="editbtn3">Reset</button></td></tr>');
-        
+
         $(document).ready(function(){
             $('.editbtn1').click(function(){
                 setCarts(1);
