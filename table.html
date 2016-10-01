@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out5</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out6</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -181,7 +181,7 @@
             console.log("kVal " + kVal);
             
             var freeCarts = false;
-                var cartsRef = firebase.database().ref().child('carts').child(cartVal).child(j.toString()).child(kVal);
+                var cartsRef = firebase.database().ref("/carts/" + chartVal + "/availability/"+ j + "/" + kVal);
                 cartsRef.on("value", function(snapshot) {
                     var data = snapshot.val()
                     console.log("data " + data);
