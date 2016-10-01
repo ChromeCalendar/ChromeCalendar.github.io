@@ -72,7 +72,7 @@
         Ref.on("value", function(snapshot) {
               var reset = snapshot.val();
               //var started = sessionStorage.getItem('start');
-              alert("Been set " + reset.beenSet);
+              //alert("Been set " + reset.beenSet);
                if(reset.beenSet === "false"){
                    refill();
                    var updates = {};
@@ -132,7 +132,7 @@
                       });
                  }
              }
-            alert("calling");
+            //alert("calling");
             //startFunc();
         }
         var taken = [];
@@ -280,7 +280,7 @@
                 //alert(event.target.id);
                 var ID = event.target.id;
                 var Color = $('#'+ID).attr("class");
-                alert("color " + Color);
+                //alert("color " + Color);
                 if(Color === 'yes'){
                     $('#'+ID).css('background-color','gold');
                     $('#'+ID).css('color','black');
