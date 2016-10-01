@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out2</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out3</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -171,12 +171,12 @@
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
                     var available = childData.available;
-                    //console.log(available);
-                    if(available === "true"){
-                        //console.log("yo12");
+                    console.log("availability " + available);
+                    if(available == "true"){
+                        console.log("yo12");
                         freeCarts = true;
                     }
-                    if(available == "false"){
+                    else if(available == "false"){
                         freeCarts = false;
                     }
                         
@@ -187,7 +187,7 @@
                     }
                     else if(freeCarts == false){
                         taken[j][k] = "no";
-                        alert("say no");
+                        console.log("say no");
                     }
                     console.log("j" + j);
                     console.log("k" + k);
