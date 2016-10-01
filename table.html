@@ -98,22 +98,22 @@
              for(var n = 0;n < 6;n++){
                  var cartLink;
                  if(n === 0){
-                     cartLink = "cartOne";
+                     cartLink = "cart1";
                  }
                  else if(n === 1){
-                     cartLink = "cartTwo";
+                     cartLink = "cart2";
                  }
                  else if(n === 2){
-                     cartLink = "cartThree";
+                     cartLink = "cart3";
                  }
                  else if(n === 3){
-                     cartLink = "cartFour";
+                     cartLink = "cart4";
                  }
                  else if(n === 4){
-                     cartLink = "cartFive";
+                     cartLink = "cart5";
                  }
                  else if(n === 5){
-                     cartLink = "cartSix";
+                     cartLink = "cart6";
                  }
                  for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
@@ -266,7 +266,7 @@
                 //alert(tagTwo);
                 
                  var updates = {};
-                  updates['/carts/cartOne/availability/' + tagOne + '/' + tagTwo] = "false";
+                  updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
                   firebase.database().ref().update(updates);
                 
                 console.log("x0x");
