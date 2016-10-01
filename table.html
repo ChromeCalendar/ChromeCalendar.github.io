@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out8</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out9</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -328,9 +328,9 @@
                 
                 //alert(tagOne);
                 alert("tagTwo " + tagTwo);
-                
-                 var updates = {};
-                  updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
+                newUpdate(tagOne, tagTwo);
+                 //var updates = {};
+                  //updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
                   //firebase.database().ref().update(updates);
                 
                 console.log("x0x");
@@ -345,8 +345,13 @@
             }
             selected.length = 0;
             console.log("here's where it went south");
-            //ClearTable(4);
+            ClearTable(4);
             //startFunc();
+        }
+        function newUpdate(tagOne, tageTwo){
+            var updates = {};
+            updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
+            firebase.database().ref().update(updates);
         }
         function ClearTable(until){
             for(var t = 0; t < until;t++){
