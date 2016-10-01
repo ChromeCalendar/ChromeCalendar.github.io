@@ -143,38 +143,44 @@
             var j = 0;
             var k = 0;
             var dfd = $.Deferred();
-            for(j = 0;j < 4;j++){
-                for(k = 0;k < 5;k++){
+            for(var x = 0;x < 6;x++){
+                for(j = 0;j < 4;j++){
+                    for(k = 0;k < 5;k++){
 
-                    checkAvailable(j,k);
-                    //var temp = Math.floor((Math.random() * 2));
-                    //console.log("temp "+temp);
-                    console.log("really " + j +"what " + k);
+                        checkAvailable(j,k,x);
+                        //var temp = Math.floor((Math.random() * 2));
+                        //console.log("temp "+temp);
+                        console.log("really " + j +"what " + k);
 
 
+                    }
                 }
             }
         }
-        function checkAvailable(j,k){
+        function checkAvailable(j,k,x){
             //j is period, k is day
+            //x is cart
+            var cartVal = "cart" + x.toString();
             var kVal = 0;
-            if(k == 1){
+            if(k == 0){
                 kVal = "one";
             }
-            else if(k == 2){
+            else if(k == 1){
                 kVal = "two";
             }
-            else if(k == 3){
+            else if(k == 2){
                 kVal = "three";
             }
-            else if(k == 4){
+            else if(k == 3){
                 kVal = "four";
             }
-            else if(k == 5){
+            else if(k == 4){
                 kVal = "five";
             }
+            
+            
             var freeCarts = false;
-                var cartsRef = firebase.database().ref().child('carts');
+                var cartsRef = firebase.database().ref().child('carts').child(cartVal).child(j.toString()).child(kVal);
                 cartsRef.on("value", function(snapshot) {
                     var numCarts = snapshot.numChildren();
                     var count = 0;
@@ -186,8 +192,8 @@
                     // key will be "fred" the first time and "barney" the second time
                     //var key = childSnapshot.key();
                     // childData will be the actual contents of the child
-                    var childData = childSnapshot.val();
-                    childData.availability.(j).(kVal);
+                    var available = childSnapshot.val();
+                    //var available = childData.
                     //var available = childData.availability.child(kVal).val();
                     console.log("availability " + available);
                     if(available == "true"){
