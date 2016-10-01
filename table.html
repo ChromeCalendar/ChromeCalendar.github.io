@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out3</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out4</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -156,6 +156,23 @@
             }
         }
         function checkAvailable(j,k){
+            //j is period, k is day
+            var kVal = 0;
+            if(k == 1){
+                kVal = "one";
+            }
+            else if(k == 2){
+                kVal = "two";
+            }
+            else if(k == 3){
+                kVal = "three";
+            }
+            else if(k == 4){
+                kVal = "four";
+            }
+            else if(k == 5){
+                kVal = "five";
+            }
             var freeCarts = false;
                 var cartsRef = firebase.database().ref().child('carts');
                 cartsRef.on("value", function(snapshot) {
@@ -170,7 +187,7 @@
                     //var key = childSnapshot.key();
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
-                    var available = childData.available;
+                    var available = childData.child("availability/" + j).child(kVal).val();
                     console.log("availability " + available);
                     if(available == "true"){
                         console.log("yo12");
