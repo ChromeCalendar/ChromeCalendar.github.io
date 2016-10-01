@@ -71,7 +71,7 @@
         var Ref = firebase.database().ref();
         Ref.on("value", function(snapshot) {
               var reset = snapshot.val();
-              alert(reset.beenSet);
+              alert("Been set " + reset.beenSet);
                if(reset.beenSet === "false"){
                    refill();
                    var updates = {};
@@ -331,7 +331,7 @@
                 
                  var updates = {};
                   updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
-                  firebase.database().ref().update(updates);
+                  //firebase.database().ref().update(updates);
                 
                 console.log("x0x");
                 if(selected[q].color === "no"){
