@@ -81,6 +81,9 @@
                        beenSet = "true"
                    });*/
                }
+            else{
+                startFunc();
+            }
         });
         var UID = sessionStorage.getItem('UID');
         
@@ -125,6 +128,7 @@
                       });
                  }
              }
+            startFunc();
         }
         var taken = [];
         var selected = [];
@@ -134,7 +138,7 @@
         function Clickable (numID, color) {
             this.numID = numID;
         }
-        startFunc();
+        //startFunc();
         function startFunc(){
             var j = 0;
             var k = 0;
