@@ -54,7 +54,7 @@
       </table>
     </div>
     <script>
-        
+        sessionStorage.setItem('start', 0);
         var config = {
           apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
           authDomain: "chrome-calendar.firebaseapp.com",
@@ -71,6 +71,7 @@
         var Ref = firebase.database().ref();
         Ref.on("value", function(snapshot) {
               var reset = snapshot.val();
+              var started = sessionStorage.getItem('start');
               alert("Been set " + reset.beenSet);
                if(reset.beenSet === "false"){
                    refill();
@@ -81,12 +82,13 @@
                        beenSet = "true"
                    });*/
                }
-               //else{
+               if(started === 0){
+                   // Save data to sessionStorage
+                   sessionStorage.setItem('key', 1);
                    startFunc();
-               //}
+               }
         });
         var UID = sessionStorage.getItem('UID');
-        
         function signOut(){
             firebase.auth().signOut().then(function() {
               // Sign-out successful.
