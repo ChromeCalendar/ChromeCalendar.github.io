@@ -183,8 +183,7 @@
             var freeCarts = false;
                 var cartsRef = firebase.database().ref("/carts/" + cartVal + "/availability/"+ j + "/" + kVal);
                 cartsRef.on("value", function(snapshot) {
-                    var data = snapshot.val()
-                    console.log("data " + data);
+                    var available = snapshot.val()
                     console.log("availability " + available);
                     if(available == "true"){
                         console.log("yo12");
