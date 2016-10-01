@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out1</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out2</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -176,12 +176,18 @@
                         //console.log("yo12");
                         freeCarts = true;
                     }
+                    if(available == "false"){
+                        freeCarts = false;
+                    }
+                        
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         taken[j][k] = "yes";
+                        alert("say yes");
                     }
                     else if(freeCarts == false){
                         taken[j][k] = "no";
+                        alert("say no");
                     }
                     console.log("j" + j);
                     console.log("k" + k);
