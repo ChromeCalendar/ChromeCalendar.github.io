@@ -181,7 +181,7 @@
             console.log("kVal " + kVal);
             
             var freeCarts = false;
-                var cartsRef = firebase.database().ref("/carts/" + chartVal + "/availability/"+ j + "/" + kVal);
+                var cartsRef = firebase.database().ref("/carts/" + cartVal + "/availability/"+ j + "/" + kVal);
                 cartsRef.on("value", function(snapshot) {
                     var data = snapshot.val()
                     console.log("data " + data);
