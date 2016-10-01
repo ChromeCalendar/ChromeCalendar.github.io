@@ -348,7 +348,7 @@
             ClearTable(4);
             //startFunc();
         }
-        function newUpdate(tagOne, tageTwo){
+        function newUpdate(tagOne, tagTwo){
             var updates = {};
             updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
             firebase.database().ref().update(updates);
