@@ -291,6 +291,7 @@
                 var tagOne;
                 var tagTwo;
                 var tempInt = parseInt(selected[q].numID,10);
+                
                 //alert("wup");
                 if((tempInt >= 1) && (tempInt <= 5)){
                     tagOne = '0';
@@ -326,7 +327,7 @@
                 }
                 
                 //alert(tagOne);
-                //alert(tagTwo);
+                alert("tagTwo " + tagTwo);
                 
                  var updates = {};
                   updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
