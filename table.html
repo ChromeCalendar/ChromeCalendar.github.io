@@ -187,7 +187,8 @@
                     //var key = childSnapshot.key();
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.val();
-                    var available = childData.child("availability/" + j).child(kVal).val();
+                    childData.availability.(j).(kVal);
+                    //var available = childData.availability.child(kVal).val();
                     console.log("availability " + available);
                     if(available == "true"){
                         console.log("yo12");
