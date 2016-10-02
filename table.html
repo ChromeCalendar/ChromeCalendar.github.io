@@ -129,7 +129,14 @@
                      cartLink = "cart6";
                      floor = 2;
                  }
-                 for(var w = 0;w < 4;w++){
+                 Fill(cartLink,floor,addFloor);
+                 
+             }
+            //alert("calling");
+            //startFunc();
+        }
+        function Fill(cartLink,floor,callback){
+            for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
                         one: "true",
                         two: "true",
@@ -138,12 +145,12 @@
                         five: "true"
                       });
                  }
-                 firebase.database().ref("/carts/" + cartLink).set({
-                     floor: floor
-                 });
-             }
-            //alert("calling");
-            //startFunc();
+            callback(cartLink,floor);
+        }
+        function addFloor(cartLink,floor){
+            firebase.database().ref("/carts/" + cartLink).set({
+                 floor: floor
+            });
         }
         var taken = [];
         var selected = [];
