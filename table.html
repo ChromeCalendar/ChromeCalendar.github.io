@@ -81,6 +81,10 @@
                    /*firebase.database().ref().set({
                        beenSet = "true"
                    });*/
+                   if(already === 0){
+                       already = 1;
+                       startFunc();
+                   }
                }
                alert("alert " + already);
                if(already === 0){
