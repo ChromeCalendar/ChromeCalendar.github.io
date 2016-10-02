@@ -129,13 +129,22 @@
                      cartLink = "cart6";
                      floor = 2;
                  }
-                 Fill(cartLink,floor,addFloor);
+                 for(var w = 0;w < 4;w++){
+                     firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
+                        one: "true",
+                        two: "true",
+                        three: "true",
+                        four: "true",
+                        five: "true"
+                      });
+                 }
+                 //Fill(cartLink,floor,addFloor);
                  
              }
             //alert("calling");
             //startFunc();
         }
-        function Fill(cartLink,floor,callback){
+       /* function Fill(cartLink,floor,callback){
             for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
                         one: "true",
@@ -145,13 +154,13 @@
                         five: "true"
                       });
                  }
-            callback(cartLink,floor);
-        }
-        function addFloor(cartLink,floor){
+            //callback(cartLink,floor);
+        }*/
+        /*function addFloor(cartLink,floor){
             firebase.database().ref("/carts/" + cartLink).set({
                  floor: floor
             });
-        }
+        }*/
         var taken = [];
         var selected = [];
         for(var p = 0;p < 5;p++){
