@@ -204,9 +204,9 @@
             var j = 0;
             var k = 0;
             var dfd = $.Deferred();
-            for(var x = 0;x < 6;x++){
+            for(var k = 0;k < 5;k++){
                 for(j = 0;j < 4;j++){
-                    for(k = 0;k < 5;k++){
+                    for(var x = 0;x < 6;x++){
 
                         checkAvailable(j,k,x);
                         //var temp = Math.floor((Math.random() * 2));
@@ -221,6 +221,7 @@
         function checkAvailable(j,k,x){
             //j is period, k is day
             //x is cart
+            var specificCarts = [];
             var cartVal = "cart" + x.toString();
             console.log("here's your val " + cartVal);
             var kVal = 0;
@@ -264,6 +265,7 @@
                         console.log("temp is " + temp);
                         CA[k][j].num = (temp + 1);
                         console.log("after " + CA[k][j].num);
+                        specificCarts.push(x);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
@@ -271,7 +273,10 @@
                         //taken[j][k] = "no";
                         console.log("say no");
                     }
-                    
+                    if(x === 5){
+                        alert("done for this round");
+                        CA[x][j].specific = specifcCarts;
+                    }
                     console.log("j" + j);
                     console.log("k" + k);
                     //console.log("count" + count);
