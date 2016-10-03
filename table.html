@@ -426,7 +426,8 @@
                 }
             }
             selected.length = 0;
-            console.log("here's where it went south");
+            //console.log("here's where it went south");
+            already = 0;
             ClearTable(4);
             //startFunc();
         }
@@ -440,7 +441,9 @@
                 console.log("trying to clear here");
                 $('#myTable tr:last').remove();
             }
-            //startFunc();
+            if(already === 0){
+                startFunc();
+            }
         }
     </script>
     </body>
