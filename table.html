@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out3</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out4</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -324,7 +324,7 @@
         function account(){
             for(var ii = 0;ii < 5;ii++){
                 for(var jj = 0;jj < 4;jj++){
-                    alert("availability CA " + CA[ii][jj]);
+                   // alert("availability CA " + CA[ii][jj]);
                     if(CA[ii][jj] !== 0){
                         taken[ii][jj] = "yes";
                     }
@@ -367,6 +367,7 @@
         });
         
         function Clear(){
+            alert("clear called");
             console.log("sup");
             for(var q = 0;q < selected.length;q++){
                 console.log("rawr" + selected.length);
