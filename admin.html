@@ -6,6 +6,14 @@
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
     
     <script>
@@ -26,11 +34,13 @@
     function setCarts (floor)
     {
     var num=prompt("How many carts are on the floor?","0");
-        
+    
+    if(num!=null)
+    {
     firebase.database().ref('floornum/' + floor).set({
         cartnum:num
     });
-
+    }
     }
         </script>
 </head>
@@ -56,21 +66,21 @@
             cartnum1=(info.cartnum);
             $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
             });
-                $('#carts tr:last').after('<td><button class="editbtn1">Reset</button></td></tr>');
+                $('#carts tr:last').after('<td><button class="editbtn3">Reset Floor 3</button></td></tr>');
         var watcher = firebase.database().ref('floornum/2');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
+                $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
             });
-               // $('#carts tr:last').after('<td><button class="editbtn2">Reset</button></td></tr>');
+               $('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
         var watcher = firebase.database().ref('floornum/3');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
             $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
             });
-            //    $('#carts tr:last').after('<td><button class="editbtn3">Reset</button></td></tr>');
+                $('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         
 
         $(document).ready(function(){
@@ -91,6 +101,8 @@
                 location.reload();
             });
         });
+        
+        
         
     </script>
 </body>
