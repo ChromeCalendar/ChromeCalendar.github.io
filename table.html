@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out12</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out1</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -56,8 +56,12 @@
     <script>
         var already = 0;
         var availability = [];
-        for(var r = 0;r < 5;r++){
-            availability[r] = [];
+        for(var rr = 0;rr < 5;rr++){
+            availability[rr] = [];
+            for(var r = 0;r < 4;r++){
+                availability[rr][r] = 0;
+                console.log("here's your stupid number " + availability[rr][r]);
+            }
         }
        // availability goes [day][period]
         var config = {
