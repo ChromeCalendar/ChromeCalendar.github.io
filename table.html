@@ -56,10 +56,17 @@
     <script>
         var already = 0;
         var CA = [];
-        clearCA();
-        function clearCA(){
+        
             for(var rr = 0;rr < 5;rr++){
                 CA[rr] = [];
+                for(var r = 0;r < 4;r++){
+                    CA[rr][r] = 0;
+                    //console.log("here's your stupid number " + CA[rr][r]);
+                }
+            }
+        function clearCA(){
+            for(var rr = 0;rr < 5;rr++){
+                //CA[rr] = [];
                 for(var r = 0;r < 4;r++){
                     CA[rr][r] = 0;
                     console.log("here's your stupid number " + CA[rr][r]);
