@@ -56,11 +56,16 @@
     <script>
         var already = 0;
         var CA = [];
-        
+        function Cell (num,specific) {
+            this.num = num;
+            this.specific = specific;
+            
+        }
             for(var rr = 0;rr < 5;rr++){
                 CA[rr] = [];
                 for(var r = 0;r < 4;r++){
-                    CA[rr][r] = 0;
+                    CA[rr][r] = new Cell();
+                    CA[rr][r].num = 0;
                     //console.log("here's your stupid number " + CA[rr][r]);
                 }
             }
@@ -68,8 +73,8 @@
             for(var rr = 0;rr < 5;rr++){
                 //CA[rr] = [];
                 for(var r = 0;r < 4;r++){
-                    CA[rr][r] = 0;
-                    console.log("here's your stupid number " + CA[rr][r]);
+                    CA[rr][r].num = 0;
+                    console.log("here's your stupid number " + CA[rr][r].num);
                 }
             }
         }
@@ -254,11 +259,11 @@
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
-                        console.log("before " + CA[k][j]);
-                        var temp = CA[k][j];
+                        console.log("before " + CA[k][j].num);
+                        var temp = CA[k][j].num;
                         console.log("temp is " + temp);
-                        CA[k][j] = (temp + 1);
-                        console.log("after " + CA[k][j]);
+                        CA[k][j].num = (temp + 1);
+                        console.log("after " + CA[k][j].num);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
@@ -325,7 +330,7 @@
             for(var ii = 0;ii < 5;ii++){
                 for(var jj = 0;jj < 4;jj++){
                    // alert("availability CA " + CA[ii][jj]);
-                    if(CA[ii][jj] !== 0){
+                    if(CA[ii][jj].num !== 0){
                         taken[ii][jj] = "yes";
                     }
                     else{
