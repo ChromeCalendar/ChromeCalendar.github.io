@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out5</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out6</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -265,7 +265,7 @@
                         console.log("temp is " + temp);
                         CA[k][j].num = (temp + 1);
                         console.log("after " + CA[k][j].num);
-                        specificCarts.push(x);
+                        CA[k][j].push(x);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
@@ -273,10 +273,10 @@
                         //taken[j][k] = "no";
                         console.log("say no");
                     }
-                    if(x === 5){
+                   /* if(x === 5){
                         alert("done for this round");
                         CA[x][j].specific = specificCarts;
-                    }
+                    }*/
                     console.log("j" + j);
                     console.log("k" + k);
                     //console.log("count" + count);
