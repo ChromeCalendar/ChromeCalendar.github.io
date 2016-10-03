@@ -55,12 +55,12 @@
     </div>
     <script>
         var already = 0;
-        var availability = [];
+        var CA = [];
         for(var rr = 0;rr < 5;rr++){
-            availability[rr] = [];
+            CA[rr] = [];
             for(var r = 0;r < 4;r++){
-                availability[rr][r] = 0;
-                console.log("here's your stupid number " + availability[rr][r]);
+                CA[rr][r] = 0;
+                console.log("here's your stupid number " + CA[rr][r]);
             }
         }
        // availability goes [day][period]
@@ -244,11 +244,11 @@
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
-                        console.log("before " + availability[k][j]);
-                        var temp = availability[k][j];
+                        console.log("before " + CA[k][j]);
+                        var temp = CA[k][j];
                         console.log("temp is " + temp);
-                        availability[k][j] = (temp + 1);
-                        console.log("after " + availability[k][j]);
+                        CA[k][j] = (temp + 1);
+                        console.log("after " + CA[k][j]);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
@@ -314,8 +314,8 @@
         function account(){
             for(var ii = 0;ii < 5;ii++){
                 for(var jj = 0;jj < 4;jj++){
-                    alert("availability " + availability[ii][jj]);
-                    if(availability[ii][jj] !== 0){
+                    alert("availability CA " + CA[ii][jj]);
+                    if(CA[ii][jj] !== 0){
                         taken[ii][jj] = "yes";
                     }
                     else{
