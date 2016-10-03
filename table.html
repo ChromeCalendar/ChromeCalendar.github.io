@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out1</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out2</button>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -244,8 +244,11 @@
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
-                        availability[k][j] += 1;
-                        console.log("panda " + availability[k][j]);
+                        console("before " + availability[k][j]);
+                        var temp = availability[k][j];
+                        console.log("temp is " + temp);
+                        availability[k][j] = (temp + 1);
+                        console.log("after " + availability[k][j]);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
