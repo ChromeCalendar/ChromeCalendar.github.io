@@ -240,7 +240,8 @@
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
-                        availability[j][k]++;
+                        availability[k][j] += 1;
+                        console.log("panda " + availability[k][j]);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
@@ -248,7 +249,7 @@
                         //taken[j][k] = "no";
                         console.log("say no");
                     }
-                    account();
+                    
                     console.log("j" + j);
                     console.log("k" + k);
                     //console.log("count" + count);
@@ -256,7 +257,8 @@
                     if((j === 3) && (k === 4) && (x === 5)){
                             alert("go again mate");
                            console.log("WE ARE MAKING A CALL");
-                           myFunction();
+                           account();
+                           //myFunction();
                      }
                     /*var numCarts = snapshot.numChildren();
                     var count = 0;
@@ -314,6 +316,7 @@
                     }
                 }
             }
+            myFunction();
         }
         //myFunction();
         function myFunction(){
