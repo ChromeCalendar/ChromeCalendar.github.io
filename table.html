@@ -267,7 +267,7 @@
                     else if(available == "false"){
                         freeCarts = false;
                     }
-                        
+                    console.log("potato " + x + " row " + j + " col " + k);
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
@@ -446,6 +446,7 @@
                 //alert(tagOne);
                 alert("tagTwo " + tagTwo);
                 tagThree = CA[tempTwo][tempOne].specific[0];
+                read(tempTwo,tempOne);
                 newUpdate(tagOne, tagTwo, tagThree);
                  //var updates = {};
                   //updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
@@ -492,6 +493,12 @@
             var updates = {};
             updates['/carts/'+tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
             firebase.database().ref().update(updates);
+        }
+        function read(k,j){
+            var temp = CA[k][j].specific.length;
+            for(var iii = 0;iii < temp;iii+){
+                console.log("panda " + CA[k][j].specific[iii]);
+            }
         }
         function ClearTable(until){
             for(var t = 0; t < until;t++){
