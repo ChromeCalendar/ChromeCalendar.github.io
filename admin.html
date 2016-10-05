@@ -42,6 +42,30 @@
     });
     }
     }
+        
+        function findRes(c,p)
+        {
+            var day = new Date();
+            var weekday = new Array(5);
+            weekday[1] = "one";
+            weekday[2] = "two";
+            weekday[3] = "three";
+            weekday[4] = "four";
+            weekday[5] = "five";
+
+            var daynum = weekday[day.getDay()];
+
+            var temp="cart"+c.toString();
+            var resWatcher = firebase.database().ref('carts/'+temp+'/availability/'+p.toString()+'/'+daynum);
+            resWatcher.on('value', function(snapshot) {
+                            var info=snapshot.val();
+                            if(info=="true")
+                                {
+                                    alert("yay");
+                                    $('#Reservations tr:last').after('<tr><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                                }
+                        });
+        }
         </script>
 </head>
 <body>
@@ -50,6 +74,21 @@
             <tr>
                 <th>Floor</th>
                 <th>Number of Carts</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    
+    <table style="width:100%" id="Reservations">
+        <thead>
+            <tr>
+                <th>Upcoming Reservations</th>
+            </tr>
+            <tr>
+                <th>Floor / Cart #</th>
+                <th>Period</th>
             </tr>
         </thead>
         <tbody>
@@ -103,6 +142,14 @@
         });
         
         
+        for(p=0; p<4; p++)
+            {
+                for(c=1; c<7; c++)
+                    {
+                        findRes(c,p);
+                    }
+            }
+        //carts / cats+num / availability / period / day of week (number as word)
         
     </script>
 </body>
