@@ -78,6 +78,15 @@
                 }
             }
         }
+        function arrayClearCA(){
+            for(var rr = 0;rr < 5;rr++){
+                //CA[rr] = [];
+                for(var r = 0;r < 4;r++){
+                    CA[rr][r].specific = [];
+                    //console.log("here's your stupid number " + CA[rr][r].num);
+                }
+            }
+        }
        // availability goes [day][period]
         var config = {
           apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
@@ -383,45 +392,58 @@
                 console.log("rawr" + selected.length);
                 var tagOne;
                 var tagTwo;
+                var tagThree;
+                var tempTwo;
+                var tempOne;
                 var tempInt = parseInt(selected[q].numID,10);
                 
                 //alert("wup");
                 if((tempInt >= 1) && (tempInt <= 5)){
                     tagOne = '0';
                     tagTwo = tempInt ;
+                    tempOne = 0;
                 }
                 else if((tempInt  >= 6) && (tempInt <= 10)){
                     tagOne = '1';
                     tagTwo = tempInt  - 5;
+                    tempOne = 1;
                 }
                 else if((tempInt  >= 11) && (tempInt  <= 15)){
                     tagOne = '2';
                     tagTwo = tempInt  - 10;
+                    tempOne = 2;
                 }
                 else if((tempInt >= 16) && (tempInt  <= 20)){
                     tagOne = '3';
                     tagTwo = tempInt - 15;
+                    tempOne = 3;
                 }
                 
                 if(tagTwo === 1){
                     tagTwo = "one";
+                    tempTwo = 0;
                 }
                 else if(tagTwo === 2){
                     tagTwo = "two";
+                    tempTwo = 1;
                 }
                 else if(tagTwo === 3){
                     tagTwo = "three";
+                    tempTwo = 2;
                 }
                 else if(tagTwo === 4){
                     tagTwo = "four";
+                    tempTwo = 3;
                 }
                 else if(tagTwo === 5){
                     tagTwo = "five";
+                    tempTwo = 4;
                 }
                 
                 //alert(tagOne);
                 alert("tagTwo " + tagTwo);
-                newUpdate(tagOne, tagTwo);
+                tagThree = CA[tempTwo][tempOne].specific[0];
+                newUpdate(tagOne, tagTwo, tagThree);
                  //var updates = {};
                   //updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
                   //firebase.database().ref().update(updates);
@@ -442,9 +464,29 @@
             ClearTable(4);
             //startFunc();
         }
-        function newUpdate(tagOne, tagTwo){
+        function newUpdate(tagOne, tagTwo, tagThree){
+            alert("cart "+tagThree);
+            if(tagThree === 0){
+                tagThree = "cart1";
+            }
+            else if(tagThree === 1){
+                tagThree = "cart2";
+            }
+            else if(tagThree === 2){
+                tagThree = "cart3";
+            }
+            else if(tagThree === 3){
+                tagThree = "cart4";
+            }
+            else if(tagThree === 4){
+                tagThree = "cart5";
+            }
+            else if(tagThree === 5){
+                tagThree = "cart6";
+            }
+            alert("cart "+ tagThree);
             var updates = {};
-            updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
+            updates['/carts/'+tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
             firebase.database().ref().update(updates);
         }
         function ClearTable(until){
