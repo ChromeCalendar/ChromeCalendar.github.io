@@ -87,6 +87,7 @@
                     //console.log("here's your stupid number " + CA[rr][r].num);
                 }
             }
+            read(0,0);
             alert("CA " + CA[0][0].specific[0]);
         }
        // availability goes [day][period]
@@ -268,6 +269,9 @@
                         freeCarts = false;
                     }
                     console.log("potato " + x + " row " + j + " col " + k);
+                    if(x == 2){
+                        alert("hey "  + freeCarts);
+                    }
                     if(freeCarts == true){
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
