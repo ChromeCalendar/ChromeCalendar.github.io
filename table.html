@@ -235,7 +235,7 @@
             //x is cart
             var specificCarts = [];
             var cartVal = "cart" + x.toString();
-            console.log("here's your val " + cartVal);
+            //console.log("here's your val " + cartVal);
             var kVal = 0;
             if(k == 0){
                 kVal = "one";
@@ -252,24 +252,24 @@
             else if(k == 4){
                 kVal = "five";
             }
-            console.log("kVal " + kVal);
-            
+            //console.log("kVal " + kVal);
+            //j is period
             var freeCarts = false;
             var numAvail = 0;
                 var cartsRef = firebase.database().ref("/carts/" + cartVal + "/availability/"+ j + "/" + kVal);
                 cartsRef.on("value", function(snapshot) {
                     var available = snapshot.val()
                     
-                    console.log("availability " + available);
+                    console.log("availability " + available + " cartVal " + cartVal + " kVal " + kVal + " period " + j);
                     if(available == "true"){
-                        console.log("yo12");
+                        //console.log("yo12");
                         freeCarts = true;
                     }
                     else if(available == "false"){
                         freeCarts = false;
                     }
                     console.log("potato " + x + " row " + j + " col " + k);
-                    if(x == 2){
+                    if((x == 2) $$ (j == 0) $$ (kVal == "one")){
                         alert("hey "  + freeCarts);
                     }
                     if(freeCarts == true){
