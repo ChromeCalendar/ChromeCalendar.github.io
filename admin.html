@@ -33,7 +33,9 @@
         
     function setCarts (floor)
     {
+    var total=notWorking();
     var num=prompt("How many carts are on the floor?","0");
+    alert(total);
     
     if(num!=null)
     {
@@ -41,27 +43,31 @@
         cartnum:num
     });
     }
+    
     }
         
-        function findRes(c,p)
+    function notWorking()
         {
-            var day = new Date();
-            var weekday = new Array(5);
-            weekday[1] = "one";
-            weekday[2] = "two";
-            weekday[3] = "three";
-            weekday[4] = "four";
-            weekday[5] = "five";
-
-            var daynum = weekday[day.getDay()];
+            var Watcher = firebase.database().ref('/carts');
+            //alert("yay");
+            Watcher.on('value', function(snapshot) {
+                alert("yay2");
+                var info=snapshot.numChildren();
+                return info;
+            });
+        }
+        
+    function findRes(c,p)
+        {
+            var d = new Date();
+            var n = d.getDay()-1;
 
             var temp="cart"+c.toString();
-            var resWatcher = firebase.database().ref('carts/'+temp+'/availability/'+p.toString()+'/'+daynum);
+            var resWatcher = firebase.database().ref('carts/'+temp+'/availability/'+p.toString()+'/'+n.toString());
             resWatcher.on('value', function(snapshot) {
                             var info=snapshot.val();
                             if(info=="true")
                                 {
-                                    alert("yay");
                                     $('#Reservations tr:last').after('<tr><td>'+c+'</td><td>'+(p+1)+'</tr>');
                                 }
                         });
@@ -144,7 +150,7 @@
         
         for(p=0; p<4; p++)
             {
-                for(c=1; c<7; c++)
+                for(c=0; c<6; c++)
                     {
                         findRes(c,p);
                     }
