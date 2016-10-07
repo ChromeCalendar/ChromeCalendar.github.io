@@ -39,10 +39,11 @@
             alert("num " + num);
             var total = notWorking(floor,num,temporary);
         }
-        alert(total);
+        //alert(total);
     }
     function temporary(floor,num,info){
         alert("info " + info);
+        alert("everything is ok! info is  " + info + " floor is " + floor + " and num is " + num);
         if(num != null)
         {
             firebase.database().ref('floornum/' + floor).set({
