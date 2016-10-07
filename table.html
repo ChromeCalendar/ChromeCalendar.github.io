@@ -24,7 +24,7 @@
     </head>
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out2</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out3</button>
     <!--<div class="container">
   <h2>Form control: select</h2>
   <p>The form below contains two dropdown menus (select lists):</p>-->
@@ -255,7 +255,7 @@
             var dfd = $.Deferred();
             for(var k = 0;k < 5;k++){
                 for(j = 0;j < 4;j++){
-                    for(var x = 0;x < 6;x++){
+                    for(var x = 0;x < onFloor;x++){
 
                         checkAvailable(j,k,x);
                         //var temp = Math.floor((Math.random() * 2));
@@ -340,7 +340,7 @@
                     console.log("k" + k);
                     //console.log("count" + count);
                     //console.log("numcarts" + numCarts);
-                    if((j === 3) && (k === 4) && (x === 5)){
+                    if((j === 3) && (k === 4) && (x === onFloor)){
                            alert("go again mate");
                            console.log("WE ARE MAKING A CALL");
                            account();
