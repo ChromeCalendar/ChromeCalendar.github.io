@@ -37,7 +37,8 @@
         var num = prompt("How many carts are on the floor?","0");
         if(num != null){
             alert("num " + num);
-            var total = notWorking(floor,num,temporary);
+            notWorking(floor,num,temporary);
+            //var total = notWorking(floor,num,temporary);
         }
         //alert(total);
     }
@@ -54,8 +55,8 @@
     }
     function notWorking(floor,num,callback)
         {
-            var Watcher = firebase.database().ref('/carts');
             alert("yay");
+            var Watcher = firebase.database().ref('/carts');
             Watcher.on('value', function(snapshot) {
                 alert("yay2");
                 var info = snapshot.numChildren();
@@ -138,7 +139,7 @@
         $(document).ready(function(){
             $('.editbtn1').click(function(){
                 setCarts(1);
-                location.reload();
+                //location.reload();
             });
         });
         $(document).ready(function(){
