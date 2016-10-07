@@ -67,6 +67,7 @@
     <script>
         var already = 0;
         var floor = $("#sel1").val();
+        var onFloor = 0;
         alert("floor is (waiting) " + floor);
         var CA = [];
         function Cell (num,specific) {
@@ -131,35 +132,41 @@
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
                 alert(floorCarts);
+                onFloor = floorCarts;
+                if(onFloor != 0){
+                    beginAll();
+                }
             });
         }
         getNum();
-        var Ref = firebase.database().ref();
-        Ref.on("value", function(snapshot) {
-              var reset = snapshot.val();
-              //var started = sessionStorage.getItem('start');
-              //alert("Been set " + reset.beenSet);
-               if(reset.beenSet === "false"){
-                   refill();
-                   var updates = {};
-                   updates['/beenSet'] = "true";
-                   firebase.database().ref().update(updates);
-                   /*firebase.database().ref().set({
-                       beenSet = "true"
-                   });*/
+        function beginAll(){
+            var Ref = firebase.database().ref();
+            Ref.on("value", function(snapshot) {
+                  var reset = snapshot.val();
+                  //var started = sessionStorage.getItem('start');
+                  //alert("Been set " + reset.beenSet);
+                   if(reset.beenSet === "false"){
+                       refill();
+                       var updates = {};
+                       updates['/beenSet'] = "true";
+                       firebase.database().ref().update(updates);
+                       /*firebase.database().ref().set({
+                           beenSet = "true"
+                       });*/
+                       if(already === 0){
+                           already = 1;
+                           startFunc();
+                       }
+                   }
+                   alert("alert " + already);
                    if(already === 0){
+                       // Save data to sessionStorage
+                       //sessionStorage.setItem('key', 1);
                        already = 1;
                        startFunc();
                    }
-               }
-               alert("alert " + already);
-               if(already === 0){
-                   // Save data to sessionStorage
-                   //sessionStorage.setItem('key', 1);
-                   already = 1;
-                   startFunc();
-               }
-        });
+            });
+        }
         var UID = sessionStorage.getItem('UID');
         function signOut(){
             firebase.auth().signOut().then(function() {
