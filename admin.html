@@ -33,27 +33,33 @@
         
     function setCarts (floor)
     {
-    var total=notWorking();
-    var num=prompt("How many carts are on the floor?","0");
-    alert(total);
-    
-    if(num!=null)
-    {
-    firebase.database().ref('floornum/' + floor).set({
-        cartnum:num
-    });
+       
+        var num = prompt("How many carts are on the floor?","0");
+        if(num != null){
+            alert("num " + num);
+            var total = notWorking(floor,num,temporary);
+        }
+        alert(total);
     }
-    
+    function temporary(floor,num,info){
+        alert("info " + info);
+        if(num != null)
+        {
+            firebase.database().ref('floornum/' + floor).set({
+                cartnum:num
+            });
+            
+        }
     }
-        
-    function notWorking()
+    function notWorking(floor,num,callback)
         {
             var Watcher = firebase.database().ref('/carts');
             //alert("yay");
             Watcher.on('value', function(snapshot) {
                 alert("yay2");
-                var info=snapshot.numChildren();
-                return info;
+                var info = snapshot.numChildren();
+                //return info;
+                callback(floor,num,info);
             });
         }
         
