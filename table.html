@@ -105,6 +105,8 @@
         }
         $( "#sel1" ).change(function() {
           alert( "Handler for .change() called." );
+          floor = $("#sel1").val();
+          alert("floor now " + floor );
         });
        // availability goes [day][period]
         var config = {
