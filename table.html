@@ -272,8 +272,9 @@
             //x is cart
             var specificCarts = [];
             //here is the error
-            
-            var cartVal = "cart" + (x + (floor-1)*2).toString();
+            var tempX = x + (floor - 1) * 2;
+            alert("temp X " + tempX);
+            var cartVal = "cart" + tempX.toString();
             //console.log("here's your val " + cartVal);
             var kVal = 0;
             if(k == 0){
