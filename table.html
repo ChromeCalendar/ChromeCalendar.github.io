@@ -171,11 +171,11 @@
                  }
                  for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
-                        one: "true",
-                        two: "true",
-                        three: "true",
-                        four: "true",
-                        five: "true"
+                        0: "true",
+                        1: "true",
+                        2: "true",
+                        3: "true",
+                        4: "true"
                       });
                  }
                  //Fill(cartLink,floor,addFloor);
@@ -239,19 +239,24 @@
             //console.log("here's your val " + cartVal);
             var kVal = 0;
             if(k == 0){
-                kVal = "one";
+                //kVal = "one";
+                kVal = '0';
             }
             else if(k == 1){
-                kVal = "two";
+                //kVal = "two";
+                kVal = '1';
             }
             else if(k == 2){
-                kVal = "three";
+               // kVal = "three";
+                kVal = '2';
             }
             else if(k == 3){
-                kVal = "four";
+                //kVal = "four";
+                kVal = '3';
             }
             else if(k == 4){
-                kVal = "five";
+                //kVal = "five";
+                kVal = '4';
             }
             //console.log("kVal " + kVal);
             //j is period
@@ -428,23 +433,23 @@
                 }
                 
                 if(tagTwo === 1){
-                    tagTwo = "one";
+                    tagTwo = "0";
                     tempTwo = 0;
                 }
                 else if(tagTwo === 2){
-                    tagTwo = "two";
+                    tagTwo = "1";
                     tempTwo = 1;
                 }
                 else if(tagTwo === 3){
-                    tagTwo = "three";
+                    tagTwo = "2";
                     tempTwo = 2;
                 }
                 else if(tagTwo === 4){
-                    tagTwo = "four";
+                    tagTwo = "3";
                     tempTwo = 3;
                 }
                 else if(tagTwo === 5){
-                    tagTwo = "five";
+                    tagTwo = "4";
                     tempTwo = 4;
                 }
                 //tempTwo is days
