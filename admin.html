@@ -55,7 +55,7 @@
     function notWorking(floor,num,callback)
         {
             var Watcher = firebase.database().ref('/carts');
-            //alert("yay");
+            alert("yay");
             Watcher.on('value', function(snapshot) {
                 alert("yay2");
                 var info = snapshot.numChildren();
