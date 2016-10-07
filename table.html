@@ -67,16 +67,6 @@
     <script>
         var already = 0;
         var floor = $("#sel1").val();
-        
-        function getNum(){
-            alert("in get num");
-            var floorCarts;
-            var floorRef = firebase.database().ref("/carts/floors/" + floor);
-            floorRef.on("value", function(snapshot) {
-               floorCarts = snapshot.numChildren();
-                alert(floorCarts);
-            });
-        }
         getNum();
         alert("floor is (waiting) " + floor);
         var CA = [];
@@ -133,6 +123,15 @@
           //alert(username);
           // ...
         });
+        function getNum(){
+            alert("in get num");
+            var floorCarts;
+            var floorRef = firebase.database().ref("/carts/floors/" + floor);
+            floorRef.on("value", function(snapshot) {
+               floorCarts = snapshot.numChildren();
+                alert(floorCarts);
+            });
+        }
         var Ref = firebase.database().ref();
         Ref.on("value", function(snapshot) {
               var reset = snapshot.val();
@@ -176,30 +175,30 @@
                  var floor;
                  if(n === 0){
                      cartLink = "cart0";
-                     floor = 0;
+                     floor = '0';
                  }
                  else if(n === 1){
                      cartLink = "cart1";
-                     floor = 0;
+                     floor = '0';
                  }
                  else if(n === 2){
                      cartLink = "cart2";
-                     floor = 1;
+                     floor = '1';
                  }
                  else if(n === 3){
                      cartLink = "cart3";
-                     floor = 1;
+                     floor = '1';
                  }
                  else if(n === 4){
                      cartLink = "cart4";
-                     floor = 2;
+                     floor = '2';
                  }
                  else if(n === 5){
                      cartLink = "cart5";
-                     floor = 2;
+                     floor = '2';
                  }
                  for(var w = 0;w < 4;w++){
-                     firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
+                     firebase.database().ref('/carts/floors/' + floor '/' + cartLink + "/availability/" + w.toString()).set({
                         0: "true",
                         1: "true",
                         2: "true",
@@ -291,7 +290,7 @@
             //j is period
             var freeCarts = false;
             var numAvail = 0;
-                var cartsRef = firebase.database().ref("/carts/" + cartVal + "/availability/"+ j + "/" + kVal);
+                var cartsRef = firebase.database().ref("/carts/floors/" + floor + '/' + cartVal + "/availability/"+ j + "/" + kVal);
                 cartsRef.on("value", function(snapshot) {
                     var available = snapshot.val()
                     
@@ -534,7 +533,7 @@
             }
             alert("cart "+ tagThree);
             var updates = {};
-            updates['/carts/'+tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
+            updates['/carts/floors/'+ floor + '/' + tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
             firebase.database().ref().update(updates);
         }
         function read(k,j){
