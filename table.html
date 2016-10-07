@@ -25,11 +25,19 @@
     <body>
     <button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
     <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out10</button>
-    <select size='5'>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+    <div class="container">
+  <!--<h2>Form control: select</h2>
+  <p>The form below contains two dropdown menus (select lists):</p>-->
+  <form>
+    <div class="form-group">
+      <label for="sel1">Select floor:</label>
+          <select class="form-control" id="sel1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+      </div>
+  </form>
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
