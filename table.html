@@ -198,7 +198,7 @@
                      floor = '2';
                  }
                  for(var w = 0;w < 4;w++){
-                     firebase.database().ref('/carts/floors/' + floor '/' + cartLink + "/availability/" + w.toString()).set({
+                     firebase.database().ref('/carts/floors/' + floor + '/' + cartLink + "/availability/" + w.toString()).set({
                         0: "true",
                         1: "true",
                         2: "true",
