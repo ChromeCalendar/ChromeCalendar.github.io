@@ -2,3 +2,6 @@ table{
   background-color: DarkMagenta;
   border-color: black;
 }
+td{
+    background-color: rgba(6,53,69,1);
+}
