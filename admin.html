@@ -148,15 +148,18 @@
         });
         
         function addLine(num,cartnum){
-            //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class="editbtn' + num + '">Reset Floor ' + num + '</button></td></tr>');
-            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
+            var tempWord = "editbtn" + num.toString();
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class=' + tempWord + '>Reset Floor ' + num + '</button></td></tr>');
+            //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
         }
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
-        $("button").click(function() {
-          console.log("in click function");
-          alert( "Handler for .click() called." );
+        $(document).ready(function(){
+            $("button").click(function() {
+              console.log("in click function");
+              alert( "Handler for .click() called." );
+            });
         });
-        $(".editbtn2").click(function() {
+        /*$(".editbtn2").click(function() {
           alert( "Handler for .click() called." );
         });
         $(document).ready(function() {
@@ -185,7 +188,7 @@
                 location.reload();
             });
         });
-        
+        */
         
         for(p=0; p<4; p++)
             {
