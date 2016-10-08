@@ -149,7 +149,7 @@
         
         function addLine(num,cartnum){
             var tempWord = "editbtn" + num.toString();
-            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class=' + tempWord + '>Reset Floor ' + num + '</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class=' + tempWord + '><button class=' + tempWord + '>Reset Floor ' + num + '</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
         }
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
