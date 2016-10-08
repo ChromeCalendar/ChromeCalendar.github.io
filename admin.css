@@ -16,7 +16,7 @@ table{
     
 }
 .clickable{
-    background-color: rgba(129,31,20);
+    background-color: rgba(129,31,20,1);
     color: white;
 }
 .container{
