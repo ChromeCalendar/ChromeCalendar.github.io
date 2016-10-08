@@ -163,7 +163,8 @@
               var clickedClass = event.target.id;
               console.log(event.target.id);
               alert("clicked class " + clickedClass);
-              if(clickedClass != ''){
+              console.log("after " + event.target.id);
+              if(clickedClass != null){
                 setCarts(clickedClass);
               }
             });
