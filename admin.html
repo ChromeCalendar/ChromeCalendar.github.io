@@ -162,7 +162,9 @@
               //alert( "Handler for .click() called." );
               var clickedClass = event.target.id;
               alert("clicked class " + clickedClass);
-              setCarts(clickedClass);
+              if(clickedClass != ''){
+                setCarts(clickedClass);
+              }
             });
         });
         /*$(".editbtn2").click(function() {
