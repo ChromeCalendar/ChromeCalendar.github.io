@@ -17,7 +17,7 @@ table{
 }
 tr{
     padding: 8px;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 .clickable{
     background-color: rgba(129,31,20,1);
