@@ -15,7 +15,8 @@ table{
    /* margin: 60px;*/
     
 }
-table, th, td {
+table, tr, td {
+    padding: 8px;
     border: 1px solid black;
 }
 .clickable{
