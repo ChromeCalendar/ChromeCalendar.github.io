@@ -4,7 +4,8 @@ body{
     background-size: cover;
 }
 td{
-    background-color: rgba(6,53,69,1);
+    background-color: rgba(252,160,98,1);
+    border-color: black;
 }
 thead{
     background-color: #09092a;
@@ -15,8 +16,12 @@ table{
     
 }
 .container{
-    margin: 60px;
-    padding: 30;
+    /*margin: 60px;
+    padding: 30;*/
     border-radius: 15px;
     background-color: rgba(255,255,255,.4);
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
