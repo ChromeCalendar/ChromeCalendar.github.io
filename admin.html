@@ -148,9 +148,9 @@
         });
         
         function addLine(num,cartnum){
-            var tempWord = "editbtn" + num.toString();
+            //var tempWord = "editbtn" + num.toString();
             console.log(tempWord);
-            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td id=' + tempWord + '><button id=' + tempWord + '>Reset Floor ' + num + '</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td id=' + num + '><button id=' + tempWord + '>Reset Floor ' + num + '</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
         }
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
