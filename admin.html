@@ -73,12 +73,12 @@
             var temp="cart"+c.toString();
             var resWatcher = firebase.database().ref('carts/'+temp+'/availability/'+p.toString()+'/'+n.toString());
             resWatcher.on('value', function(snapshot) {
-                            var info=snapshot.val();
-                            if(info=="true")
-                                {
-                                    $('#Reservations tr:last').after('<tr><td>'+c+'</td><td>'+(p+1)+'</tr>');
-                                }
-                        });
+                var info=snapshot.val();
+                if(info=="true")
+                {
+                    $('#Reservations tr:last').after('<tr><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                }
+            });
         }
         </script>
 </head>
@@ -102,7 +102,7 @@
             </tr>
             <tr>
                 <th>Floor / Cart #</th>
-                <th>Period1</th>
+                <th>Period2</th>
             </tr>
         </thead>
         <tbody>
@@ -117,7 +117,10 @@
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn3">Reset Floor 3</button></td></tr>');
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(1,tempNum);
+            //$('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn3">Reset Floor 3</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
         });
         //$('#carts tr:last').after('<td><button class="editbtn3">Reset Floor 3</button></td></tr>');
@@ -126,7 +129,10 @@
             var info = snapshot.val();
             cartnum1=(info.cartnum);
             var tempWord = "editbtn2";
-            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class=' + tempWord + '>Reset Floor 2</button></td></tr>');
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(2,tempNum);
+            //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class=' + tempWord + '>Reset Floor 2</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
         });
         //$('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
@@ -134,9 +140,16 @@
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset Floor 1</button></td></tr>');
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(3,tempNum);
+            //$('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset Floor 1</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
         });
+        
+        function addLine(num,cartnum){
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class="editbtn1">Reset Floor 1</button></td></tr>');
+        }
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         $("button").click(function() {
           console.log("in click function");
@@ -150,24 +163,27 @@
                 alert("come on");
             });
         });
-        /*$(document).ready(function(){
+        $(document).ready(function(){
             $('.editbtn1').click(function(){
+                alert("come on");
                 setCarts(1);
                 //location.reload();
             });
         });
         $(document).ready(function(){
             $('.editbtn2').click(function(){
+                alert("come on");
                 setCarts(2);
                 location.reload();
             });
         });
         $(document).ready(function(){
             $('.editbtn3').click(function(){
+                alert("come on");
                 setCarts(3);
                 location.reload();
             });
-        });*/
+        });
         
         
         for(p=0; p<4; p++)
