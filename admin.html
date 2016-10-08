@@ -125,7 +125,8 @@
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class="editbtn2">Reset Floor 2</button></td></tr>');
+            var tempWord = "editbtn2";
+            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class=' + tempWord + '>Reset Floor 2</button></td></tr>');
             //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
         });
         //$('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
@@ -138,7 +139,10 @@
         });
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         
-        $( "button" ).click(function() {
+        $("button").click(function() {
+          alert( "Handler for .click() called." );
+        });
+        $(".editbtn2").click(function() {
           alert( "Handler for .click() called." );
         });
         /*$(document).ready(function(){
