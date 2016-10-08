@@ -117,23 +117,26 @@
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
-            });
-                $('#carts tr:last').after('<td><button class="editbtn3">Reset Floor 3</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn3">Reset Floor 3</button></td></tr>');
+            //$('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
+        });
+        //$('#carts tr:last').after('<td><button class="editbtn3">Reset Floor 3</button></td></tr>');
         var watcher = firebase.database().ref('floornum/2');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-                $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
-            });
-               $('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class="editbtn2">Reset Floor 2</button></td></tr>');
+            //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
+        });
+        //$('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
         var watcher = firebase.database().ref('floornum/3');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
             cartnum1=(info.cartnum);
-            $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
-            });
-                $('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset Floor 1</button></td></tr>');
+            //$('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
+        });
+        //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         
 
         $(document).ready(function(){
