@@ -162,9 +162,9 @@
               //alert( "Handler for .click() called." );
               var clickedClass = event.target.id;
               console.log(event.target.id);
-              alert("clicked class " + clickedClass);
-              console.log("after " + event.target.id);
-              if(clickedClass != null){
+              //alert("clicked class " + clickedClass);
+              //console.log("after " + event.target.id);
+              if(event.target.id != ''){
                 setCarts(clickedClass);
               }
             });
