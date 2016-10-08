@@ -4,11 +4,11 @@ body{
     background-size: cover;
 }
 td{
-    background-color: rgba(252,160,98,1);
+    background-color: rgba(242,160,98,1);
     border-color: black;
 }
 thead{
-    background-color: #09092a;
+    /*background-color: #09092a;*/
     color:white;
 }
 table{
@@ -22,6 +22,6 @@ table{
     background-color: rgba(255,255,255,.4);
     margin: auto;
     width: 50%;
-    border: 3px solid green;
+    border: 3px solid black;
     padding: 10px;
 }
