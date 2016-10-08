@@ -102,7 +102,7 @@
             </tr>
             <tr>
                 <th>Floor / Cart #</th>
-                <th>Period3</th>
+                <th>Period4</th>
             </tr>
         </thead>
         <tbody>
@@ -148,7 +148,8 @@
         });
         
         function addLine(num,cartnum){
-            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class="editbtn' + num + '">Reset Floor ' + num + '</button></td></tr>');
+            //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td><button class="editbtn' + num + '">Reset Floor ' + num + '</button></td></tr>');
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
         }
         //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         $("button").click(function() {
