@@ -15,6 +15,10 @@ table{
    /* margin: 60px;*/
     
 }
+.clickable{
+    background-color: rgba(129,31,20);
+    color: white;
+}
 .container{
     /*margin: 60px;
     padding: 30;*/
