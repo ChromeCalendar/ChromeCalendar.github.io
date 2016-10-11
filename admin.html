@@ -65,19 +65,23 @@
                 callback(floor,num,info);
             });
         }
-        
-    function findRes(c,p)
+    
+    function cartCount(f)
+        {
+            
+        }
+    function findRes(f,c,p)
         {
             var d = new Date();
             var n = d.getDay()-1;
 
             var temp="cart"+c.toString();
-            var resWatcher = firebase.database().ref('carts/'+temp+'/availability/'+p.toString()+'/'+n.toString());
+            var resWatcher = firebase.database().ref('carts/floors/'+f+'/'+temp+'/availability/'+p.toString()+'/'+n.toString());
             resWatcher.on('value', function(snapshot) {
                 var info=snapshot.val();
                 if(info=="true")
                 {
-                    $('#Reservations tr:last').after('<tr><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                    $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                 }
             });
         }
@@ -103,8 +107,9 @@
                 <th>Upcoming Reservations</th>
             </tr>
             <tr>
-                <th>Floor / Cart #</th>
-                <th>Period9</th>
+                <th>Floor</th>
+                <th>Cart #</th>
+                <th>Period</th>
             </tr>
         </thead>
         <tbody>
@@ -199,13 +204,15 @@
             });
         });
         */
-        
-        for(p=0; p<4; p++)
+        for(f=1; f<4; f++)
             {
-                for(c=0; c<6; c++)
-                    {
-                        findRes(c,p);
-                    }
+             for(c=0; c<2; c++)
+                {
+                    for(p=0; p<4; p++)
+                        {
+                            findRes(f,2*f+c-2,p);
+                        }
+                }   
             }
         //carts / cats+num / availability / period / day of week (number as word)
         
