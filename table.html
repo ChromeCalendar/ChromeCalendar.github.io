@@ -322,6 +322,7 @@
                         alert("hey "  + freeCarts);
                     }
                     if(freeCarts == true){
+                        alert(tempX);
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
                         console.log("before " + CA[k][j].num);
@@ -548,6 +549,7 @@
             }
             alert("cart "+ tagThree);
             var updates = {};
+            alert("floor now " + floor);
             updates['/carts/floors/'+ floor + '/' + tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
             firebase.database().ref().update(updates);
         }
