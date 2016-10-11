@@ -277,9 +277,9 @@
             //x is cart
             var specificCarts = [];
             //here is the error
-            var tempX = x + (floor - 1) * 2;
-            console.log("temp X " + tempX);
-            var cartVal = "cart" + tempX.toString();
+            //var tempX = x + (floor - 1) * 2;
+            //console.log("temp X " + tempX);
+            var cartVal = "cart" + x.toString();
             //console.log("here's your val " + cartVal);
             var kVal = 0;
             if(k == 0){
@@ -323,7 +323,7 @@
                         alert("hey "  + freeCarts);
                     }
                     if(freeCarts == true){
-                        console.log(tempX);
+                        //console.log(tempX);
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
                         console.log("before " + CA[k][j].num);
@@ -332,7 +332,7 @@
                         CA[k][j].num = (temp + 1);
                         console.log("after " + CA[k][j].num);
                         console.log("spiders " + x + " row " + j + " col " + k);
-                        CA[k][j].specific.push(tempX);
+                        CA[k][j].specific.push(x);
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
