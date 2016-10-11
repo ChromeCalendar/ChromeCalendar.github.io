@@ -14,6 +14,11 @@ table{
    /* margin: 60px;*/
     
 }
+#clear{
+    width:20%; /* setting the width */
+    margin:0 auto; /* this will center  it */
+    text-align:center;
+}
 .btn-primary{
     background-image:none;
     background-color: deepskyblue;
