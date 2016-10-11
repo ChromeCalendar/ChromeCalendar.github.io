@@ -109,7 +109,8 @@
           floor = $("#sel1").val();
           alert("floor now " + floor );
           already = 0;
-          beginAll();
+          ClearTable(4)  
+          //beginAll();
         });
        // availability goes [day][period]
         var config = {
@@ -562,7 +563,7 @@
             }
             if(already === 0){
                 already = 1;
-                startFunc();
+                beginAll();
             }
         }
     </script>
