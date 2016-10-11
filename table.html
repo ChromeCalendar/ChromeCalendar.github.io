@@ -135,7 +135,7 @@
             var floorRef = firebase.database().ref("/carts/floors/" + floor);
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
-                alert(floorCarts);
+                //alert(floorCarts);
                 onFloor = floorCarts;
                 if(onFloor != 0){
                     beginAll();
@@ -162,7 +162,7 @@
                            startFunc();
                        }
                    }
-                   alert("alert " + already);
+                   //alert("alert " + already);
                    if(already === 0){
                        // Save data to sessionStorage
                        //sessionStorage.setItem('key', 1);
@@ -277,7 +277,7 @@
             var specificCarts = [];
             //here is the error
             var tempX = x + (floor - 1) * 2;
-            console.log("temp X " + tempX);
+            alert.log("temp X " + tempX);
             var cartVal = "cart" + tempX.toString();
             //console.log("here's your val " + cartVal);
             var kVal = 0;
