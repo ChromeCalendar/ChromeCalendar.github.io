@@ -57,7 +57,7 @@
     function notWorking(floor,num,callback)
         {
             alert("yay");
-            var Watcher = firebase.database().ref('/carts');
+            var Watcher = firebase.database().ref('/carts/floors/'+floor);
             Watcher.on('value', function(snapshot) {
                 alert("yay2");
                 var info = snapshot.numChildren();
@@ -68,7 +68,14 @@
     
     function cartCount(f)
         {
-            
+            var resWatcher = firebase.database().ref('carts/floors/'+f);
+            resWatcher.on('value', function(snapshot) {
+                var info=snapshot.numChildren();
+                if(info=="true")
+                {
+                    $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                }
+            });
         }
     function findRes(f,c,p)
         {
