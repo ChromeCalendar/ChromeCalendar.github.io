@@ -277,7 +277,7 @@
             var specificCarts = [];
             //here is the error
             var tempX = x + (floor - 1) * 2;
-            alert("temp X " + tempX);
+            console.log("temp X " + tempX);
             var cartVal = "cart" + tempX.toString();
             //console.log("here's your val " + cartVal);
             var kVal = 0;
@@ -322,7 +322,7 @@
                         alert("hey "  + freeCarts);
                     }
                     if(freeCarts == true){
-                        alert(tempX);
+                        console.log(tempX);
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
                         console.log("before " + CA[k][j].num);
@@ -529,6 +529,7 @@
         }
         function newUpdate(tagOne, tagTwo, tagThree){
             alert("cart "+tagThree);
+            console.log("cart "+tagThree);
             if(tagThree === 0){
                 tagThree = "cart0";
             }
@@ -547,7 +548,7 @@
             else if(tagThree === 5){
                 tagThree = "cart5";
             }
-            alert("cart "+ tagThree);
+            console.log("cart "+ tagThree);
             var updates = {};
             alert("floor now " + floor);
             updates['/carts/floors/'+ floor + '/' + tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
