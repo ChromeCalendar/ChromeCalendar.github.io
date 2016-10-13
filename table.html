@@ -24,7 +24,7 @@
     </head>
     <body>
     <!--<button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>-->
-    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out4</button>
+    <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out5</button>
     <!--<div class="container">
   <h2>Form control: select</h2>
   <p>The form below contains two dropdown menus (select lists):</p>-->
@@ -208,7 +208,19 @@
                           alert("key is " + key);
                           // childData will be the actual contents of the child
                           var childData = childSnapshot.val();
-                          weekCount(tempfloor,key);
+                          outerSet(function(ww) {
+                              for(var w = 0;w < 4;w++){
+                                  firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/week/" + ww + "/" + w.toString()).set({
+                                        0: "true",
+                                        1: "true",
+                                        2: "true",
+                                        3: "true",
+                                        4: "true"
+                                   });
+                               }
+                          });
+                          
+                          weekCount(tempfloor,key,outerSet,callback);
                           
                       });
                   });
@@ -258,7 +270,8 @@
             console.log("in week count");
             for(var ww = 0; ww < 52;ww++){
                console.log("ww is " + ww);
-               outerSet(ww,tempfloor,key);
+                callback(ww);
+               //outerSet(ww,tempfloor,key);
             }
         }
         function outerSet(ww,tempfloor,key){
