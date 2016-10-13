@@ -206,6 +206,7 @@
                      snapshot.forEach(function(childSnapshot) {//carts per floor
                           var CPF = snapshot.numChildren();
                           alert("Carts per floor " + CPF);
+                          console.log("tempfloor " + tempfloor + " ww " + ww);
                           // key will be "ada" the first time and "alan" the second time
                           var key = childSnapshot.key;
                           alert("key is " + key);
@@ -213,6 +214,7 @@
                           var childData = childSnapshot.val();
                           //weekCount(function(ww) {
                               for(var w = 0;w < 4;w++){//periods
+                                  console.log("w " + w);
                                   firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/week/" + ww + "/" + w.toString()).set({
                                         0: "true",
                                         1: "true",
@@ -277,18 +279,6 @@
                //outerSet(ww,tempfloor,key);
             }
         }*/
-        function outerSet(ww,tempfloor,key){
-            console.log("in function outerSet");
-            for(var w = 0;w < 4;w++){
-                firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/week/" + ww + "/" + w.toString()).set({
-                    0: "true",
-                    1: "true",
-                    2: "true",
-                    3: "true",
-                    4: "true"
-               });
-           }
-       }
        /* function Fill(cartLink,floor,callback){
             for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/' + cartLink + "/availability/" + w.toString()).set({
