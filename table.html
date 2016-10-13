@@ -190,8 +190,8 @@
         }
         function FEF(){
             console.log("in FEF " );
-                for(var ww = 0;ww < 52;ww++){//weeks
-                    for(var current = 1;current < 4;current++){//floors
+                for(var current = 1;current < 4;current++){//floors
+                    for(var ww = 0;ww < 52;ww++){//weeks
                         console.log("ww is " + ww );
                         alert(current);
                         refill(current,ww);
@@ -203,7 +203,7 @@
             console.log("in refill");
                 var localRef = firebase.database().ref("/carts/floors/" + tempfloor);
                  localRef.on("value", function(snapshot) {
-                     snapshot.forEach(function(childSnapshot) {//carts per week per floor
+                     snapshot.forEach(function(childSnapshot) {//carts per floor
                           var CPF = snapshot.numChildren();
                           alert("Carts per floor " + CPF);
                           // key will be "ada" the first time and "alan" the second time
