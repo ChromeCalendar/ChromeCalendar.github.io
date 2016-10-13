@@ -37,14 +37,13 @@
        
         var num = prompt("How many carts are on the floor?","0");
         if(num != null){
-            alert("num " + num);
+            alert("num" + num);
             notWorking(floor,num,temporary);
             //var total = notWorking(floor,num,temporary);
         }
         //alert(total);
     }
     function temporary(floor,num,info){
-        alert("glorious info " + info);
         //alert("everything is ok! info is  " + info + " floor is " + floor + " and num is " + num);
         if(num != null)
         {
@@ -56,14 +55,30 @@
     }
     function notWorking(floor,num,callback)
         {
-            alert("yay");
             var Watcher = firebase.database().ref('/carts/floors/'+floor);
             Watcher.on('value', function(snapshot) {
-                alert("yay2");
-                var info = snapshot.numChildren();
+                //var info = snapshot.numChildren();
                 //return info;
+                for(info=snapshot.numChildren(); info<num; info++)
+                    {
+                        addCarts(floor,num,info);
+                    }
+                    
                 callback(floor,num,info);
             });
+        }
+    function addCarts(floor,num,info)
+        {
+             for(var period=0; period<4; period++)
+             { 
+                firebase.database().ref('carts/floors/'+floor+'/cart'+info+'/availability/'+period).set({
+                    0: "true",
+                    1: "true",
+                    2: "true",
+                    3: "true",
+                    4: "true"
+                });
+             }
         }
     
     function cartCount(f)
