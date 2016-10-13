@@ -155,11 +155,12 @@
                   //var started = sessionStorage.getItem('start');
                   //alert("Been set " + reset.beenSet);
                    if(reset.beenSet === "false"){
-                       //refill();
-                       FEF();
                        var updates = {};
                        updates['/beenSet'] = "true";
                        firebase.database().ref().update(updates);
+                       //refill();
+                       FEF();
+                       
                        /*firebase.database().ref().set({
                            beenSet = "true"
                        });*/
@@ -188,6 +189,7 @@
             });
         }
         function FEF(){
+            console.log("in FEF " );
             for(var current = 1;current < 4;current++){
                 alert(current);
                 refill(current);
@@ -207,6 +209,7 @@
                           // childData will be the actual contents of the child
                           var childData = childSnapshot.val();
                           for(var ww = 0; ww < 52;ww++){
+                              console.log("ww is " + ww);
                               for(var w = 0;w < 4;w++){
                                   firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/week/" + ww + "/" + w.toString()).set({
                                         0: "true",
@@ -215,7 +218,7 @@
                                         3: "true",
                                         4: "true"
                                     });
-                          }
+                              }
                           }
                       });
                   });
