@@ -151,7 +151,8 @@
                   //var started = sessionStorage.getItem('start');
                   //alert("Been set " + reset.beenSet);
                    if(reset.beenSet === "false"){
-                       refill();
+                       //refill();
+                       FEF();
                        var updates = {};
                        updates['/beenSet'] = "true";
                        firebase.database().ref().update(updates);
@@ -182,11 +183,39 @@
               // An error happened.
             });
         }
+        function FEF(){
+            for(var current = 1;current < 4;current++){
+                alert(current);
+                refill(current);
+            }
+        }
         //alert("UID " + UID);
-        function refill(){
-             for(var n = 0;n < 6;n++){
-                 var cartLink;
-                 var floor;
+        function refill(tempfloor){
+            console.log("in refill");
+                var localRef = firebase.database().ref("/carts/floors/" + tempfloor);
+                 localRef.on("value", function(snapshot) {
+                     snapshot.forEach(function(childSnapshot) {
+                          var CPF = snapshot.numChildren();
+                          alert("Carts per floor " + CPF);
+                          // key will be "ada" the first time and "alan" the second time
+                          var key = childSnapshot.key;
+                          alert("key is " + key);
+                          // childData will be the actual contents of the child
+                          var childData = childSnapshot.val();
+                          for(var w = 0;w < 4;w++){
+                              firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/" + w.toString()).set({
+                                    0: "true",
+                                    1: "true",
+                                    2: "true",
+                                    3: "true",
+                                    4: "true"
+                                });
+                          }
+                      });
+                  });
+             //for(var n = 0;n < 6;n++){
+                 /*var cartLink;
+                 //var floor;
                  if(n === 0){
                      cartLink = "cart0";
                      floor = '1';
@@ -210,8 +239,8 @@
                  else if(n === 5){
                      cartLink = "cart1";
                      floor = '3';
-                 }
-                 for(var w = 0;w < 4;w++){
+                 }*/
+                 /*for(var w = 0;w < 4;w++){
                      firebase.database().ref('/carts/floors/' + floor + '/' + cartLink + "/availability/" + w.toString()).set({
                         0: "true",
                         1: "true",
@@ -219,10 +248,10 @@
                         3: "true",
                         4: "true"
                       });
-                 }
+                 }*/
                  //Fill(cartLink,floor,addFloor);
                  
-             }
+             //}
             //alert("calling");
             //startFunc();
         }
