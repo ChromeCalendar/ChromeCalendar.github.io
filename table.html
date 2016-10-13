@@ -109,6 +109,7 @@
           alert( "Handler for .change() called." );
           floor = $("#sel1").val();
           alert("floor now " + floor );
+          //getNum();
           already = 0;
           arrayClearCA();
           ClearTable(4)  
@@ -131,7 +132,8 @@
         
         
         function getNum(){
-            alert("in get num");
+            floor = $("#sel1").val();
+            alert("in get num " + floor);
             var floorCarts;
             var floorRef = firebase.database().ref("/carts/floors/" + floor);
             floorRef.on("value", function(snapshot) {
@@ -600,7 +602,8 @@
             if(already === 0){
                 alert("ready to beginAll");
                 //already = 1;
-                beginAll();
+                //beginAll();
+                getNum();
             }
         }
     </script>
