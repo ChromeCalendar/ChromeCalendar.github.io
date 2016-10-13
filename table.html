@@ -194,12 +194,12 @@
                 console.log("ww is " + ww );
                 for(var current = 1;current < 4;current++){
                     alert(current);
-                    refill(current);
+                    refill(current,ww);
                 }
             }
         }
         //alert("UID " + UID);
-        function refill(tempfloor){
+        function refill(tempfloor,ww){
             console.log("in refill");
                 var localRef = firebase.database().ref("/carts/floors/" + tempfloor);
                  localRef.on("value", function(snapshot) {
