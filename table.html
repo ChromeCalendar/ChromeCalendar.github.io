@@ -138,6 +138,7 @@
                floorCarts = snapshot.numChildren();
                 //alert(floorCarts);
                 onFloor = floorCarts;
+                alert("onFloor " + onFloor);
                 if(onFloor != 0){
                     beginAll();
                 }
@@ -302,6 +303,7 @@
             }
         }
         function checkAvailable(j,k,x){
+            alert("checkAvailable of " + x);
             //j is period, k is day
             //x is cart
             var specificCarts = [];
