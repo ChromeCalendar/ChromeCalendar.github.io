@@ -208,7 +208,7 @@
                           alert("key is " + key);
                           // childData will be the actual contents of the child
                           var childData = childSnapshot.val();
-                          weekCount();
+                          weekCount(tempfloor,key);
                           
                       });
                   });
@@ -254,14 +254,14 @@
             //alert("calling");
             //startFunc();
         }
-        function weekCount(){
+        function weekCount(tempfloor,key){
             console.log("in week count");
             for(var ww = 0; ww < 52;ww++){
                console.log("ww is " + ww);
-               outerSet(ww);
+               outerSet(ww,tempfloor,key);
             }
         }
-        function outerSet(ww){
+        function outerSet(ww,tempfloor,key){
             console.log("in function outerSet");
             for(var w = 0;w < 4;w++){
                 firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/week/" + ww + "/" + w.toString()).set({
