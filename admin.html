@@ -61,14 +61,19 @@
                 //return info;
                 for(info=snapshot.numChildren(); info<num; info++)
                     {
-                        addCarts(floor,num,info);
+                        addCarts(floor,info);
                     }
-                    
+                for(info=snapshot.numChildren(); info>=num; info--)
+                    {
+                        minusCarts(floor,info);
+                    }
                 callback(floor,num,info);
             });
         }
-    function addCarts(floor,num,info)
+    function addCarts(floor,info)
         {
+            info++;
+            alert("oh yes!!");
              for(var period=0; period<4; period++)
              { 
                 firebase.database().ref('carts/floors/'+floor+'/cart'+info+'/availability/'+period).set({
@@ -80,16 +85,22 @@
                 });
              }
         }
+        
+    function minusCarts(floor,info)
+        {
+                firebase.database().ref('carts/floors/'+floor+'/cart'+info).remove();
+                alert("oh no!!!");
+        }
     
     function cartCount(f)
         {
             var resWatcher = firebase.database().ref('carts/floors/'+f);
             resWatcher.on('value', function(snapshot) {
-                var info=snapshot.numChildren();
-                if(info=="true")
-                {
-                    $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
-                }
+                return snapshot.numChildren();
+                //if(info=="true")
+                //{
+                  //  $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                //}
             });
         }
     function findRes(f,c,p)
@@ -149,10 +160,7 @@
             var tempNum;
             tempNum = cartnum1;
             addLine(1,tempNum);
-            //$('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</td><td><button class="editbtn3">Reset Floor 3</button></td></tr>');
-            //$('#carts tr:last').after('<tr><td>'+1+'</td><td>'+cartnum1+'</tr>');
         });
-        //$('#carts tr:last').after('<td><button class="editbtn3">Reset Floor 3</button></td></tr>');
         var watcher = firebase.database().ref('floornum/2');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
@@ -161,10 +169,7 @@
             var tempNum;
             tempNum = cartnum1;
             addLine(2,tempNum);
-            //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td><td><button class=' + tempWord + '>Reset Floor 2</button></td></tr>');
-            //$('#carts tr:last').after('<tr><td>'+2+'</td><td>'+cartnum1+'</td>');
         });
-        //$('#carts tr:last').after('<td><button class="editbtn2">Reset Floor 2</button></td></tr>');
         var watcher = firebase.database().ref('floornum/3');
         watcher.once('value', function(snapshot) {
             var info = snapshot.val();
@@ -172,8 +177,6 @@
             var tempNum;
             tempNum = cartnum1;
             addLine(3,tempNum);
-            //$('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td><td><button class="editbtn1">Reset Floor 1</button></td></tr>');
-            //$('#carts tr:last').after('<tr><td>'+3+'</td><td>'+cartnum1+'</td>');
         });
         
         function addLine(num,cartnum){
