@@ -61,9 +61,9 @@
                 //return info;
                 for(info=snapshot.numChildren(); info<num; info++)
                     {
-                        addCarts(floor,info);
+                        info=addCarts(floor,info-1);
                     }
-                for(info=snapshot.numChildren(); info>=num; info--)
+                for(info=snapshot.numChildren(); info>num; info--)
                     {
                         minusCarts(floor,info);
                     }
@@ -76,7 +76,7 @@
             alert("oh yes!!");
              for(var period=0; period<4; period++)
              { 
-                firebase.database().ref('carts/floors/'+floor+'/cart'+info+'/availability/'+period).set({
+                firebase.database().ref('carts/floors/'+floor+'/cart'+(info)+'/availability/'+period).set({
                     0: "true",
                     1: "true",
                     2: "true",
@@ -88,14 +88,15 @@
         
     function minusCarts(floor,info)
         {
-                firebase.database().ref('carts/floors/'+floor+'/cart'+info).remove();
                 alert("oh no!!!");
+                firebase.database().ref('carts/floors/'+floor+'/cart'+(info-1)).remove();
         }
     
     function cartCount(f)
         {
             var resWatcher = firebase.database().ref('carts/floors/'+f);
             resWatcher.on('value', function(snapshot) {
+                alert(snapshot.numChildren());
                 return snapshot.numChildren();
                 //if(info=="true")
                 //{
@@ -105,6 +106,7 @@
         }
     function findRes(f,c,p)
         {
+            alert("yay!");
             var d = new Date();
             var n = d.getDay()-1;
 
@@ -229,13 +231,13 @@
             });
         });
         */
-        for(f=1; f<4; f++)
+        for(p=0; p<4; p++)
             {
-             for(c=0; c<2; c++)
+             for(f=1; f<4; f++)
                 {
-                    for(p=0; p<4; p++)
+                    for(c=0; c<cartCount(f); c++)
                         {
-                            findRes(f,2*f+c-2,p);
+                            findRes(f,c,p);
                         }
                 }   
             }
