@@ -39,12 +39,10 @@
         if(num != null){
             alert("num" + num);
             notWorking(floor,num,temporary);
-            //var total = notWorking(floor,num,temporary);
         }
-        //alert(total);
     }
+        
     function temporary(floor,num,info){
-        //alert("everything is ok! info is  " + info + " floor is " + floor + " and num is " + num);
         if(num != null)
         {
             firebase.database().ref('floornum/' + floor).set({
@@ -57,8 +55,6 @@
         {
             var Watcher = firebase.database().ref('/carts/floors/'+floor);
             Watcher.on('value', function(snapshot) {
-                //var info = snapshot.numChildren();
-                //return info;
                 for(info=snapshot.numChildren(); info<num; info++)
                     {
                         info=addCarts(floor,info-1);
@@ -92,21 +88,40 @@
                 firebase.database().ref('carts/floors/'+floor+'/cart'+(info-1)).remove();
         }
     
-    function cartCount(f)
+    
+        
+    function resList()
+    {
+        for(p=0; p<4; p++)
+        { 
+            floorLoop(p);
+        }
+    }
+    function floorLoop(p)
+    {
+        for(f=1; f<4; f++)
+                {
+                    cartCount(f,p);
+                }   
+    }
+    function cartCount(f,p)
         {
             var resWatcher = firebase.database().ref('carts/floors/'+f);
             resWatcher.on('value', function(snapshot) {
-                alert(snapshot.numChildren());
-                return snapshot.numChildren();
-                //if(info=="true")
-                //{
-                  //  $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
-                //}
+                var info = snapshot.numChildren();
+                
+                cartLoop(f,p,snapshot.numChildren());
             });
+        }
+    function cartLoop(f,p,cc)
+        {
+            for(c=0; c<cc; c++)
+                        {
+                            findRes(f,c,p);
+                        }
         }
     function findRes(f,c,p)
         {
-            alert("yay!");
             var d = new Date();
             var n = d.getDay()-1;
 
@@ -114,7 +129,7 @@
             var resWatcher = firebase.database().ref('carts/floors/'+f+'/'+temp+'/availability/'+p.toString()+'/'+n.toString());
             resWatcher.on('value', function(snapshot) {
                 var info=snapshot.val();
-                if(info=="true")
+                if(info=="false")
                 {
                     $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                 }
@@ -136,6 +151,7 @@
             </tbody>
         </table>
     </div>
+    
     <table style="width:100%" id="Reservations">
         <thead>
             <tr>
@@ -182,66 +198,21 @@
         });
         
         function addLine(num,cartnum){
-            //var tempWord = "editbtn" + num.toString();
-            //console.log(tempWord);
             $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class = "clickable" id=' + num + '>Reset Floor ' + num + '</td></tr>');
-            //$('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class="editbtn' + num + '">yo</td></tr>');
         }
-        //$('#carts tr:last').after('<td><button class="editbtn1">Reset Floor 1</button></td></tr>');
         $(document).ready(function(){
             $("table").click(function() {
               console.log("in click function");
-              //alert( "Handler for .click() called." );
               var clickedClass = event.target.id;
               console.log(event.target.id);
-              //alert("clicked class " + clickedClass);
-              //console.log("after " + event.target.id);
               if(event.target.id != ''){
                 setCarts(clickedClass);
               }
             });
         });
-        /*$(".editbtn2").click(function() {
-          alert( "Handler for .click() called." );
-        });
-        $(document).ready(function() {
-            $("button").click(function(event) {
-                alert("come on");
-            });
-        });
-        $(document).ready(function(){
-            $('.editbtn1').click(function(){
-                alert("come on");
-                setCarts(1);
-                //location.reload();
-            });
-        });
-        $(document).ready(function(){
-            $('.editbtn2').click(function(){
-                alert("come on");
-                setCarts(2);
-                location.reload();
-            });
-        });
-        $(document).ready(function(){
-            $('.editbtn3').click(function(){
-                alert("come on");
-                setCarts(3);
-                location.reload();
-            });
-        });
-        */
-        for(p=0; p<4; p++)
-            {
-             for(f=1; f<4; f++)
-                {
-                    for(c=0; c<cartCount(f); c++)
-                        {
-                            findRes(f,c,p);
-                        }
-                }   
-            }
-        //carts / cats+num / availability / period / day of week (number as word)
+        
+        resList();
+        //make the list of upcoming reservations
         
     </script>
 </body>
