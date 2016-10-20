@@ -72,6 +72,53 @@
         var onFloor = 0;
         alert("floor is (waiting) " + floor);
         var CA = [];
+        var Months = [];
+        monthSet();
+        function Month (name,days) {
+            //this.type = type;
+            this.name = name;
+            this.days = days;
+        }
+        function monthSet(){
+            for(var i0 = 0;i0 < 12;i0++){
+                if(i0 == 0){
+                    Months.push(new Month('January',31));
+                }
+                else if(i0 == 1){
+                    Months.push(new Month('February',28));
+                }
+                else if(i0 == 2){
+                    Months.push(new Month('March',31));
+                }
+                else if(i0 == 3){
+                    Months.push(new Month('April',30));
+                }
+                else if(i0 == 4){
+                    Months.push(new Month('May',31));
+                }
+                else if(i0 == 5){
+                    Months.push(new Month('June',30));
+                }
+                else if(i0 == 6){
+                    Months.push(new Month('July',31));
+                }
+                else if(i0 == 7){
+                    Months.push(new Month('August',31));
+                }
+                else if(i0 == 8){
+                    Months.push(new Month('September',30));
+                }
+                else if(i0 == 9){
+                    Months.push(new Month('October',31));
+                }
+                else if(i0 == 10){
+                    Months.push(new Month('November',30));
+                }
+                else if(i0 == 11){
+                    Months.push(new Month('December',31));
+                }
+            }
+        }
         function Cell (num,specific) {
             this.num = num;
             this.specific = [];
@@ -141,18 +188,21 @@
 
                             });
         }
+        
+        
         function make52(){
             for(var qq = 0;qq < 52;qq++){
                 for(var qqq = 1;qqq < 4;qqq++){
                     var until = 0;
                     console.log("qq " + qq + " qqq " + qqq);
-                    if(qqq == 3){
+                    /*if(qqq == 3){
                         until = 4;
                         
                     }
                     else{
                         until = 2;
-                    }
+                    }*/
+                    until = 2;
                     for(var q0 = 0; q0 < until; q0++){
                         for(var q1 = 0;q1 < 4;q1++){
                         var tempcart = "cart" + q0.toString();
