@@ -184,7 +184,7 @@
                                     1: "true",
                                     2: "true",
                                     3: "true",
-                                    4: "true"
+                                    //4: "true"
 
                             });
         }
@@ -204,7 +204,7 @@
                     }*/
                     until = 2;
                     for(var q0 = 0; q0 < until; q0++){
-                        for(var q1 = 0;q1 < 4;q1++){
+                        for(var q1 = 0;q1 < 5;q1++){
                         var tempcart = "cart" + q0.toString();
                             actualAdd(qq,qqq,tempcart,q1);
                         }
@@ -236,7 +236,7 @@
             floor = $("#sel1").val();
             alert("in get num " + floor);
             var floorCarts;
-            var floorRef = firebase.database().ref("/carts/floors/" + floor);
+            var floorRef = firebase.database().ref("/weeks/0/floors/" + floor+"/carts");
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
                 //alert(floorCarts);
@@ -303,7 +303,7 @@
         //alert("UID " + UID);
         function refill(tempfloor){//,ww){
             console.log("in refill");
-                var localRef = firebase.database().ref("/carts/floors/" + tempfloor);
+                var localRef = firebase.database().ref("/weeks/0/floors/" + tempfloor+"/carts");
                  localRef.on("value", function(snapshot) {
                      snapshot.forEach(function(childSnapshot) {//carts per floor
                           var CPF = snapshot.numChildren();
@@ -317,7 +317,7 @@
                           //weekCount(function(ww) {
                               for(var w = 0;w < 4;w++){//periods
                                   //console.log("w " + w);
-                                  firebase.database().ref('/carts/floors/' + tempfloor + '/' + key + "/availability/" + w.toString()).set({
+                                  firebase.database().ref('/weeks/0/floors/' + tempfloor + '/carts/' + key + "/availability/" + w.toString()).set({
                                         0: "true",
                                         1: "true",
                                         2: "true",
@@ -463,11 +463,11 @@
             //j is period
             var freeCarts = false;
             var numAvail = 0;
-                var cartsRef = firebase.database().ref("/carts/floors/" + floor + '/' + cartVal + "/availability/"+ j + "/" + kVal);
+                var cartsRef = firebase.database().ref("/weeks/0/floors/" + floor + '/carts/' + cartVal + "/availability/"+ kVal + "/" + j);
                 cartsRef.on("value", function(snapshot) {
                     var available = snapshot.val()
                     
-                    console.log("availability " + available + " cartVal " + cartVal + " kVal " + kVal + " period " + j);
+                    console.log("availability " + available + " cartVal " + cartVal + " day " + kVal + " period " + j);
                     if(available == "true"){
                         //console.log("yo12");
                         if(cartVal == "cart2");
@@ -717,7 +717,7 @@
             console.log("cart "+ tagThree);
             var updates = {};
             alert("floor now " + floor);
-            updates['/carts/floors/'+ floor + '/' + tagThree+'/availability/' + tagOne + '/' + tagTwo] = "false";
+            updates['/weeks/0/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = "false";
             firebase.database().ref().update(updates);
         }
         function read(k,j){
