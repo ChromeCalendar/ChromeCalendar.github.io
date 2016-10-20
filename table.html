@@ -41,7 +41,7 @@
       <table class="table table-bordered"  id="myTable">
         <thead>
           <tr>
-            <th>Period #7</th>
+            <th>Period</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -522,10 +522,17 @@
             myFunction();
             
         }
+        function calendar(){
+            //need the start date from firebase at this point
+            var startDate = new Date(116, 8, 29); //temporary starting date until then
+            //next find the date of the current week
+            var currentDate = new Date(getYear(),getMonth(),getDay());
+            //ok now find the previous monday
+        }
         //myFunction fills in table;
         function myFunction(){
-         var clicked = 0;
-         console.log("yoyoy");
+            var clicked = 0;
+            console.log("yoyoy");
             for(var i = 0;i < 4;i++){
                 var one = taken[0][i];
                 var two = taken[1][i];
