@@ -25,6 +25,7 @@
     <body>
     <!--<button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>-->
     <button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out7</button>
+    <button type = "button" class="btn btn-danger" onclick="make52()">Make 52</button>
     <!--<div class="container">
   <h2>Form control: select</h2>
   <p>The form below contains two dropdown menus (select lists):</p>-->
@@ -129,8 +130,58 @@
           //alert(username);
           // ...
         });
-        
-        
+        function actualAdd(qq,qqq,tempcart,q1)
+        {
+            firebase.database().ref('/weeks/'+qq+'/floors/'+qqq+'/carts/' + tempcart+'/availability/'+q1).set({
+                                    0: "true",
+                                    1: "true",
+                                    2: "true",
+                                    3: "true",
+                                    4: "true"
+
+                            });
+        }
+        function make52(){
+            for(var qq = 0;qq < 52;qq++){
+                for(var qqq = 1;qqq < 4;qqq++){
+                    var until = 0;
+                    console.log("qq " + qq + " qqq " + qqq);
+                    if(qqq == 3){
+                        until = 4;
+                        
+                    }
+                    else{
+                        until = 2;
+                    }
+                    for(var q0 = 0; q0 < until; q0++){
+                        for(var q1 = 0;q1 < 4;q1++){
+                        var tempcart = "cart" + q0.toString();
+                            actualAdd(qq,qqq,tempcart,q1);
+                        }
+                    }
+                }
+               // for(qqq = 1;qqq < 4;qqq){
+                    //var localRef = firebase.database().ref("weeks/carts/floors/" + qqq);
+                    /*localRef.on("value", function(snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                            var id = childSnapshot.key;
+                            for(var qqqq = 0;qqqq < 4;qqqq++){
+                                firebase.database().ref('/weeks/carts/floors/' + qqq + '/' + id + '/availability/' + qqqq).set({
+                                    0: "true",
+                                    1: "true",
+                                    2: "true",
+                                    3: "true",
+                                    4: "true"
+                                    
+                                });
+                            }
+                        });
+                    });*/
+                    
+                     
+                //}
+             }
+        }
         function getNum(){
             floor = $("#sel1").val();
             alert("in get num " + floor);
@@ -195,6 +246,7 @@
                         console.log("ww is " + ww );
                         alert(current);
                         refill(current)//,ww);
+                        
                     //}
                 }
         }
