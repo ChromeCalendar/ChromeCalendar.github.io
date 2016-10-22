@@ -5,14 +5,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
-      <div class="container">
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button id="btnSignUp" onclick = "click()" class="btn btn-secondary">Sign in1</button>
-      </div>
+      <div id = "week"></div>
       <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js">
-          (function() {
-              
               const config = {
                 apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
                 authDomain: "chrome-calendar.firebaseapp.com",
@@ -21,32 +15,11 @@
                 messagingSenderId: "583488732443"
               };
               firebase.initializeApp(config);
-              
+              var date = new Date();
+              console.log("date " + date.getDate());
+              console.log("month " + date.getMonth());
 
-              const inputEmail = document.getElementById('email');
-              const inputPassword = document.getElementById('password');
-              const btnSignUp = document.getElementById('btnSignUp');
-
-              //btnSignUp.addEventListener('click', e => {
-              function click(){
-                alert("hey");
-                const email = inputEmail.value;
-                const pass = inputPassword.value;
-                const auth = firebase.auth();
-
-                const promise = auth.signInUserWithEmailAndPassword(email, pass);
-                promise.catch(e => alert(e.message));
-              }
-              //});
-
-              firebase.auth().onAuthStateChanged(firebaseUser => {
-                if(firebaseUser) {
-                  console.log(firebaseUser);
-                } else {
-                  console.log('not logged in');
-                }
-              });
-            }());
+             
       </script>
 </body>
 </html>
