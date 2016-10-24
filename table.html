@@ -278,6 +278,7 @@
                        startFunc();
                    }
             });
+            calendar();
         }
         var UID = sessionStorage.getItem('UID');
         function signOut(){
@@ -573,11 +574,22 @@
             
         }
         function calendar(){
+            alert("hello");
             //need the start date from firebase at this point
             var startDate = new Date(116, 8, 29); //temporary starting date until then
+            alert("darkness");
             //next find the date of the current week
-            var currentDate = new Date(getYear(),getMonth(),getDay());
-            //ok now find the previous monday
+            //ok now week from firebase
+            var weekNumber = firebase.database().ref("/Date");
+            weekNumber.on("value", function(snapshot) {
+                var info1 = snapshot.val();
+                //alert(floorCarts);
+                alert(info1.Week);
+            });
+            alert("myOldFriend");
+            //alert(weekNumber);
+            
+            
         }
         //myFunction fills in table;
         function myFunction(){
