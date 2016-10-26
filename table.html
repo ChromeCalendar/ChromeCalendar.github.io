@@ -42,11 +42,11 @@
         <thead>
           <tr>
             <th>Period</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
+            <th id="monday">Monday</th>
+            <th id="tuesday">Tuesday</th>
+            <th id="wednesday">Wednesday</th>
+            <th id="thursday">Thursday</th>
+            <th id="friday">Friday</th>
           </tr>
         </thead>
         <tbody>
@@ -67,10 +67,29 @@
       <button id = "clear" type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
     </div>
     <script>
+        var config = {
+          apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+          authDomain: "chrome-calendar.firebaseapp.com",
+          databaseURL: "https://chrome-calendar.firebaseio.com",
+          storageBucket: "chrome-calendar.appspot.com",
+          messagingSenderId: "583488732443"
+        };
+        firebase.initializeApp(config);
+        firebase.database().ref('/users').once('value').then(function(snapshot) {
+          var username = snapshot.val();
+          //alert(username);
+          // ...
+        });
         var already = 0;
+        var callLock = 0;
+        //var currentDay = 0;
+        var currentMonth = 0;
+        var currentDay = 1;
+        var currentWeek = 0;
+        getCurrent();
         var floor = $("#sel1").val();
         var onFloor = 0;
-        alert("floor is (waiting) " + floor);
+        //alert("floor is (waiting) " + floor);
         var CA = [];
         var Months = [];
         monthSet();
@@ -85,7 +104,7 @@
                     Months.push(new Month('January',31));
                 }
                 else if(i0 == 1){
-                    Months.push(new Month('February',28));
+                    Months.push(new Month('February',29));
                 }
                 else if(i0 == 2){
                     Months.push(new Month('March',31));
@@ -124,6 +143,7 @@
             this.specific = [];
             
         }
+        
         for(var rr = 0;rr < 5;rr++){
              CA[rr] = [];
              for(var r = 0;r < 4;r++){
@@ -142,7 +162,7 @@
             }
         }
         function arrayClearCA(){
-            alert("in arrayClearCA");
+           // alert("in arrayClearCA");
             for(var rr = 0;rr < 5;rr++){
                 //CA[rr] = [];
                 for(var r = 0;r < 4;r++){
@@ -151,10 +171,10 @@
                 }
             }
             read(0,0);
-            alert("CA " + CA[0][0].specific[0]);
+            //alert("CA " + CA[0][0].specific[0]);
         }
         $( "#sel1" ).change(function() {
-          alert( "Handler for .change() called." );
+         // alert( "Handler for .change() called." );
           floor = $("#sel1").val();
           alert("floor now " + floor );
           //getNum();
@@ -164,35 +184,55 @@
           //beginAll();
         });
        // availability goes [day][period]
-        var config = {
-          apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
-          authDomain: "chrome-calendar.firebaseapp.com",
-          databaseURL: "https://chrome-calendar.firebaseio.com",
-          storageBucket: "chrome-calendar.appspot.com",
-          messagingSenderId: "583488732443"
-        };
-        firebase.initializeApp(config);
-        firebase.database().ref('/users').once('value').then(function(snapshot) {
-          var username = snapshot.val();
-          //alert(username);
-          // ...
-        });
-        function actualAdd(qq,qqq,tempcart,q1)
+        
+        function actualAdd(qq,qqq,tempcart,q1,tempMonth,tempDay)
         {
             firebase.database().ref('/weeks/'+qq+'/floors/'+qqq+'/carts/' + tempcart+'/availability/'+q1).set({
-                                    0: "true",
-                                    1: "true",
-                                    2: "true",
-                                    3: "true",
-                                    //4: "true"
+                day: tempDay,
+                month: Months[tempMonth].name,             
+                0: "true",
+                1: "true",
+                2: "true",
+                3: "true",
+                //4: "true"
 
-                            });
+                });
         }
-        
-        
+        function getCurrent(){
+            var weekRef = firebase.database().ref("/Date");
+            weekRef.on("value", function(snapshot) {
+              //alert(username);
+                var collect = snapshot.val();
+                currentDay = collect.Day;
+                currentMonth = collect.Month;
+                currentWeek = collect.Week;
+                decorate();
+                //alert(currentWeek);
+              // ...
+            });
+        }
+        function decorate(){
+            tempDate = new Date();
+            console.log("day " + tempDate.getDay());
+            var chosenDay = tempDate.getDay();
+            if(chosenDay == 6){
+                chosenDay = 5;
+            }
+            else if(chosenDay == 0){
+                chosenDay = 0;
+            }
+            $("#monday").text("Monday " +  (currentDay - tempDate.getDay() + 1));
+            $("#tuesday").text("Tuesday " + (currentDay -  tempDate.getDay() + 2));
+            $("#wednesday").text("Wednesday " + (currentDay - tempDate.getDay() + 3));
+            $("#thursday").text("Thursday " + (currentDay - tempDate.getDay() + 4));
+            $("#friday").text("Friday " + (currentDay - tempDate.getDay() + 5));
+            //var dayRef = firebase.database().ref("/weeks/" + currentWeek + "/floors);
+        }
         function make52(){
-            for(var qq = 0;qq < 52;qq++){
-                for(var qqq = 1;qqq < 4;qqq++){
+            var tempMonth = 0;
+            var tempDay = 4;
+            for(var qq = 0;qq < 52;qq++){//weeks
+                for(var q1 = 0;q1 < 5;q1++){//days
                     var until = 0;
                     console.log("qq " + qq + " qqq " + qqq);
                     /*if(qqq == 3){
@@ -203,10 +243,38 @@
                         until = 2;
                     }*/
                     until = 2;
-                    for(var q0 = 0; q0 < until; q0++){
-                        for(var q1 = 0;q1 < 5;q1++){
-                        var tempcart = "cart" + q0.toString();
-                            actualAdd(qq,qqq,tempcart,q1);
+                    //var initialDay = tempDay;
+                    //var initialMonth = tempMonth;
+                    for(var qqq = 1; qqq < 4; qqq++){//floors
+                        for(var q0 = 0;q0 < until;q0++){//carts
+                            
+                            /*if(Months[currentMonth].days != currentDate){
+                                currentDate++;
+                            }
+                            else{
+                                currentDate = 0;
+                                currentMonth++;
+                            }*/
+                            //qq is week
+                            
+                            var tempcart = "cart" + q0.toString();
+                            actualAdd(qq,qqq,tempcart,q1,tempMonth,tempDay);
+                            //tempDay++;
+                            
+                        }
+                        
+                    }
+                    if(Months[tempMonth].days != tempDay){
+                        tempDay++;
+                    }
+                    else{
+                        tempDay = 1;
+                        if(tempMonth == 11){
+                            //tempMonth++;
+                            tempMonth == 0;
+                        }
+                        else{
+                            tempMonth++;
                         }
                     }
                 }
@@ -230,20 +298,64 @@
                     
                      
                 //}
+                //adding two days to account for saturday and sunday. 
+                /*if(Months[tempMonth].days != tempDay){
+                    tempDay++;
+                }*/
+                //Months
+                /*if((Months[tempMonth].days - 1) == tempDay){
+                    tempDay = 2;
+                    //tempMonth++;
+                    if(tempMonth == 11){
+                        //tempMonth++;
+                        tempMonth == 0;
+                    }
+                    else{
+                        tempMonth++;
+                    }
+                    
+                }*/
+                if((Months[tempMonth].days - 1) == tempDay){
+                    tempDay = 1;
+                    //tempMonth++;
+                    if(tempMonth == 11){
+                        //tempMonth++;
+                        tempMonth == 0;
+                    }
+                    else{
+                        tempMonth++;
+                    }
+                }
+                else if(Months[tempMonth].days == tempDay){
+                    tempDay = 2;
+                    //tempMonth++;
+                    if(tempMonth == 11){
+                        //tempMonth++;
+                        tempMonth == 0;
+                    }
+                    else{
+                        tempMonth++;
+                    }
+                }
+                else{
+                    tempDay += 2;
+                }
              }
         }
         function getNum(){
+            console.log("it aLL starts here");
             floor = $("#sel1").val();
-            alert("in get num " + floor);
+            //alert("in get num " + floor);
             var floorCarts;
-            var floorRef = firebase.database().ref("/weeks/0/floors/" + floor+"/carts");
+            var floorRef = firebase.database().ref("/weeks/"+currentWeek+"/floors/" + floor+"/carts");
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
                 //alert(floorCarts);
                 onFloor = floorCarts;
                 
                 if(onFloor != 0){
-                    alert("onFloor " + onFloor);
+                   // alert("onFloor " + onFloor);
+                    //callLock = 0;
                     beginAll();
                 }
             });
@@ -294,7 +406,7 @@
                 for(var current = 1;current < 4;current++){//floors
                     //for(var ww = 0;ww < 52;ww++){//weeks
                         console.log("ww is " + ww );
-                        alert(current);
+                        //alert(current);
                         refill(current)//,ww);
                         
                     //}
@@ -303,21 +415,21 @@
         //alert("UID " + UID);
         function refill(tempfloor){//,ww){
             console.log("in refill");
-                var localRef = firebase.database().ref("/weeks/0/floors/" + tempfloor+"/carts");
+                var localRef = firebase.database().ref("/weeks/" + currentWeek + "/floors/" + tempfloor+"/carts");
                  localRef.on("value", function(snapshot) {
                      snapshot.forEach(function(childSnapshot) {//carts per floor
                           var CPF = snapshot.numChildren();
-                          alert("Carts per floor " + CPF);
+                          //alert("Carts per floor " + CPF);
                           //console.log("tempfloor " + tempfloor + " ww " + ww);
                           // key will be "ada" the first time and "alan" the second time
                           var key = childSnapshot.key;
-                          alert("key is " + key);
+                          //alert("key is " + key);
                           // childData will be the actual contents of the child
                           var childData = childSnapshot.val();
                           //weekCount(function(ww) {
                               for(var w = 0;w < 4;w++){//periods
                                   //console.log("w " + w);
-                                  firebase.database().ref('/weeks/0/floors/' + tempfloor + '/carts/' + key + "/availability/" + w.toString()).set({
+                                  firebase.database().ref('/weeks/' + currentWeek + '/floors/' + tempfloor + '/carts/' + key + "/availability/" + w.toString()).set({
                                         0: "true",
                                         1: "true",
                                         2: "true",
@@ -429,6 +541,7 @@
             }
         }
         function checkAvailable(j,k,x){
+            alert("checking availability");
             //alert("checkAvailable of " + x);
             //j is period, k is day
             //x is cart
@@ -463,11 +576,11 @@
             //j is period
             var freeCarts = false;
             var numAvail = 0;
-                var cartsRef = firebase.database().ref("/weeks/0/floors/" + floor + '/carts/' + cartVal + "/availability/"+ kVal + "/" + j);
+                var cartsRef = firebase.database().ref("/weeks/" + currentWeek + "/floors/" + floor + '/carts/' + cartVal + "/availability/"+ kVal + "/" + j);
                 cartsRef.on("value", function(snapshot) {
                     var available = snapshot.val()
                     
-                    console.log("availability " + available + " cartVal " + cartVal + " day " + kVal + " period " + j);
+                    //console.log("availability " + available + " cartVal " + cartVal + " day " + kVal + " period " + j);
                     if(available == "true"){
                         //console.log("yo12");
                         if(cartVal == "cart2");
@@ -476,7 +589,7 @@
                     else if(available == "false"){
                         freeCarts = false;
                     }
-                    console.log("potato " + x + " row " + j + " col " + k);
+                    //console.log("potato " + x + " row " + j + " col " + k);
                     if((x == 2) && (j == 0) && (kVal == "one")){
                         alert("hey "  + freeCarts);
                     }
@@ -484,12 +597,12 @@
                         //console.log(tempX);
                         //console.log("we are about to say yes");
                         //taken[j][k] = "yes";
-                        console.log("before " + CA[k][j].num);
+                       // console.log("before " + CA[k][j].num);
                         var temp = CA[k][j].num;
-                        console.log("temp is " + temp);
+                       // console.log("temp is " + temp);
                         CA[k][j].num = (temp + 1);
-                        console.log("after " + CA[k][j].num);
-                        console.log("spiders " + x + " row " + j + " col " + k);
+                       // console.log("after " + CA[k][j].num);
+                        //console.log("spiders " + x + " row " + j + " col " + k);
                         CA[k][j].specific.push(x);
                         //taken[j][k] += 1;
                         //alert("say yes");
@@ -502,14 +615,18 @@
                         alert("done for this round");
                         CA[x][j].specific = specificCarts;
                     }*/
-                    console.log("j" + j);
-                    console.log("k" + k);
+                    //console.log("j" + j);
+                    //console.log("k" + k);
                     //console.log("count" + count);
                     //console.log("numcarts" + numCarts);
                     if((j === 3) && (k === 4) && (x === (onFloor - 1))){
                            alert("go again mate");
-                           console.log("WE ARE MAKING A CALL");
-                           account();
+                            console.log(callLock + " callLock");
+                           if(callLock == 0){
+                               callLock = 1;
+                               console.log("WE ARE MAKING A CALL");
+                               account();
+                           }
                            //myFunction();
                      }
                     /*var numCarts = snapshot.numChildren();
@@ -557,6 +674,7 @@
                 });
         }
         function account(){
+            alert("in account");
             for(var ii = 0;ii < 5;ii++){
                 for(var jj = 0;jj < 4;jj++){
                    // alert("availability CA " + CA[ii][jj]);
@@ -573,6 +691,7 @@
             
         }
         function calendar(){
+            alert("calendar");
             //need the start date from firebase at this point
             var startDate = new Date(116, 8, 29); //temporary starting date until then
             //next find the date of the current week
@@ -581,8 +700,9 @@
         }
         //myFunction fills in table;
         function myFunction(){
+            alert("adding rows to tables");
             var clicked = 0;
-            console.log("yoyoy");
+            //console.log("yoyoy");
             for(var i = 0;i < 4;i++){
                 var one = taken[0][i];
                 var two = taken[1][i];
@@ -608,11 +728,11 @@
             });
         });
         
-        function Clear(){
-            alert("clear called");
-            console.log("sup");
+        function Clear(){//called when the submit button is clicked
+            alert("submit function called");
+            console.log("Submitting");
             for(var q = 0;q < selected.length;q++){
-                console.log("rawr" + selected.length);
+               // console.log("rawr" + selected.length);
                 var tagOne;
                 var tagTwo;
                 var tagThree;
@@ -666,9 +786,9 @@
                 //tempOne is periods
                 
                 //alert(tagOne);
-                alert("tagTwo " + tagTwo);
-                alert("tempOne " + tempOne + " tempTwo " + tempTwo);
-                alert("tagThree " + CA[tempTwo][tempOne].specific[0]);
+                //alert("tagTwo " + tagTwo);
+                //alert("tempOne " + tempOne + " tempTwo " + tempTwo);
+                //alert("tagThree " + CA[tempTwo][tempOne].specific[0]);
                 tagThree = CA[tempTwo][tempOne].specific[0];
                 read(tempTwo,tempOne);
                 newUpdate(tagOne, tagTwo, tagThree);
@@ -676,7 +796,7 @@
                   //updates['/carts/cart1/availability/' + tagOne + '/' + tagTwo] = "false";
                   //firebase.database().ref().update(updates);
                 
-                console.log("x0x");
+                //console.log("x0x");
                 if(selected[q].color === "no"){
                     $('#'+selected[q].numID).css('background-color','#0d1a26');
                     $('#'+selected[q].numID).css('color','white');
@@ -694,9 +814,12 @@
             //startFunc();
         }
         function newUpdate(tagOne, tagTwo, tagThree){
-            alert("cart "+tagThree);
-            console.log("cart "+tagThree);
-            if(tagThree === 0){
+            alert("in updating function");
+            console.log("updating firebase");
+            //alert("cart "+tagThree);
+            //console.log("cart "+tagThree);
+            tagThree = "cart" + tagThree.toString();
+            /*if(tagThree === 0){
                 tagThree = "cart0";
             }
             else if(tagThree === 1){
@@ -713,30 +836,38 @@
             }
             else if(tagThree === 5){
                 tagThree = "cart5";
-            }
-            console.log("cart "+ tagThree);
+            }*/
+            alert("cart "+ tagThree);
             var updates = {};
-            alert("floor now " + floor);
-            updates['/weeks/0/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = "false";
+            //alert("floor now " + floor);
+            updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = "false";
             firebase.database().ref().update(updates);
         }
         function read(k,j){
+            alert("clearing the list of available");
             var temp = CA[k][j].specific.length;
             for(var iii = 0;iii < temp;iii++){
-                console.log("panda " + CA[k][j].specific[iii]);
+                //console.log("panda " + CA[k][j].specific[iii]);
             }
         }
         function ClearTable(until){
+            console.log("deleting rows");
+            alert("deleting the rows of tables");
             for(var t = 0; t < until;t++){
-                console.log("trying to clear here");
+                //console.log("trying to clear here");
                 $('#myTable tr:last').remove();
+                if(t == (until - 1)){
+                    console.log("done removing");
+                    if(already === 0){
+                        alert("ready to beginAll");
+                        callLock = 0;
+                        //already = 1;
+                        //beginAll();
+                        getNum();
+                    }
+                }
             }
-            if(already === 0){
-                alert("ready to beginAll");
-                //already = 1;
-                //beginAll();
-                getNum();
-            }
+            
         }
     </script>
     </body>
