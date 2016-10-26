@@ -38,8 +38,16 @@
         var num = prompt("How many carts are on the floor?","0");
         if(num != null){
             alert("num" + num);
-            notWorking(floor,num,temporary);
+            weekLoop2(floor,num,temporary);
         }
+    }
+        
+    function weekLoop2 (floor,num,temporary)
+    {
+        for(var week=0; week<52; week++)
+            {
+                notWorking(floor,num,temporary,week);
+            }
     }
         
     function temporary(floor,num,info){
@@ -51,47 +59,56 @@
             location.reload();
         }
     }
-    function notWorking(floor,num,callback)
+    function notWorking(floor,num,callback,week)
         {
-            var Watcher = firebase.database().ref('/weeks/0/floors/'+floor);
+            var Watcher = firebase.database().ref('/weeks/'+week+'/floors/'+floor+'/carts');
             Watcher.on('value', function(snapshot) {
-                for(info=snapshot.numChildren(); info<num; info++)
-                    {
-                        info=addCarts(floor,info-1);
-                    }
-                for(info=snapshot.numChildren(); info>num; info--)
-                    {
-                        minusCarts(floor,info);
-                    }
+                if(snapshot.numChildren()<num);
+                {
+                    addLoop(snapshot.numChildren(),num,floor,week);
+                }
+                if(snapshot.numChildren()>num);
+                {
+                    minusLoop(snapshot.numChildren(),num,floor,week);
+                }
                 callback(floor,num,info);
             });
         }
-    function addCarts(floor,info)
+        
+    function addLoop(info,num,floor,week)
+        {
+            for(var i=info; i<num; i++)
+                    {
+                        //alert(num);
+                        //alert(i);
+                        info=addCarts(floor,i-1,week);
+                    }
+        }
+    function minusLoop(info,num,floor,week)
+        {
+            for(var i=info; i>num; i--)
+                    {
+                        alert(week);
+                        minusCarts(floor,i,week);
+                    }
+        }
+    function addCarts(floor,info,week)
         {
             info++;
-            alert("oh yes!!");
-             for(var period=0; period<4; period++)
-             { 
-                 for(var week=0; week<52; week++)
-                     {
-                        firebase.database().ref('weeks/'+week+'/floors/'+floor+'/carts/cart'+(info)+'/availability/'+period).set({
+             for(var day=0; day<5; day++)
+             {
+                        firebase.database().ref('weeks/'+week+'/floors/'+floor+'/carts/cart'+(info)+'/availability/'+day).set({
                             0: "true",
                             1: "true",
                             2: "true",
-                            3: "true",
-                            4: "true"
+                            3: "true"
                         });
-                     }
              }
         }
         
-    function minusCarts(floor,info)
+    function minusCarts(floor,info,week)
         {
-                alert("oh no!!!");
-            for(var week=0; week<52; week++)
-                {
-                firebase.database().ref('weeks/'+week+'floors/'+floor+'/carts/cart'+(info-1)).remove();
-                }
+                firebase.database().ref('weeks/'+week+'floors/'+floor+'/carts/cart'+(info)).remove();
         }
     
     
@@ -123,16 +140,23 @@
         {
             for(c=0; c<cc; c++)
                         {
-                            findRes(f,c,p);
+                            weekLoop(f,c,p);
                         }
         }
-    function findRes(f,c,p)
+    function weekLoop(f,p,c)
+        {
+            for(var week=0; week<52; week++)
+                {
+                    findRes(f,c,p,week);
+                }
+        }
+    function findRes(f,c,p,week)
         {
             var d = new Date();
             var n = d.getDay()-1;
 
             var temp="cart"+c.toString();
-            var resWatcher = firebase.database().ref('carts/floors/'+f+'/'+temp+'/availability/'+p.toString()+'/'+n.toString());
+            var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+temp+'/availability/'+'/'+n.toString()+'/'+p.toString());
             resWatcher.on('value', function(snapshot) {
                 var info=snapshot.val();
                 if(info=="false")
