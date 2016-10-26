@@ -542,7 +542,7 @@
             }
         }
         function checkAvailable(j,k,x){
-            alert("checking availability");
+            //alert("checking availability");
             //alert("checkAvailable of " + x);
             //j is period, k is day
             //x is cart
@@ -695,17 +695,25 @@
             alert("calendar");
             //need the start date from firebase at this point
             var startDate = new Date(116, 8, 29); //temporary starting date until then
-            //next find the date of the current week
-            //ok now week from firebase
+            
+            var week;
+            var day;
+            //ok now get week from firebase
             var weekNumber = firebase.database().ref("/Date");
             weekNumber.on("value", function(snapshot) {
                 var info1 = snapshot.val();
-                //alert(floorCarts);
-                alert(info1.Week);
+                week = info1.Week;
             });
-            //alert(weekNumber);
             
-            
+            var firstDayOfWeek = firebase.database().ref("/weeks/" + week+ "/floors/1/carts/cart0/availability/0")
+            firstDayOfWeek.on("value", function(snapshot) {
+                var info2 = snapshot.val();
+                //alert(info2.day);
+                day = info2.day;
+                
+            });
+            alert(week);
+            alert(day);
         }
         //myFunction fills in table;
         function myFunction(){
