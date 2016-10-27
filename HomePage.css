@@ -1,0 +1,19 @@
+body{
+    background-image: url("https://static.pexels.com/photos/199609/pexels-photo-199609.jpeg");
+    background-size: cover;
+    color: black;
+    font-family: 'Courgette', cursive;
+}
+.btn-primary {
+    font-family: 'Courgette', cursive;
+    color:white;
+    background-color: #1E56BD;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    padding: 10px;
+    border-radius:10px;
+    text-align: center;
+    
+}
