@@ -3,15 +3,19 @@ body{
     background-size: cover;
     color: black;
     font-family: 'Courgette', cursive;
+    text-align: center;
+    padding-top: 50px;
 }
-.btn-primary {
+.header {
+    font-family: 'Courgette', cursive;
+    text-align: center;
+}
+.button {
     font-family: 'Courgette', cursive;
     color:white;
     background-color: #1E56BD;
-    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 100px;
     padding: 10px;
     border-radius:10px;
     text-align: center;
