@@ -1,6 +1,7 @@
 body{
     font-family: 'Courgette', cursive;
-    background-image: url(https://static.pexels.com/photos/25009/pexels-photo-25009.jpg);
+    /*background-image: url(https://static.pexels.com/photos/25009/pexels-photo-25009.jpg);*/
+    background-image: url("https://static.pexels.com/photos/33139/halloween-pumpkin-carving-face.jpg");
     background-size: cover;
 }
 td{
@@ -30,7 +31,7 @@ table{
 }
 .no{
     background-color: #0d1a26;
-    
+    background-color: black;
 }
 .container{
     margin: 60px;
