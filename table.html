@@ -34,9 +34,11 @@
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">Page 1</a></li>
           <li><a href="#">Page 2</a></li> 
-          <li><a href="#">Page 3</a></li>
+          <li><a id = "MonthSlot" href="#">Page 3</a></li>
           <li><a onclick="signOut()">Sign Out</a></li>
           <li><a onclick ="make52()">Refresh the Firebase</a></li>
+          <li><a onclick = "getCurrent(1,-1)">Back</a></li>
+          <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
           <!--<li><button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out7</button></li>
           <li><button type = "button" class="btn btn-danger" onclick="make52()">Make 52</button></li>-->
         </ul>
@@ -101,13 +103,14 @@
           //alert(username);
           // ...
         });
+        var firstGet = false;
         var already = 0;
         var callLock = 0;
         //var currentDay = 0;
         var currentMonth = 0;
         var currentDay = 1;
         var currentWeek = 0;
-        getCurrent();
+        getCurrent(0,0);
         var floor = $("#sel1").val();
         var onFloor = 0;
         //alert("floor is (waiting) " + floor);
@@ -219,23 +222,75 @@
 
                 });
         }
-        function getCurrent(){
+        function getCurrent(clicked, time){
             var weekRef = firebase.database().ref("/Date");
             weekRef.on("value", function(snapshot) {
               //alert(username);
-                var tempDate = new Date();
-                var collect = snapshot.val();
-                currentDay = collect.Day;
-                currentMonth = collect.MonthNum;
-                currentWeek = collect.Week;
-                console.log("potato spider " + tempDate.getDate());
-                if(currentDay != tempDate.getDate()){
-                    upday(tempDate.getDate(),tempDate.getDay());
+                //var currentTemp  = 0;
+                if(clicked == 0){
+                    var tempDate = new Date();
+                    var collect = snapshot.val();
+                    currentDay = collect.Day;
+                    currentMonth = collect.MonthNum;
+                    currentWeek = collect.Week;
+                    console.log("potato spider " + tempDate.getDate());
+                    firstGet = true;
+                
+                    if(currentDay != tempDate.getDate()){
+                        upday(tempDate.getDate(),tempDate.getDay());
+                    }
                 }
-                decorate();
+                if(clicked == 0){
+                    decorate();
+                }
+                else if(clicked == 1){
+                    if(time == 1){
+                        currentWeek++;
+                        if((currentDay + 7) > Months[currentMonth].days){
+                            currentDay = ((currentDay + 7) - Months[currentMonth].days);
+                            if(currentMonth < 11){
+                                currentMonth += 1;
+                            }
+                            else if(currentMonth == 11){
+                                currentMonth = 0;
+                            }
+                        }
+                        else{
+                            currentDay = currentDay + 7;
+                        }
+                    }
+                    if(time == -1){
+                        currentWeek--;
+                        if((currentDay - 7) <= 0){
+                            currentDay = Months[currentMonth - 1].days - (currentDay - 7);
+                            if(currentMonth > 0){
+                                currentMonth -= 1;
+                            }
+                            else if(currentMonth == 0){
+                                currentMonth = 12;
+                            }
+                        }
+                        else{
+                            currentDay = currentDay - 7;
+                        }
+                    }
+                    console.log("current spider week is " + currentWeek);
+                    console.log("current spider day is " + currentDay);
+                    console.log("current spider month is " + currentMonth);
+                    decorate();
+                    //getNum();
+                    already = 0;
+                    arrayClearCA();
+                    ClearTable(4)
+                    getNum();
+                }
+                
                 //alert(currentWeek);
               // ...
             });
+        }
+        function timeTravel(){
+            
         }
         function upday(newDay, relDay){
             var upWeek = 0;
@@ -286,11 +341,39 @@
             else if(chosenDay == 0){
                 chosenDay = 0;
             }
-            $("#monday").text("Monday " +  (currentDay - tempDate.getDay() + 1));
-            $("#tuesday").text("Tuesday " + (currentDay -  tempDate.getDay() + 2));
-            $("#wednesday").text("Wednesday " + (currentDay - tempDate.getDay() + 3));
-            $("#thursday").text("Thursday " + (currentDay - tempDate.getDay() + 4));
-            $("#friday").text("Friday " + (currentDay - tempDate.getDay() + 5));
+            var fillTemp;
+            
+            fillTemp = (currentDay - tempDate.getDay() + 1);
+            if((currentDay - tempDate.getDay() + 1) <= 0){
+                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                //$("#monday").text("Monday " + ); 
+            }
+            $("#monday").text("Monday " +  (fillTemp));
+            fillTemp = (currentDay - tempDate.getDay() + 2);
+            if(fillTemp <= 0){
+                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                //$("#monday").text("Monday " + ); 
+            }
+            $("#tuesday").text("Tuesday " + (fillTemp));
+            fillTemp = (currentDay - tempDate.getDay() + 3);
+            if(fillTemp <= 0){
+                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                //$("#monday").text("Monday " + ); 
+            }
+            $("#wednesday").text("Wednesday " + (fillTemp));
+            fillTemp = (currentDay - tempDate.getDay() + 4);
+            if(fillTemp <= 0){
+                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                //$("#monday").text("Monday " + ); 
+            }
+            $("#thursday").text("Thursday " + (fillTemp));
+            fillTemp = (currentDay - tempDate.getDay() + 5);
+            if(fillTemp <= 0){
+                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                //$("#monday").text("Monday " + ); 
+            }
+            $("#friday").text("Friday " + (fillTemp));
+            $("#MonthSlot").text(Months[currentMonth].name);
             //var dayRef = firebase.database().ref("/weeks/" + currentWeek + "/floors);
         }
         function make52(){
@@ -412,6 +495,7 @@
             floor = $("#sel1").val();
             //alert("in get num " + floor);
             var floorCarts;
+            console.log("current week potato " + currentWeek);
             var floorRef = firebase.database().ref("/weeks/"+currentWeek+"/floors/" + floor+"/carts");
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
@@ -427,6 +511,7 @@
         }
         getNum();
         function beginAll(){
+            console.log("in begin all");
             var Ref = firebase.database().ref();
             Ref.on("value", function(snapshot) {
                   var reset = snapshot.val();
@@ -792,7 +877,7 @@
                 var four = taken[3][i];
                 var five = taken[4][i];
                 clicked++;
-                $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'>'+(1+i*5).toString()+'</td><td class=' + two +' id= '+(2+i*5).toString()+'>'+(2+i*5).toString()+'</td><td class=' + three +' id= '+(3+i*5).toString()+'>'+(3+i*5).toString()+'</td><td class=' + four +' id= '+(4+i*5).toString()+'>'+(4+i*5).toString()+'</td>'+(5+i*5).toString()+'<td class=' + five +' id=  '+(5+i*5).toString()+'>'+(5+i*5).toString()+'</td></tr>'); 
+                $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'></td><td class=' + two +' id= '+(2+i*5).toString()+'></td><td class=' + three +' id= '+(3+i*5).toString()+'></td><td class=' + four +' id= '+(4+i*5).toString()+'></td><td class=' + five +' id=  '+(5+i*5).toString()+'></td></tr>'); 
             }
             //$('#myTable tr:last').remove();
         }
