@@ -202,14 +202,58 @@
             var weekRef = firebase.database().ref("/Date");
             weekRef.on("value", function(snapshot) {
               //alert(username);
+                var tempDate = new Date();
                 var collect = snapshot.val();
                 currentDay = collect.Day;
-                currentMonth = collect.Month;
+                currentMonth = collect.MonthNum;
                 currentWeek = collect.Week;
+                console.log("potato spider " + tempDate.getDate());
+                if(currentDay != tempDate.getDate()){
+                    upday(tempDate.getDate(),tempDate.getDay());
+                }
                 decorate();
                 //alert(currentWeek);
               // ...
             });
+        }
+        function upday(newDay, relDay){
+            var upWeek = 0;
+            var upMonth = 0;
+            if(relDay == 0){
+                if(currentWeek < 51){
+                    upWeek = (currentWeek + 1);
+                }
+                else{
+                    upWeek = (0);
+                }
+            }
+            else{
+                upWeek = currentWeek;
+            }
+            if(newDay == 0){
+                if(currentMonth < 11){
+                    upMonth = (currentMonth + 1);
+                }
+                else{
+                    upMonth = (0);
+                }
+            }
+            else{
+                upMonth = currentMonth;
+            }
+            console.log("New day " + newDay);
+            console.log("upMonth " + upMonth);
+            console.log("upWeek " + upWeek);
+            console.log("month " + Months[upMonth].name);
+            firebase.database().ref('/Date').set({
+                Day: newDay,
+                MonthNum: upMonth,
+                Week: upWeek,
+                Leap: "true",
+                Month: Months[upMonth].name
+            });
+            
+            
         }
         function decorate(){
             tempDate = new Date();
