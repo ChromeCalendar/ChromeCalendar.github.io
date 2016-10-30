@@ -21,14 +21,19 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+        
+        
+        
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         
             <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+   <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Potato Spiders inc</a>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Potato Spiders inc</a>
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
@@ -39,27 +44,39 @@
           <li><a onclick ="make52()">Refresh the Firebase</a></li>
           <li><a onclick = "getCurrent(1,-1)">Back</a></li>
           <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
-          <!--<li><button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out7</button></li>
-          <li><button type = "button" class="btn btn-danger" onclick="make52()">Make 52</button></li>-->
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" id ="floorName" href="#">Floor 1
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="sel1">
+              <li><a onclick="DropDown(1)">1</a></li>
+              <li><a onclick="DropDown(2)">2</a></li>
+              <li><a onclick="DropDown(3)">3</a></li> 
+            </ul>
+         </li>
         </ul>
       </div>
     </nav>
         
         
+        <!-- Fixed navbar -->
+
+    <!--<li><button type ="button" class="btn btn-primary" onclick="signOut()">Sign Out7</button></li>
+          <li><button type = "button" class="btn btn-danger" onclick="make52()">Make 52</button></li>-->    
     <!--<button type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>-->
     
     
     <!--<div class="container">
   <h2>Form control: select</h2>
   <p>The form below contains two dropdown menus (select lists):</p>-->
-    <div class="container">
+   <!--<div class="container">
       <label for="sel1">Select floor:</label>
           <select class="form-control" id="sel1">
             <option>1</option>
             <option>2</option>
             <option>3</option>
           </select>
-    </div>
+    </div>-->
     <div class="container">
       <table class="table table-bordered"  id="myTable">
         <thead>
@@ -111,7 +128,8 @@
         var currentDay = 1;
         var currentWeek = 0;
         getCurrent(0,0);
-        var floor = $("#sel1").val();
+        //var floor = $("#sel1").val();
+        var floor = 1;
         var onFloor = 0;
         //alert("floor is (waiting) " + floor);
         var CA = [];
@@ -207,6 +225,16 @@
           ClearTable(4)  
           //beginAll();
         });
+        function DropDown(newFloor){
+          //floor = $("#sel1").val();
+          floor = newFloor;
+          alert("floor now " + floor );
+          $("#floorName").text("Floor " + floor);
+          //getNum();
+          already = 0;
+          arrayClearCA();
+          ClearTable(4)  
+        }
        // availability goes [day][period]
         
         function actualAdd(qq,qqq,tempcart,q1,tempMonth,tempDay)
@@ -224,6 +252,8 @@
         }
         function getCurrent(clicked, time){
             var weekRef = firebase.database().ref("/Date");
+            var adjustDate;
+            var adjustDay;
             weekRef.on("value", function(snapshot) {
               //alert(username);
                 //var currentTemp  = 0;
@@ -235,9 +265,17 @@
                     currentWeek = collect.Week;
                     console.log("potato spider " + tempDate.getDate());
                     firstGet = true;
-                
-                    if(currentDay != tempDate.getDate()){
-                        upday(tempDate.getDate(),tempDate.getDay());
+                    if(tempDate.getDay() == 0){
+                        adjustDay = tempDate.getDay() + 1;
+                        adjustDate = tempDate.getDate() + 1;
+                    }
+                    else if(tempDate.getDay() == 6){
+                        adjustDay = tempDate.getDay() - 1;
+                        adjustDate = tempDate.getDate() - 1;
+                    } 
+                    console.log("XOX " + adjustDate + " " + adjustDay);
+                    if(currentDay != adjustDate){
+                        upday(adjustDate,adjustDay);
                     }
                 }
                 if(clicked == 0){
@@ -257,6 +295,7 @@
                         }
                         else{
                             currentDay = currentDay + 7;
+                            console.log("halloween " + currentDay);
                         }
                     }
                     if(time == -1){
@@ -272,6 +311,7 @@
                         }
                         else{
                             currentDay = currentDay - 7;
+                            
                         }
                     }
                     console.log("current spider week is " + currentWeek);
@@ -296,8 +336,10 @@
             var upWeek = 0;
             var upMonth = 0;
             if(relDay == 0){
+                console.log("david pumpkins");
                 if(currentWeek < 51){
                     upWeek = (currentWeek + 1);
+                    console.log("david pumpkins 2");
                 }
                 else{
                     upWeek = (0);
@@ -339,40 +381,59 @@
                 chosenDay = 5;
             }
             else if(chosenDay == 0){
-                chosenDay = 0;
+                chosenDay = 1;
             }
             var fillTemp;
             
-            fillTemp = (currentDay - tempDate.getDay() + 1);
-            if((currentDay - tempDate.getDay() + 1) <= 0){
+            fillTemp = (currentDay - chosenDay + 1);
+            if((currentDay - chosenDay + 1) <= 0){
                 fillTemp = (Months[currentMonth - 1].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
+            }
+            else if((currentDay - chosenDay + 1) > Months[currentMonth].days){
+                fillTemp = ((currentDay - chosenDay + 1) - Months[currentMonth].days);
             }
             $("#monday").text("Monday " +  (fillTemp));
-            fillTemp = (currentDay - tempDate.getDay() + 2);
+            fillTemp = (currentDay - chosenDay + 2);
             if(fillTemp <= 0){
                 fillTemp = (Months[currentMonth - 1].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
+            }
+            else if((currentDay - chosenDay + 2) > Months[currentMonth].days){
+                fillTemp = ((currentDay - chosenDay + 2) - Months[currentMonth].days);
             }
             $("#tuesday").text("Tuesday " + (fillTemp));
-            fillTemp = (currentDay - tempDate.getDay() + 3);
+            
+            fillTemp = (currentDay - chosenDay + 3);
             if(fillTemp <= 0){
                 fillTemp = (Months[currentMonth - 1].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
+            }
+            else if((currentDay - chosenDay + 3) > Months[currentMonth].days){
+                fillTemp = ((currentDay - chosenDay + 3) - Months[currentMonth].days);
             }
             $("#wednesday").text("Wednesday " + (fillTemp));
-            fillTemp = (currentDay - tempDate.getDay() + 4);
+            
+            fillTemp = (currentDay - chosenDay + 4);
             if(fillTemp <= 0){
                 fillTemp = (Months[currentMonth - 1].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
+            }
+            else if((currentDay - chosenDay + 4) > Months[currentMonth].days){
+                fillTemp = ((currentDay - chosenDay + 4) - Months[currentMonth].days);
             }
             $("#thursday").text("Thursday " + (fillTemp));
-            fillTemp = (currentDay - tempDate.getDay() + 5);
+            
+            fillTemp = (currentDay - chosenDay + 5);
             if(fillTemp <= 0){
                 fillTemp = (Months[currentMonth - 1].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
+            else if((currentDay - chosenDay + 5) > Months[currentMonth].days){
+                fillTemp = ((currentDay - chosenDay + 5) - Months[currentMonth].days);
+            }
             $("#friday").text("Friday " + (fillTemp));
+            
             $("#MonthSlot").text(Months[currentMonth].name);
             //var dayRef = firebase.database().ref("/weeks/" + currentWeek + "/floors);
         }
@@ -492,7 +553,7 @@
         }
         function getNum(){
             console.log("it aLL starts here");
-            floor = $("#sel1").val();
+            //floor = $("#sel1").val();
             //alert("in get num " + floor);
             var floorCarts;
             console.log("current week potato " + currentWeek);
