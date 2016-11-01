@@ -32,9 +32,6 @@
             <!-- Fixed navbar -->
    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Potato Spiders inc</a>
-        </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
           <li><a id = "MonthSlot" href="#">Page 3</a></li>
@@ -52,6 +49,16 @@
               <li><a onclick="DropDown(3)">3</a></li> 
             </ul>
          </li>
+        <li>
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Room #" name="srch-term" id="srch-term"></input>
+                    <!--<div class="input-group-btn btn btn-primary">
+                    </div>-->
+                </div>
+                <button type = "button" class= "btn btn-primary" onclick="newRoom()">Change Room #</button>
+            </form>
+        </li>
         </ul>
       </div>
     </nav>
@@ -247,6 +254,27 @@
                 //4: "true"
 
                 });
+        }
+        function newRoom(){
+            var room = $("#srch-term").val();
+            console.log("room " + room);
+            var user = firebase.auth().currentUser;
+            if (user) {
+                //firebase.database().ref('/users/'+user.uid).set({
+                var updates = {};
+                console.log("UID " + user.uid);
+                updates['/users/'+user.uid +'/room'] = room;
+                firebase.database().ref().update(updates);
+                //4: "true"
+
+            }
+              // User is signed in.
+            else {
+                console.log("infinite sadness");
+              // No user is signed in.
+            }
+            
+            
         }
         function getCurrent(clicked, time){
             var weekRef = firebase.database().ref("/Date");
