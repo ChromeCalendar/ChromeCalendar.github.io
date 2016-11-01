@@ -273,6 +273,10 @@
                         adjustDay = tempDate.getDay() - 1;
                         adjustDate = tempDate.getDate() - 1;
                     } 
+                    else{
+                        adjustDay = tempDate.getDay();
+                        adjustDate = tempDate.getDate();
+                    }
                     console.log("XOX " + adjustDate + " " + adjustDay);
                     if(currentDay != adjustDate){
                         upday(adjustDate,adjustDay);
