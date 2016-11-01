@@ -254,6 +254,7 @@
             var weekRef = firebase.database().ref("/Date");
             var adjustDate;
             var adjustDay;
+            var upMonth;
             weekRef.on("value", function(snapshot) {
               //alert(username);
                 //var currentTemp  = 0;
@@ -274,12 +275,29 @@
                         adjustDate = tempDate.getDate() - 1;
                     } 
                     else{
+                        console.log("in normal adjust");
                         adjustDay = tempDate.getDay();
                         adjustDate = tempDate.getDate();
+                        console.log("adjust is " + adjustDate);
+                        if(adjustDate == 1){
+                            if(currentMonth < 11){
+                                
+                                currentMonth++;
+                                upMonth = (currentMonth);
+                            }
+                            else{
+                                upMonth = (0);
+                                currentMonth = 0;
+                            }
+                        }
+                        else{
+                            upMonth = currentMonth;
+                        }
+                    
                     }
                     console.log("XOX " + adjustDate + " " + adjustDay);
                     if(currentDay != adjustDate){
-                        upday(adjustDate,adjustDay);
+                        upday(adjustDate,adjustDay,upMonth);
                     }
                 }
                 if(clicked == 0){
@@ -337,7 +355,7 @@
         function timeTravel(){
             
         }
-        function upday(newDay, relDay){
+        function upday(newDay, relDay,upMonth){
             var upWeek = 0;
             var upMonth = 0;
             if(relDay == 0){
@@ -353,17 +371,15 @@
             else{
                 upWeek = currentWeek;
             }
-            if(newDay == 0){
+            /*if(newDay == 1){
                 if(currentMonth < 11){
                     upMonth = (currentMonth + 1);
                 }
                 else{
                     upMonth = (0);
                 }
-            }
-            else{
-                upMonth = currentMonth;
-            }
+            }*/
+            
             console.log("New day " + newDay);
             console.log("upMonth " + upMonth);
             console.log("upWeek " + upWeek);
