@@ -1,19 +1,19 @@
 body{
+    background-color: rgba(120,120,160,1);
     font-family: 'Courgette', cursive;
-    background-image: url(http://2.bp.blogspot.com/-NBX1DEMcj9I/UIohshYDZfI/AAAAAAAAAkc/30nzzXjWOV8/s1600/Funny+Dog+Using+Computer.jpg);
     background-size: cover;
 }
 td{
-    background-color: rgba(242,160,98,1);
+    background-color: rgba(240,240,252,1);
     border-color: black;
+    color: rgba(20,1,60,1);
 }
 thead{
     /*background-color: #09092a;*/
-    color:white;
+    color: rgba(240,240,252,1);
 }
 table{
    /* margin: 60px;*/
-    
 }
 td{
     padding: 8px;
@@ -21,7 +21,7 @@ td{
 }
 .clickable{
     background-color: rgba(129,31,20,1);
-    color: white;
+    color: rgba(240,240,252,1);
 }
 .container{
     /*margin: 60px;
