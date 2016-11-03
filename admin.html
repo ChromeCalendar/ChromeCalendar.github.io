@@ -137,7 +137,7 @@
         {
             for(c=0; c<cc; c++)
                         {
-                            weekLoop(f,c,p);
+                            weekLoop(f,p,c);
                         }
         }
     function weekLoop(f,p,c)
@@ -150,6 +150,7 @@
     
     function findRes(f,c,p,week)
         {
+            //alert(p);
             var d = new Date();
             var n = d.getDay()-1;
 
