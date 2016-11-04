@@ -87,6 +87,7 @@
               alert(error.message);
               alert(error.code);
               alert(user.uid);
+              
               var errorCode = error.code;
               var errorMessage = error.message;
                
@@ -114,7 +115,14 @@
           if (user) {
               var uid = user.uid; 
               alert(uid);
-              window.location.href="table.html";
+              localStorage.setItem('key', user.uid);
+              if(localStorage.getItem('key') !== null){
+                  window.location.href="table.html";
+              }
+              else{
+                  
+                  alert("what the actual hell");
+              }
             // User is signed in.
               //alert("we are going");
              

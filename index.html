@@ -146,11 +146,14 @@
         });
         function reDirect(newLoc){
             alert("in reDirect");
+            
             window.location.href = newLoc;
         }
         function setInfo(email,uid,callback){
             alert("hello");
             alert("user.uid" + uid);
+            localStorage.setItem('key', uid);
+
             firebase.database().ref('users/' + uid).set({
                     email: email,
                     animal : "wolf"

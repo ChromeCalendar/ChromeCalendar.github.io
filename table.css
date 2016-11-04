@@ -33,6 +33,12 @@ table{
     background-color: #0d1a26;
     background-color: black;
 }
+.mineTaken{
+    background-color: maroon;
+}
+.mine{
+    background-color:lightpink;
+}
 .container{
     margin: 60px;
     padding: 30;

@@ -39,6 +39,7 @@
           <li><a onclick ="make52()">Refresh the Firebase</a></li>
           <li><a onclick = "getCurrent(1,-1)">Back</a></li>
           <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
+          <li><a onclick = "mineView()" >My Carts</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" id ="floorName" href="#">Floor 1
                 <span class="caret"></span>
@@ -112,6 +113,8 @@
       <button id = "clear" type ="button" class="btn btn-primary" onclick="Clear()">Clear</button>
     </div>
     <script>
+        var personalRoom;
+        var mineMode = false;
         var config = {
           apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
           authDomain: "chrome-calendar.firebaseapp.com",
@@ -120,11 +123,18 @@
           messagingSenderId: "583488732443"
         };
         firebase.initializeApp(config);
-        firebase.database().ref('/users').once('value').then(function(snapshot) {
-          var username = snapshot.val();
-          //alert(username);
-          // ...
-        });
+        var data = localStorage.getItem('key');
+                console.log("key is  " + data);
+               firebase.database().ref('/users/'+data).on("value", function(snapshot) {
+                  var username = snapshot.val();
+                  personalRoom = username.room;
+                  console.log("personal Room " + personalRoom);
+                  getCurrent(0,0);
+                  // ...
+                });
+        
+        
+        
         var firstGet = false;
         var already = 0;
         var callLock = 0;
@@ -132,7 +142,7 @@
         var currentMonth = 0;
         var currentDay = 1;
         var currentWeek = 0;
-        getCurrent(0,0);
+       
         //var floor = $("#sel1").val();
         var floor = 1;
         var onFloor = 0;
@@ -204,7 +214,18 @@
                 //CA[rr] = [];
                 for(var r = 0;r < 4;r++){
                     CA[rr][r].num = 0;
+                    //mineArray[rr][r] = 0;
                     console.log("here's your stupid number " + CA[rr][r].num);
+                }
+            }
+        }
+        function clearMine(){
+            for(var rr = 0;rr < 5;rr++){
+                //CA[rr] = [];
+                for(var r = 0;r < 4;r++){
+                    //CA[rr][r].num = 0;
+                    mineArray[rr][r] = 0;
+                    //console.log("here's your stupid number " + CA[rr][r].num);
                 }
             }
         }
@@ -237,11 +258,20 @@
           $("#floorName").text("Floor " + floor);
           //getNum();
           already = 0;
+          clearMine();
           arrayClearCA();
           ClearTable(4)  
         }
        // availability goes [day][period]
-        
+        function mineView(){
+            
+                mineMode = !mineMode;
+                already = 0;
+                arrayClearCA();
+                ClearTable(4);
+                getNum();
+            
+        }
         function actualAdd(qq,qqq,tempcart,q1,tempMonth,tempDay)
         {
             firebase.database().ref('/weeks/'+qq+'/floors/'+qqq+'/carts/' + tempcart+'/availability/'+q1).set({
@@ -595,6 +625,7 @@
         }
         function getNum(){
             console.log("it aLL starts here");
+            
             //floor = $("#sel1").val();
             //alert("in get num " + floor);
             var floorCarts;
@@ -643,7 +674,7 @@
                        startFunc();
                    }
             });
-            calendar();
+            //calendar();
         }
         var UID = sessionStorage.getItem('UID');
         function signOut(){
@@ -764,10 +795,12 @@
                  floor: floor
             });
         }*/
+        var mineArray = [];
         var taken = [];
         var selected = [];
         for(var p = 0;p < 5;p++){
             taken[p] = [];
+            mineArray[p] = [];
         }
         function Clickable (numID, color,yesList) {
             this.numID = numID;
@@ -840,7 +873,10 @@
                         if(cartVal == "cart2");
                         freeCarts = true;
                     }
-                    else if(available == "false"){
+                    else if(available != "true"){
+                        if(available == personalRoom){
+                            mineArray[kVal][j] = 1;
+                        }
                         freeCarts = false;
                     }
                     //console.log("potato " + x + " row " + j + " col " + k);
@@ -944,7 +980,7 @@
             myFunction();
             
         }
-        function calendar(){
+        /*function calendar(){
             alert("calendar");
             //need the start date from firebase at this point
             var startDate = new Date(116, 8, 29); //temporary starting date until then
@@ -967,18 +1003,74 @@
             });
             alert(week);
             alert(day);
-        }
+        }*/
         //myFunction fills in table;
         function myFunction(){
             alert("adding rows to tables");
             var clicked = 0;
             //console.log("yoyoy");
             for(var i = 0;i < 4;i++){
-                var one = taken[0][i];
-                var two = taken[1][i];
-                var three = taken[2][i];
-                var four = taken[3][i];
+                console.log("mineMode " + mineMode);
+                if((mineArray[0][i] != 1) || (mineMode === false)){
+                    var one = taken[0][i];
+                }
+                else{
+                    if(taken[0][i] == "no"){
+                    var one = "mineTaken";
+                    }
+                    else{
+                    var one = "mine";
+                    }
+                }
+                if((mineArray[1][i] != 1) || (mineMode === false)){
+                    var two = taken[1][i];
+                    //var two = "mine";
+                }
+                else{
+                    if(taken[1][i] == "no"){
+                    var two = "mineTaken";
+                    }
+                    else{
+                    var two = "mine";
+                    }
+                }
+                if((mineArray[2][i] != 1) || (mineMode === false)){    
+                    var three = taken[2][i];
+                    //var three = "mine";
+                }
+                else{
+                    if(taken[2][i] == "no"){
+                    var three = "mineTaken";
+                    }
+                    else{
+                    var three = "mine";
+                    }
+                }
+                if((mineArray[3][i] != 1) || (mineMode === false)){
+                    var four = taken[3][i];
+                    //var four = "mine";
+                }
+                else{
+                    if(taken[3][i] == "no"){
+                    var four = "mineTaken";
+                    }
+                    else{
+                    var four = "mine";
+                    }
+                }
+                if((mineArray[4][i] != 1) || (mineMode === false)){
                 var five = taken[4][i];
+                    //var five = "mine";
+                }
+                else{
+                    if(taken[4][i] == "no"){
+                    var five = "mineTaken";
+                    }
+                    else{
+                    var five = "mine";
+                    }
+                }
+                //clearMine();
                 clicked++;
                 $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'></td><td class=' + two +' id= '+(2+i*5).toString()+'></td><td class=' + three +' id= '+(3+i*5).toString()+'></td><td class=' + four +' id= '+(4+i*5).toString()+'></td><td class=' + five +' id=  '+(5+i*5).toString()+'></td></tr>'); 
             }
@@ -989,8 +1081,8 @@
                 //alert(event.target.id);
                 var ID = event.target.id;
                 var Color = $('#'+ID).attr("class");
-                //alert("color " + Color);
-                if(Color === 'yes'){
+                console.log("color " + Color);
+                if((Color === 'yes') || (Color == 'mine')){
                     $('#'+ID).css('background-color','gold');
                     $('#'+ID).css('color','black');
                     selected.push(new Clickable(ID,Color));
@@ -1081,6 +1173,7 @@
             already = 0;
             arrayClearCA();
             ClearTable(4);
+            clearMine();
             //startFunc();
         }
         function newUpdate(tagOne, tagTwo, tagThree){
@@ -1110,7 +1203,7 @@
             alert("cart "+ tagThree);
             var updates = {};
             //alert("floor now " + floor);
-            updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = "false";
+            updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = personalRoom;
             firebase.database().ref().update(updates);
         }
         function read(k,j){
