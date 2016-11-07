@@ -48,4 +48,8 @@ table{
 .navbar{
     background-image: none;
     background-color: black;
+    
+}
+.navbar-default .navbar-nav>li>a {
+    color: white;
 }

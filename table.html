@@ -142,14 +142,20 @@
         var currentMonth = 0;
         var currentDay = 1;
         var currentWeek = 0;
-       
+        var currentYear = 
+        firebase.database().ref('/Date').on("value", function(snapshot) {
+              var yearType = snapshot.val();
+              currentYear = yearType.Year;
+              monthSet();
+                  // ...
+        });
         //var floor = $("#sel1").val();
         var floor = 1;
         var onFloor = 0;
         //alert("floor is (waiting) " + floor);
         var CA = [];
         var Months = [];
-        monthSet();
+        
         function Month (name,days) {
             //this.type = type;
             this.name = name;
@@ -176,7 +182,12 @@
                     Months.push(new Month('January',31));
                 }
                 else if(i0 == 6){
-                    Months.push(new Month('February',29));
+                    if(currentYear == 0){
+                        Months.push(new Month('February',29));
+                    }
+                    else{
+                        Months.push(new Month('February',28));
+                    }
                 }
                 else if(i0 == 7){
                     Months.push(new Month('March',31));
@@ -428,6 +439,14 @@
                 else{
                     upMonth = (0);
                     currentMonth = 0;
+                    if(currentYear < 4){
+                        currentYear++;
+                    }
+                    else{
+                        currentYear = 0;
+                        
+                    }
+                    make52();
                 }
             }
             else{
@@ -442,7 +461,8 @@
                 MonthNum: upMonth,
                 Week: upWeek,
                 Leap: "true",
-                Month: Months[upMonth].name
+                Month: Months[upMonth].name,
+                Year:  currentYear
             });
             
             
