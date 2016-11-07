@@ -158,40 +158,40 @@
         function monthSet(){
             for(var i0 = 0;i0 < 12;i0++){
                 if(i0 == 0){
-                    Months.push(new Month('January',31));
-                }
-                else if(i0 == 1){
-                    Months.push(new Month('February',29));
-                }
-                else if(i0 == 2){
-                    Months.push(new Month('March',31));
-                }
-                else if(i0 == 3){
-                    Months.push(new Month('April',30));
-                }
-                else if(i0 == 4){
-                    Months.push(new Month('May',31));
-                }
-                else if(i0 == 5){
-                    Months.push(new Month('June',30));
-                }
-                else if(i0 == 6){
-                    Months.push(new Month('July',31));
-                }
-                else if(i0 == 7){
                     Months.push(new Month('August',31));
                 }
-                else if(i0 == 8){
+                else if(i0 == 1){
                     Months.push(new Month('September',30));
                 }
-                else if(i0 == 9){
+                else if(i0 == 2){
                     Months.push(new Month('October',31));
                 }
-                else if(i0 == 10){
+                else if(i0 == 3){
                     Months.push(new Month('November',30));
                 }
-                else if(i0 == 11){
+                else if(i0 == 4){
                     Months.push(new Month('December',31));
+                }
+                else if(i0 == 5){
+                    Months.push(new Month('January',31));
+                }
+                else if(i0 == 6){
+                    Months.push(new Month('February',29));
+                }
+                else if(i0 == 7){
+                    Months.push(new Month('March',31));
+                }
+                else if(i0 == 8){
+                    Months.push(new Month('April',30));
+                }
+                else if(i0 == 9){
+                    Months.push(new Month('May',31));
+                }
+                else if(i0 == 10){
+                    Months.push(new Month('June',30));
+                }
+                else if(i0 == 11){
+                    Months.push(new Month('July',31));
                 }
             }
         }
@@ -258,7 +258,7 @@
           $("#floorName").text("Floor " + floor);
           //getNum();
           already = 0;
-          clearMine();
+          //clearMine();
           arrayClearCA();
           ClearTable(4)  
         }
@@ -267,6 +267,7 @@
             
                 mineMode = !mineMode;
                 already = 0;
+                //clearMine();
                 arrayClearCA();
                 ClearTable(4);
                 getNum();
@@ -387,6 +388,7 @@
                     already = 0;
                     arrayClearCA();
                     ClearTable(4)
+                    //clearMine();
                     getNum();
                 }
                 
@@ -511,7 +513,7 @@
         }
         function make52(){
             var tempMonth = 0;
-            var tempDay = 4;
+            var tempDay = 29;
             for(var qq = 0;qq < 52;qq++){//weeks
                 for(var q1 = 0;q1 < 5;q1++){//days
                     var until = 0;
@@ -804,7 +806,7 @@
         }
         function Clickable (numID, color,yesList) {
             this.numID = numID;
-            this.yesList = [];
+            //this.yesList = [];
             
         }
         //startFunc();
@@ -1074,6 +1076,7 @@
                 clicked++;
                 $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'></td><td class=' + two +' id= '+(2+i*5).toString()+'></td><td class=' + three +' id= '+(3+i*5).toString()+'></td><td class=' + four +' id= '+(4+i*5).toString()+'></td><td class=' + five +' id=  '+(5+i*5).toString()+'></td></tr>'); 
             }
+            clearMine();
             //$('#myTable tr:last').remove();
         }
         $(document).ready(function() {
@@ -1081,15 +1084,37 @@
                 //alert(event.target.id);
                 var ID = event.target.id;
                 var Color = $('#'+ID).attr("class");
+                var tempLocation = selected.indexOf(ID);
                 console.log("color " + Color);
                 if((Color === 'yes') || (Color == 'mine')){
-                    $('#'+ID).css('background-color','gold');
-                    $('#'+ID).css('color','black');
-                    selected.push(new Clickable(ID,Color));
+                    console.log("HEY SPIDER " + selected.indexOf(ID));
+                    if(selected.indexOf(ID) == -1){
+                        console.log("this is new");
+                        $('#'+ID).css('background-color','gold');
+                        $('#'+ID).css('color','black');
+                        selected.push(ID);
+                    }
+                    else{
+                        if(Color == 'yes'){
+                            $('#'+ID).css('background-color','#00ccff');
+                        }
+                        else if(Color == 'mine'){
+                            $('#'+ID).css('background-color','lightpink');
+                        }
+                        readSelected();
+                        selected.splice(tempLocation,1);
+                        readSelected();
+                    }
+                   // selected.push(new Clickable(ID,Color));
+                    
                 }
             });
         });
-        
+        function readSelected(){
+            for(var q = 0; q < selected.length;q++){
+                console.log("mango " + selected[q]);
+            }
+        }
         function Clear(){//called when the submit button is clicked
             alert("submit function called");
             console.log("Submitting");
@@ -1100,7 +1125,7 @@
                 var tagThree;
                 var tempTwo;
                 var tempOne;
-                var tempInt = parseInt(selected[q].numID,10);
+                var tempInt = parseInt(selected[q],10);
                 
                 //alert("wup");
                 if((tempInt >= 1) && (tempInt <= 5)){
@@ -1160,12 +1185,12 @@
                 
                 //console.log("x0x");
                 if(selected[q].color === "no"){
-                    $('#'+selected[q].numID).css('background-color','#0d1a26');
-                    $('#'+selected[q].numID).css('color','white');
+                    $('#'+selected[q]).css('background-color','#0d1a26');
+                    $('#'+selected[q]).css('color','white');
                 }
                 else{
-                    $('#'+selected[q].numID).css('background-color','#00ccff');
-                    $('#'+selected[q].numID).css('color','black');
+                    $('#'+selected[q]).css('background-color','#00ccff');
+                    $('#'+selected[q]).css('color','black');
                 }
             }
             selected.length = 0;
@@ -1173,7 +1198,7 @@
             already = 0;
             arrayClearCA();
             ClearTable(4);
-            clearMine();
+            //clearMine();
             //startFunc();
         }
         function newUpdate(tagOne, tagTwo, tagThree){
