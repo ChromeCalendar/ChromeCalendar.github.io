@@ -33,13 +33,15 @@
    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a id = "MonthSlot" href="#">Page 3</a></li>
-          <li><a onclick="signOut()">Sign Out</a></li>
-          <li><a onclick ="make52()">Refresh the Firebase</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a id = "MonthSlot" href="#">Page 3</a></li>
+            <li><a onclick="signOut()">Sign Out</a></li>
+            <li><a onclick = "mineView()" >My Carts</a></li>
+          <!--<li><a onclick ="make52()">Refresh the Firebase</a></li>-->
+        <!-- 
           <li><a onclick = "getCurrent(1,-1)">Back</a></li>
           <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
-          <li><a onclick = "mineView()" >My Carts</a></li>
+          
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" id ="floorName" href="#">Floor 1
                 <span class="caret"></span>
@@ -49,12 +51,12 @@
               <li><a onclick="DropDown(2)">2</a></li>
               <li><a onclick="DropDown(3)">3</a></li> 
             </ul>
-         </li>
+         </li>-->
         <li>
             <form class="navbar-form" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Room #" name="srch-term" id="srch-term"></input>
-                    <!--<div class="input-group-btn btn btn-primary">
+                    <!--<input type="text" class="form-control" placeholder="Room #" name="srch-term" id="srch-term"></input>
+                    <div class="input-group-btn btn btn-primary">
                     </div>-->
                 </div>
                 <button type = "button" class= "btn btn-primary" onclick="newRoom()">Change Room #</button>
@@ -63,6 +65,17 @@
         </ul>
       </div>
     </nav>
+    <div class="container"><!-- Move everything *useful* into here from Nav bar-->
+        <select>
+            <option onchange="DropDown(1)" value="Floor 1">Floor 1</option>
+            <option onchange="DropDown(2)" value="Floor 2">Floor 2</option>
+            <option onchange="DropDown(3)" value="Floor 3">Floor 3</option>
+            
+        </select>
+        <button onclick = "getCurrent(1,-1)">Back</button>
+        <button onclick = "getCurrent(1,1)">Forward</button>
+
+    </div>
         
         
         <!-- Fixed navbar -->
