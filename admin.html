@@ -151,18 +151,49 @@
     function findRes(f,c,p,week)
         {
             //alert(p);
+            
             var d = new Date();
             var n = d.getDay()-1;
 
             var temp="cart"+c.toString();
+            
+            var from=lastRes(f,temp,p,week,n);
             var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+temp+'/availability/'+'/'+n.toString()+'/'+p.toString());
             resWatcher.on('value', function(snapshot) {
                 var info=snapshot.val();
-                if(info=="false")
+                if(info!="true")
                 {
-                    $('#Reservations tr:last').after('<tr><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                    $('#Reservations tr:last').after('<tr><td>'+from+'</td><td>'+info+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                 }
             });
+        }
+    function lastRes(f,c,p,week,n)
+        {
+            if(p>0)
+            {
+            var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1));
+            resWatcher.on('value', function(snapshot) {
+                var info=snapshot.val();
+                if(info!="true")
+                {
+                    alert (c);
+                    return info;
+                }
+                if(info=="true")
+                {
+                    return lastRes(f,c,p-1,week,n);
+                }
+            });
+            }
+            if(p<=0)
+            {
+                return home(f,c);
+            }
+        }
+        
+    function home(f,c)
+        {
+            return 0;
         }
     </script>
 </head>
@@ -187,7 +218,8 @@
                 <th>Upcoming Reservations</th>
             </tr>
             <tr>
-                <th>Floor</th>
+                <th>From</th>
+                <th>To</th>
                 <th>Cart #</th>
                 <th>Period</th>
             </tr>
