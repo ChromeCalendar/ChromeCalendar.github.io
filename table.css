@@ -1,11 +1,12 @@
 body{
     font-family: 'Courgette', cursive;
     /*background-image: url(https://static.pexels.com/photos/25009/pexels-photo-25009.jpg);*/
-    background-image: url("https://static.pexels.com/photos/33139/halloween-pumpkin-carving-face.jpg");
+    background-color: rgba(50,20,100,1);
     background-size: cover;
 }
 td{
     background-color: rgba(6,53,69,1);
+	padding: 8px;
 }
 thead{
     background-color: #09092a;
@@ -40,6 +41,7 @@ table{
     background-color:lightpink;
 }
 .container{
+	text-align: center;
     margin: 60px;
     padding: 30;
     border-radius: 15px;
@@ -52,4 +54,7 @@ table{
 }
 .navbar-default .navbar-nav>li>a {
     color: white;
+}
+.nonbutton{
+	color: white;
 }
