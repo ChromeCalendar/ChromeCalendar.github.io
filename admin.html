@@ -163,12 +163,14 @@
                 var info=snapshot.val();
                 if(info!="true")
                 {
-                    $('#Reservations tr:last').after('<tr><td>'+from+'</td><td>'+info+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                    alert(lastRes(f,temp,p,week,n));
+                    $('#Reservations tr:last').after('<tr><td>'+from+'</td><td>'+info+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                 }
             });
         }
     function lastRes(f,c,p,week,n)
         {
+            //alert(f,c,p);
             if(p>0)
             {
             var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1));
@@ -176,7 +178,7 @@
                 var info=snapshot.val();
                 if(info!="true")
                 {
-                    alert (c);
+                    //alert (info);
                     return info;
                 }
                 if(info=="true")
@@ -185,7 +187,7 @@
                 }
             });
             }
-            if(p<=0)
+            else if(p<=0)
             {
                 return home(f,c);
             }
@@ -193,7 +195,7 @@
         
     function home(f,c)
         {
-            return 0;
+            return "home";
         }
     </script>
 </head>
@@ -220,6 +222,7 @@
             <tr>
                 <th>From</th>
                 <th>To</th>
+                <th>Floor</th>
                 <th>Cart #</th>
                 <th>Period</th>
             </tr>
