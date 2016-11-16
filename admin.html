@@ -126,26 +126,26 @@
     }
     function cartCount(f,p)
         {
-            var resWatcher = firebase.database().ref('weeks/0/floors/'+f+'/carts');
+            var resWatcher = firebase.database().ref('weeks/0/floors/'+f+'/carts');//how many carts are there
             resWatcher.on('value', function(snapshot) {
                 var info = snapshot.numChildren();
                 
-                cartLoop(f,p,snapshot.numChildren());
+                cartLoop(f,p,snapshot.numChildren());//send floor and period to the next function
             });
         }
     function cartLoop(f,p,cc)
         {
-            for(c=0; c<cc; c++)
-                        {
-                            weekLoop(f,p,c);
-                        }
+            for(c=0; c<cc; c++)//go through every cart
+            {
+                weekLoop(f,p,c);
+            }
         }
     function weekLoop(f,p,c)
         {
             var resWatcher = firebase.database().ref('Date/Week');
-            resWatcher.on('value', function(snapshot){
-                          findRes(f,c,p,snapshot.val());
-                          });
+            resWatcher.on('value', function(snapshot){//what week is it 
+                findRes(f,c,p,snapshot.val());//find reservations for that week 
+            });
         }
     
     function findRes(f,c,p,week)
@@ -154,24 +154,26 @@
             
             var d = new Date();
             var n = d.getDay()-1;
-
+            console.log("day i think " + n);
             var temp="cart"+c.toString();
             
-            var from=lastRes(f,temp,p,week,n);
-            var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+temp+'/availability/'+'/'+n.toString()+'/'+p.toString());
+            var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+temp+'/availability/'+n.toString()+'/'+p.toString());//looking at specific period for a specific cart
             resWatcher.on('value', function(snapshot) {
-                var info=snapshot.val();
-                if(info!="true")
+                var info=snapshot.val(); // get room num
+                if(info!="true")//if there is a reservation
                 {
-                    alert(lastRes(f,temp,p,week,n));
-                    $('#Reservations tr:last').after('<tr><td>'+from+'</td><td>'+info+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                    var to = info;//where it going 
+                    console.log("to " + to);
+                    var from=lastRes(f,temp,p,week,n,to); // call the weird function
+                    //alert(lastRes(f,temp,p,week,n));
+                    
                 }
             });
         }
-    function lastRes(f,c,p,week,n)
+    function lastRes(f,c,p,week,n,to)
         {
             //alert(f,c,p);
-            if(p>0)
+            if(p>0) //if we aren't at the zeroeth period 
             {
             var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1));
             resWatcher.on('value', function(snapshot) {
@@ -179,16 +181,21 @@
                 if(info!="true")
                 {
                     //alert (info);
+                    $('#Reservations tr:last').after('<tr><td>'+info+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                     return info;
                 }
                 if(info=="true")
                 {
-                    return lastRes(f,c,p-1,week,n);
+                    if(p > 0){
+                        return lastRes(f,c,p-1,week,n,to);
+                    }
+                    
                 }
             });
             }
-            else if(p<=0)
+            else if(p<=0)//we got to the end and there is nothing here
             {
+                $('#Reservations tr:last').after('<tr><td>home</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                 return home(f,c);
             }
         }
