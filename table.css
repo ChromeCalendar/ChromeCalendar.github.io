@@ -1,16 +1,17 @@
 body{
     font-family: 'Courgette', cursive;
     /*background-image: url(https://static.pexels.com/photos/25009/pexels-photo-25009.jpg);*/
-    background-color: rgba(50,20,100,1);
+    background-color: rgba(120,120,160,1);
     background-size: cover;
 }
 td{
-    background-color: rgba(6,53,69,1);
+    background-color: rgba(240,240,252,1);
 	padding: 8px;
 }
 thead{
-    background-color: #09092a;
-    color:white;
+    background-color: rgba(200,200,252,1);
+    color: rgba(20,1,60,1);
+	
 }
 table{
    /* margin: 60px;*/
