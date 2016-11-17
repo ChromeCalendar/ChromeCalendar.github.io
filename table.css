@@ -24,7 +24,7 @@ table{
 }
 .btn-primary{
     background-image:none;
-    background-color: deepskyblue;
+    background-color: rgba(200,130,150,1);
     color: black;
 }
 .yes{
@@ -36,7 +36,7 @@ table{
     background-color: black;
 }
 .mineTaken{
-    background-color: gold;
+    background-color: rgba(129,31,20,1);
 }
 .mine{
     background-color:lightpink;
