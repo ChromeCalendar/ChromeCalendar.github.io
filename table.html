@@ -149,11 +149,13 @@
         var firstGet = false;
         var already = 0;
         var callLock = 0;
+        var tableRef = firebase.database().ref("/weeks/" + 0 + "/floors/" + 1);
         //var currentDay = 0;
         var currentMonth = 0;
         var currentDay = 1;
         var currentWeek = 0;
-        var currentYear = 
+        var currentYear;
+        
         firebase.database().ref('/Date').on("value", function(snapshot) {
               var yearType = snapshot.val();
               currentYear = yearType.Year;
@@ -370,38 +372,54 @@
                 }
                 else if(clicked == 1){
                     if(time == 1){
-                        currentWeek++;
-                        if((currentDay + 7) > Months[currentMonth].days){
-                            currentDay = ((currentDay + 7) - Months[currentMonth].days);
-                            if(currentMonth < 11){
-                                currentMonth += 1;
-                            }
-                            else if(currentMonth == 11){
-                                currentMonth = 0;
-                            }
-                        }
-                        else{
-                            currentDay = currentDay + 7;
-                            console.log("halloween " + currentDay);
+                        if(currentWeek < 49){
+                                currentWeek++;
+
+                                if((currentDay + 7) > Months[currentMonth].days){
+                                    currentDay = ((currentDay + 7) - Months[currentMonth].days);
+                                    if(currentMonth < 11){
+                                        currentMonth += 1;
+                                    }
+                                    else if(currentMonth == 11){
+                                        currentMonth = 0;
+                                    }
+                                }
+                                else{
+                                    currentDay = currentDay + 7;
+                                    console.log("halloween " + currentDay);
+                                }
                         }
                     }
                     if(time == -1){
-                        currentWeek--;
-                        console.log("the most important day " + currentDay);
-                        if((currentDay - 7) <= 0){
-                            currentDay = Months[currentMonth - 1].days + (currentDay - 7);
-                            if(currentMonth > 0){
-                                currentMonth -= 1;
+                            if(currentWeek > 0){
+                                currentWeek--;
+
+                            /*else{
+                                currentWeek = 51;
+                            }*/
+                            console.log("the most important day " + currentDay);
+                            if((currentDay - 7) <= 0){
+                                if(currentMonth > 0){
+                                    currentDay = Months[currentMonth - 1].days + (currentDay - 7);
+                                }
+                                else{
+                                    console.log("poprocks");
+                                    currentDay = Months[11].days + (currentDay - 7);
+                                }
+                                if(currentMonth > 0){
+                                    currentMonth -= 1;
+                                }
+                                else if(currentMonth == 0){
+                                    currentMonth = 11;
+                                }
                             }
-                            else if(currentMonth == 0){
-                                currentMonth = 12;
+                            else{
+                                currentDay = currentDay - 7;
+
                             }
-                        }
-                        else{
-                            currentDay = currentDay - 7;
-                            
                         }
                     }
+                   
                     console.log("current spider week is " + currentWeek);
                     console.log("current spider day is " + currentDay);
                     console.log("current spider month is " + currentMonth);
@@ -416,7 +434,14 @@
                 
                 //alert(currentWeek);
               // ...
+             console.log("cookies changed " + currentWeek + " " + floor);
+             tableRef = firebase.database().ref("/weeks/" + currentWeek + "/floors/" + floor);
+                tableRef.on("child_changed", function(snapshot) {
+                  var changedPost = snapshot.val();
+                  console.log("problematic pie");
+                });
             });
+             
         }
         function timeTravel(){
             
@@ -489,10 +514,16 @@
                 chosenDay = 1;
             }
             var fillTemp;
-            
+            var adjustedMonth  = 0;
             fillTemp = (currentDay - chosenDay + 1);
             if((currentDay - chosenDay + 1) <= 0){
-                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                if(currentMonth > 0){
+                    adjustedMonth = currentMonth -1;
+                }
+                else{
+                    adjustedMonth = 11;
+                }
+                fillTemp = (Months[adjustedMonth].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
             else if((currentDay - chosenDay + 1) > Months[currentMonth].days){
@@ -501,7 +532,13 @@
             $("#monday").text("Monday " +  (fillTemp));
             fillTemp = (currentDay - chosenDay + 2);
             if(fillTemp <= 0){
-                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                if(currentMonth > 0){
+                    adjustedMonth = currentMonth -1;
+                }
+                else{
+                    adjustedMonth = 11;
+                }
+                fillTemp = (Months[adjustedMonth].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
             else if((currentDay - chosenDay + 2) > Months[currentMonth].days){
@@ -511,7 +548,13 @@
             
             fillTemp = (currentDay - chosenDay + 3);
             if(fillTemp <= 0){
-                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                if(currentMonth > 0){
+                    adjustedMonth = currentMonth -1;
+                }
+                else{
+                    adjustedMonth = 11;
+                }
+                fillTemp = (Months[adjustedMonth].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
             else if((currentDay - chosenDay + 3) > Months[currentMonth].days){
@@ -521,7 +564,13 @@
             
             fillTemp = (currentDay - chosenDay + 4);
             if(fillTemp <= 0){
-                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                if(currentMonth > 0){
+                    adjustedMonth = currentMonth -1;
+                }
+                else{
+                    adjustedMonth = 11;
+                }
+                fillTemp = (Months[adjustedMonth].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
             else if((currentDay - chosenDay + 4) > Months[currentMonth].days){
@@ -531,7 +580,13 @@
             
             fillTemp = (currentDay - chosenDay + 5);
             if(fillTemp <= 0){
-                fillTemp = (Months[currentMonth - 1].days + fillTemp);
+                if(currentMonth > 0){
+                    adjustedMonth = currentMonth -1;
+                }
+                else{
+                    adjustedMonth = 11;
+                }
+                fillTemp = (Months[adjustedMonth].days + fillTemp);
                 //$("#monday").text("Monday " + ); 
             }
             else if((currentDay - chosenDay + 5) > Months[currentMonth].days){
@@ -585,7 +640,7 @@
                         tempDay = 1;
                         if(tempMonth == 11){
                             //tempMonth++;
-                            tempMonth == 0;
+                            tempMonth = 0;
                         }
                         else{
                             tempMonth++;
@@ -1288,6 +1343,11 @@
             }
             
         }
+        
+        /*console.log("cookies and pie " + currentWeek + " " + floor);
+        tableRef.on('child_changed', function(childSnapshot, prevChildKey) {
+          console.log("cookies 1");
+        });*/
     </script>
     </body>
 </html>
