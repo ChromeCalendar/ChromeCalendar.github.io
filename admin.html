@@ -195,14 +195,32 @@
             }
             else if(p<=0)//we got to the end and there is nothing here
             {
-                $('#Reservations tr:last').after('<tr><td>home</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
-                return home(f,c);
+                $('#Reservations tr:last').after('<tr><td>'+home(f,c)+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                //return home(f,c);
             }
         }
         
     function home(f,c)
         {
-            return "home";
+            if(f==1)
+                {
+                    return "Math Wing";
+                }
+            if(f==2)
+                {
+                    return 115;
+                }
+            if(f==3)
+                {
+                    if(c==1)
+                        {
+                            return "Science Wing";
+                        }
+                    else
+                        {
+                            return "Library";
+                        }
+                }
         }
     </script>
 </head>
