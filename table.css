@@ -28,7 +28,7 @@ table{
     color: black;
 }
 .yes{
-    background-color: #00ccff;
+    background-color: white;
     color: black;
 }
 .no{
@@ -36,7 +36,7 @@ table{
     background-color: black;
 }
 .mineTaken{
-    background-color: maroon;
+    background-color: gold;
 }
 .mine{
     background-color:lightpink;
