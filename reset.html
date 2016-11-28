@@ -33,26 +33,16 @@
             <div class = "form-group">
               <div id="whiteText">email:</div>
               <input type="text" name="email" id="email">
-              <div id="whiteText">password:</div>
-              <input type="password" name="password" id="password">
             </div>
-          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign In</button><button id ="reset" type = "button" class="btn btn-danger">Forgot Password</button>
-         <!--<script>
-             function reset(){
-                console.log("spiderssss");
-             }
-         </script>-->
-          <a id = "submit" href="table.html"></a>
+          <button id = "reset" type = "button" class="btn btn-primary">Send Email Confirmation</button>
+            
+          <!--<a id = "submit" href="table.html"></a>-->
         </form>
 
     </body>
     <script>
         //localStorage.setItem('ready', 0);
       // Initialize Firebase
-        /*function reset(){
-            console.log("in the function");
-            //document.location.href = "reset.html";
-        }*/
         var config = {
             apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
             authDomain: "chrome-calendar.firebaseapp.com",
@@ -63,7 +53,18 @@
           firebase.initializeApp(config);
           var changedCount = 0;
         
-       
+        $( "#reset" ).click(function() {
+          console.log("in the function");
+            var auth = firebase.auth();
+            console.log("auth " + auth);
+            //var emailAddress = "user@example.com";
+            var email = $('#email').val();
+            auth.sendPasswordResetEmail(email).then(function() {
+              // Email sent.
+            }, function(error) {
+              // An error happened.
+            });
+        });
         function myFunction(){
             var email = $('#email').val();
             var password = $('#password').val();
@@ -77,9 +78,7 @@
             
             
         }
-        $( "#reset" ).click(function() {
-          document.location.href = "reset.html";
-        });
+        
         function Create(email,password){
             
             alert("in create");
@@ -115,40 +114,12 @@
               console.log('not logged in');
             }
           });*/
-        firebase.auth().onAuthStateChanged(function(user) {
-          /*if(localStorage.getItem('ready') == 1){
-              localStorage.setItem('ready',0);
-             // window.location.href="table.html";
-              alert("user.uid" + user.uid);
-              alert("we're in");
-          }*/
-          
-          if (user) {
-              var uid = user.uid; 
-              alert(uid);
-              localStorage.setItem('key', user.uid);
-              if(localStorage.getItem('key') !== null){
-                  window.location.href="table.html";
-              }
-              else{
-                  
-                  alert("what the actual hell");
-              }
-            // User is signed in.
-              //alert("we are going");
-             
-          } else {
-            // No user is signed in.
-          }
-        });
+        
         firebase.database().ref('/users').once('value').then(function(snapshot) {
           var username = snapshot.val();
           //alert(username);
           // ...
         });
-        function reDirect(){
-            //alert("i hope we get here");
-            document.location.href = "table.html";
-        }
+        
     </script>
 </html>
