@@ -62,8 +62,11 @@
             var email = $('#email').val();
             auth.sendPasswordResetEmail(email).then(function() {
               // Email sent.
+                $("#warning").text("");
             }, function(error) {
               // An error happened.
+               // console.log("spiderssss");
+                $("#warning").text("sorry, that's not a valid email");
             });
         });
         function myFunction(){
