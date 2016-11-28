@@ -25,9 +25,7 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
-        <head>
-        <link rel="shortcut icon" type="image/x-icon" href="https://software.intel.com/sites/default/files/2D_Diecon_Working_Together_rgb_200_transparent_bkgrd.png"/>`
-
+        <link rel="shortcut icon" type="image/x-icon" href="https://software.intel.com/sites/default/files/2D_Diecon_Working_Together_rgb_200_transparent_bkgrd.png" />`
     </head>
     <body>
         <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
@@ -39,8 +37,12 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign In</button>
-            
+          <button type = "button" class="btn btn-primary" onclick="myFunction()">Send Confirmation Email</button><button id ="reset" type = "button" class="btn btn-danger">Forgot Password</button>
+         <!--<script>
+             function reset(){
+                console.log("spiderssss");
+             }
+         </script>-->
           <a id = "submit" href="table.html"></a>
         </form>
 
@@ -48,6 +50,10 @@
     <script>
         //localStorage.setItem('ready', 0);
       // Initialize Firebase
+        /*function reset(){
+            console.log("in the function");
+            //document.location.href = "reset.html";
+        }*/
         var config = {
             apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
             authDomain: "chrome-calendar.firebaseapp.com",
@@ -72,6 +78,9 @@
             
             
         }
+        $( "#reset" ).click(function() {
+          document.location.href = "reset.html";
+        });
         function Create(email,password){
             
             alert("in create");
