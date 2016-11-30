@@ -13,9 +13,12 @@ td{
 }
 thead{
     /*background-color: #09092a;*/
+    
     color: rgba(240,240,252,1);
 }
 table{
+    margin-top: 100px;
+    
    /* margin: 60px;*/
 }
 td{
