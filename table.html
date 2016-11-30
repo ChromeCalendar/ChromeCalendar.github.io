@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta name="google-signin-client_id" content="583488732443-0qrkltufodphbtveim4vv0nhsf5qijog.apps.googleusercontent.com">
-<link rel="stylesheet" type="text/css" href="table.css">
+
 
 <html>
     <head>
@@ -21,11 +21,8 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
-        
-        
-        
-        
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="table.css">
     </head>
     <body>
         
@@ -284,7 +281,7 @@
         $( "#sel1" ).change(function() {
          // alert( "Handler for .change() called." );
           floor = $("#sel1").val();
-          alert("floor now " + floor );
+          //alert("floor now " + floor );
           //getNum();
           already = 0;
           arrayClearCA();
@@ -294,7 +291,7 @@
         function DropDown(newFloor){
           //floor = $("#sel1").val();
           floor = newFloor;
-          alert("floor now " + floor );
+          //alert("floor now " + floor );
           $("#floorName").text("Floor " + floor);
           //getNum();
           already = 0;
@@ -916,7 +913,7 @@
             var j = 0;
             var k = 0;
             //var dfd = $.Deferred();
-            alert("in startFunc() " + onFloor);
+            //alert("in startFunc() " + onFloor);
             for(var k = 0;k < 5;k++){
                 for(j = 0;j < 4;j++){
                     for(var x = 0;x < onFloor;x++){
@@ -985,7 +982,7 @@
                     }
                     //console.log("potato " + x + " row " + j + " col " + k);
                     if((x == 2) && (j == 0) && (kVal == "one")){
-                        alert("hey "  + freeCarts);
+                        //alert("hey "  + freeCarts);
                     }
                     if(freeCarts == true){
                         //console.log(tempX);
@@ -1014,7 +1011,7 @@
                     //console.log("count" + count);
                     //console.log("numcarts" + numCarts);
                     if((j === 3) && (k === 4) && (x === (onFloor - 1))){
-                           alert("go again mate");
+                           //alert("go again mate");
                             console.log(callLock + " callLock");
                            if(callLock == 0){
                                callLock = 1;
@@ -1068,7 +1065,7 @@
                 });
         }
         function account(){
-            alert("in account");
+            //alert("in account");
             for(var ii = 0;ii < 5;ii++){
                 for(var jj = 0;jj < 4;jj++){
                    // alert("availability CA " + CA[ii][jj]);
@@ -1110,25 +1107,31 @@
         }*/
         //myFunction fills in table;
         function myFunction(){
-            alert("adding rows to tables");
+            //alert("adding rows to tables");
             var clicked = 0;
             //console.log("yoyoy");
             for(var i = 0;i < 4;i++){
                 console.log("mineMode " + mineMode);
-                if((mineArray[0][i] != 1) || (mineMode === false)){
+                if((mineArray[0][i] != 1) || (mineArray[4][i] != 1)){//not minemode or my room
                     var one = taken[0][i];
                 }
-                else{
-                    if(taken[0][i] == "no"){
+                else{//minemode or mine
+                    if(taken[0][i] == "no"){ 
                     var one = "mineTaken";
                     }
                     else{
                     var one = "mine";
                     }
+                    //var color1 = "black";
+                }
+                if((taken[0][i] == "no") && (mineArray[4][i] != 1)){
+                    var color1 = "white";
+                }
+                else{
+                    var color1 = "black";
                 }
                 if((mineArray[1][i] != 1) || (mineMode === false)){
-                    var two = taken[1][i];
-                    //var two = "mine";
+                    var two = taken[1][i];wo = "mine";
                 }
                 else{
                     if(taken[1][i] == "no"){
@@ -1138,9 +1141,16 @@
                     var two = "mine";
                     }
                 }
+                if((taken[1][i] == "no") && (mineArray[4][i] != 1)){
+                    var color2 = "white";
+                }
+                else{
+                    var color2 = "black";
+                }
                 if((mineArray[2][i] != 1) || (mineMode === false)){    
                     var three = taken[2][i];
                     //var three = "mine";
+                    
                 }
                 else{
                     if(taken[2][i] == "no"){
@@ -1149,10 +1159,17 @@
                     else{
                     var three = "mine";
                     }
+                    
+                }
+                if((taken[2][i] == "no") && (mineArray[4][i] != 1)){
+                    var color3 = "white";
+                }
+                else{
+                    var color3 = "black";
                 }
                 if((mineArray[3][i] != 1) || (mineMode === false)){
+                    
                     var four = taken[3][i];
-                    //var four = "mine";
                 }
                 else{
                     if(taken[3][i] == "no"){
@@ -1161,6 +1178,12 @@
                     else{
                     var four = "mine";
                     }
+                }
+                if((taken[3][i] == "no") && (mineArray[4][i] != 1)){
+                    var color4 = "white";
+                }
+                else{
+                    var color4 = "black";
                 }
                 if((mineArray[4][i] != 1) || (mineMode === false)){
                 var five = taken[4][i];
@@ -1174,9 +1197,15 @@
                     var five = "mine";
                     }
                 }
+                if((taken[4][i] == "no") && (mineArray[4][i] != 1)){
+                        var color5 = "white";
+                    }
+                else{
+                    var color5 = "black";
+                }
                 //clearMine();
                 clicked++;
-                $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td class=' + one +'  id= '+(1+i*5).toString()+'></td><td class=' + two +' id= '+(2+i*5).toString()+'></td><td class=' + three +' id= '+(3+i*5).toString()+'></td><td class=' + four +' id= '+(4+i*5).toString()+'></td><td class=' + five +' id=  '+(5+i*5).toString()+'></td></tr>'); 
+                $('#myTable tr:last').after('<tr><td style="border: 3px solid black; border-collapse: separate;">'+(i+1)+'</td><td style="border: 3px solid ' + color1 + ';border-collapse: separate;" class=' + one +'  id= '+(1+i*5).toString()+'></td><td style="border: 3px solid ' + color2 + ';border-collapse: separate;" class=' + two +' id= '+(2+i*5).toString()+'></td><td style="border: 3px solid ' + color3 + ';border-collapse: separate;" class=' + three +' id= '+(3+i*5).toString()+'></td><td style="border: 3px solid ' + color4 + ';border-collapse: separate;" class=' + four +' id= '+(4+i*5).toString()+'></td><td style="border: 3px solid ' + color5 + ';border-collapse: separate;" class=' + five +' id= '+(5+i*5).toString()+'></td></tr>'); 
             }
             clearMine();
             //$('#myTable tr:last').remove();
@@ -1194,11 +1223,13 @@
                         console.log("this is new");
                         $('#'+ID).css('background-color','maroon');
                         $('#'+ID).css('color','black');
+                        
                         selected.push(ID);
                     }
                     else{
                         if(Color == 'yes'){
                             $('#'+ID).css('background-color','#ffffff');
+                           
                         }
                         else if(Color == 'mine'){
                             $('#'+ID).css('background-color','lightpink');
@@ -1218,7 +1249,7 @@
             }
         }
         function Clear(){//called when the submit button is clicked
-            alert("submit function called");
+            //alert("submit function called");
             console.log("Submitting");
             for(var q = 0;q < selected.length;q++){
                // console.log("rawr" + selected.length);
@@ -1304,7 +1335,7 @@
             //startFunc();
         }
         function newUpdate(tagOne, tagTwo, tagThree){
-            alert("in updating function");
+            //alert("in updating function");
             console.log("updating firebase");
             //alert("cart "+tagThree);
             //console.log("cart "+tagThree);
@@ -1327,14 +1358,14 @@
             else if(tagThree === 5){
                 tagThree = "cart5";
             }*/
-            alert("cart "+ tagThree);
+            //alert("cart "+ tagThree);
             var updates = {};
             //alert("floor now " + floor);
             updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = personalRoom;
             firebase.database().ref().update(updates);
         }
         function read(k,j){
-            alert("clearing the list of available");
+           // alert("clearing the list of available");
             var temp = CA[k][j].specific.length;
             for(var iii = 0;iii < temp;iii++){
                 //console.log("panda " + CA[k][j].specific[iii]);
@@ -1342,14 +1373,14 @@
         }
         function ClearTable(until){
             console.log("deleting rows");
-            alert("deleting the rows of tables");
+            //alert("deleting the rows of tables");
             for(var t = 0; t < until;t++){
                 //console.log("trying to clear here");
                 $('#myTable tr:last').remove();
                 if(t == (until - 1)){
                     console.log("done removing");
                     if(already === 0){
-                        alert("ready to beginAll");
+                        //alert("ready to beginAll");
                         callLock = 0;
                         //already = 1;
                         //beginAll();

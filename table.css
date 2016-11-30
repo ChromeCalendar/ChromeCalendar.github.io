@@ -4,18 +4,24 @@ body{
     
     background-size: cover;
 }
+#MyTable {
+    border-collapse: collapse;
+    /* margin: 60px;*/
+}
+
+table, th, td {
+    border: 1px solid black;
+}
 td{
+    
     background-color: rgba(240,240,252,1);
-	padding: 8px;
+	/*padding: 8px;
+    margin: 8px;*/
+    border-collapse: separate;
 }
 thead{
     background-color: rgba(200,200,252,1);
     color: rgba(20,1,60,1);
-	
-}
-table{
-   /* margin: 60px;*/
-    
 }
 #clear{
     width:100%; /* setting the width */
@@ -31,13 +37,16 @@ table{
 }
 .yes{
     background-color: white;
-    
     background-size: contain;
     color: black;
+    margin: 3px;
+    
 }
 .no{
-    background-color: #0d1a26;
+    /*background-color: #0d1a26;*/
+    margin: 3px;
     background-color: black;
+    border: 3px solid white;
 }
 .mineTaken{
     background-color: rgba(129,31,20,1);

@@ -6,10 +6,11 @@ body{
 }
 td{
     background-color: rgba(240,240,252,1);
-    
     background-size: contain;
-    border-color: black;
     color: rgba(20,1,60,1);
+    
+    padding: 8px;
+    border: 3px solid black;
 }
 thead{
     margin-top: 100px;
@@ -21,10 +22,6 @@ table{
     margin-top: 100px;
     
    /* margin: 60px;*/
-}
-td{
-    padding: 8px;
-    border: 3px solid black;
 }
 #changeCarts{
     /*border-top: 30px;
