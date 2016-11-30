@@ -234,28 +234,69 @@
         </ul>
       </div>
     </nav>
+    <div id = "changeCarts" class = "container">
+        <table style="width:100%" id="carts">
+            <thead>
+                <tr>
+                    <th>Floor</th>
+                    <th>Number of Carts</th>
+                </tr>
+            </thead>
+            <tbody>
 
+            </tbody>
+        </table>
+    </div>
     
-    <table style="width:100%" id="Reservations">
-        <thead>
-            <tr>
-                <th>Upcoming Reservations</th>
-            </tr>
-            <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Floor</th>
-                <th>Cart #</th>
-                <th>Period</th>
-            </tr>
-        </thead>
-        <tbody>
+   
 
         </tbody>
     </table>
     <script>
-
-        resList();
+        var cartnum1;
+        var cartnum2=5;
+        var cartnum3=5;
+        var watcher = firebase.database().ref('floornum/1');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(1,tempNum);
+        });
+        var watcher = firebase.database().ref('floornum/2');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempWord = "editbtn2";
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(2,tempNum);
+        });
+        var watcher = firebase.database().ref('floornum/3');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(3,tempNum);
+        });
+        
+        function addLine(num,cartnum){
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class = "clickable" id=' + num + '>Reset Floor ' + num + '</td></tr>');
+        }
+        $(document).ready(function(){
+            $("table").click(function() {
+              console.log("in click function");
+              var clickedClass = event.target.id;
+              console.log(event.target.id);
+              if(event.target.id != ''){
+                setCarts(clickedClass);
+              }
+            });
+        });
+        
+        //resList();
         //make the list of upcoming reservations
         
     </script>
