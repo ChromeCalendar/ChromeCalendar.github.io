@@ -67,7 +67,7 @@
       </div>
     </nav>
     <div class="container" ><!-- Move everything *useful* into here from Nav bar--><!-- rude! everything is useful >:( -->
-        <select class = "btn btn-default dropdown-toggle">
+        <select id = "thing" class = "btn btn-default dropdown-toggle">
             <option onchange="DropDown(1)" value="Floor 1">Floor 1</option>
             <option onchange="DropDown(2)" value="Floor 2">Floor 2</option>
             <option onchange="DropDown(3)" value="Floor 3">Floor 3</option>
@@ -163,7 +163,22 @@
               monthSet();
                   // ...
         });
-        //var floor = $("#sel1").val();
+        $( "#thing" ).change(function() {
+          alert( "Handler for .change() called." );
+          var thing = $("#thing").val();
+         if(thing == "Floor 1"){
+             DropDown(1)
+         }
+        else if(thing == "Floor 2"){
+             DropDown(2)
+         }
+        else if(thing == "Floor 3"){
+             DropDown(3)
+         }
+          //alert(thing);
+          //DropDown(3)
+        });
+                //var floor = $("#sel1").val();
         var floor = 1;
         var onFloor = 0;
         //alert("floor is (waiting) " + floor);
