@@ -1,10 +1,13 @@
 body{
-    background-color: rgba(120,120,160,1);
+    /*background-color: rgba(120,120,160,1);*/
+    background-image: url("https://static.pexels.com/photos/207849/pexels-photo-207849.jpeg");
     font-family: 'Courgette', cursive;
     background-size: cover;
 }
 td{
     background-color: rgba(240,240,252,1);
+    background-image: url("https://static.pexels.com/photos/207849/pexels-photo-207849.jpeg");
+    background-size: contain;
     border-color: black;
     color: rgba(20,1,60,1);
 }
