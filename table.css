@@ -1,7 +1,7 @@
 body{
     font-family: 'Courgette', cursive;
     background-color: rgba(120,120,160,1);
-    background-image: url("https://static.pexels.com/photos/207849/pexels-photo-207849.jpeg");
+    
     background-size: cover;
 }
 td{
@@ -24,14 +24,14 @@ table{
 }
 .btn-primary{
     background-image:none;
-    background-image: url("https://static.pexels.com/photos/207849/pexels-photo-207849.jpeg");
-    /*background-color: rgba(200,130,150,1);*/
+    
+    background-color: rgba(200,130,150,1);
     background-size: contain;
     color: black;
 }
 .yes{
     background-color: white;
-    background-image: url("https://static.pexels.com/photos/207849/pexels-photo-207849.jpeg");
+    
     background-size: contain;
     color: black;
 }
