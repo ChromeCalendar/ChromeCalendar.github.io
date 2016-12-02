@@ -1230,12 +1230,11 @@
                     }
                     else{
                         if(Color == 'yes'){
-<<<<<<< HEAD
+
                             $('#'+ID).css('background-color','#00ccff');
-=======
                             $('#'+ID).css('background-color','#ffffff');
                            
->>>>>>> origin/master
+
                         }
                         else if(Color == 'mine'){
                             $('#'+ID).css('background-color','lightpink');
@@ -1367,8 +1366,12 @@
             //alert("cart "+ tagThree);
             var updates = {};
             //alert("floor now " + floor);
-            updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = personalRoom;
-            firebase.database().ref().update(updates);
+            firebase.database().ref('/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne + "resNode").set({
+                 room: personalRoom,
+                 name: personalName
+            });
+            /*updates['/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne] = personalRoom;
+            firebase.database().ref().update(updates);*/
         }
         function read(k,j){
            // alert("clearing the list of available");
