@@ -1,23 +1,32 @@
 body{
     background-color: rgba(120,120,160,1);
+    
     font-family: 'Courgette', cursive;
     background-size: cover;
 }
 td{
     background-color: rgba(240,240,252,1);
-    border-color: black;
+    background-size: contain;
     color: rgba(20,1,60,1);
+    
+    padding: 8px;
+    border: 3px solid black;
 }
 thead{
+    margin-top: 100px;
     /*background-color: #09092a;*/
+    
     color: rgba(240,240,252,1);
 }
 table{
+    margin-top: 100px;
+    
    /* margin: 60px;*/
 }
-td{
-    padding: 8px;
-    border: 3px solid black;
+#changeCarts{
+    /*border-top: 30px;
+    padding-top: 30px;*/
+    margin-top: 100px;
 }
 .clickable{
     background-color: rgba(129,31,20,1);

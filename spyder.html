@@ -30,14 +30,16 @@
             var snap = snapshot.val();
         });
     
-        
+     
     function setCarts (floor)
     {
-       
+       if(confirm("Are you sure you want to perrmanently change the number of Chromecarts available on this floor?"))
+           {
         var num = prompt("How many carts are on the floor?","0");
         if(num != null){
             alert("num" + num);
             weekLoop2(floor,num,temporary);
+        }
         }
     }
         
@@ -194,14 +196,32 @@
             }
             else if(p<=0)//we got to the end and there is nothing here
             {
-                $('#Reservations tr:last').after('<tr><td>home</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
-                return home(f,c);
+                $('#Reservations tr:last').after('<tr><td>'+home(f,c)+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                //return home(f,c);
             }
         }
         
     function home(f,c)
         {
-            return "home";
+            if(f==1)
+                {
+                    return "Math Wing";
+                }
+            if(f==2)
+                {
+                    return 115;
+                }
+            if(f==3)
+                {
+                    if(c==1)
+                        {
+                            return "Science Wing";
+                        }
+                    else
+                        {
+                            return "Library";
+                        }
+                }
         }
     </script>
 </head>
@@ -216,28 +236,69 @@
         </ul>
       </div>
     </nav>
+    <div id = "changeCarts" class = "container">
+        <table style="width:100%" id="carts">
+            <thead>
+                <tr>
+                    <th>Floor</th>
+                    <th>Number of Carts</th>
+                </tr>
+            </thead>
+            <tbody>
 
+            </tbody>
+        </table>
+    </div>
     
-    <table style="width:100%" id="Reservations">
-        <thead>
-            <tr>
-                <th>Upcoming Reservations</th>
-            </tr>
-            <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Floor</th>
-                <th>Cart #</th>
-                <th>Period</th>
-            </tr>
-        </thead>
-        <tbody>
+   
 
         </tbody>
     </table>
     <script>
-
-        resList();
+        var cartnum1;
+        var cartnum2=5;
+        var cartnum3=5;
+        var watcher = firebase.database().ref('floornum/1');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(1,tempNum);
+        });
+        var watcher = firebase.database().ref('floornum/2');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempWord = "editbtn2";
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(2,tempNum);
+        });
+        var watcher = firebase.database().ref('floornum/3');
+        watcher.once('value', function(snapshot) {
+            var info = snapshot.val();
+            cartnum1=(info.cartnum);
+            var tempNum;
+            tempNum = cartnum1;
+            addLine(3,tempNum);
+        });
+        
+        function addLine(num,cartnum){
+            $('#carts tr:last').after('<tr><td>'+num+'</td><td>'+cartnum+'</td><td class = "clickable" id=' + num + '>Reset Floor ' + num + '</td></tr>');
+        }
+        $(document).ready(function(){
+            $("table").click(function() {
+              console.log("in click function");
+              var clickedClass = event.target.id;
+              console.log(event.target.id);
+              if(event.target.id != ''){
+                setCarts(clickedClass);
+              }
+            });
+        });
+        
+        //resList();
         //make the list of upcoming reservations
         
     </script>
