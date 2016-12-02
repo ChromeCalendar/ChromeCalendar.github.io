@@ -30,14 +30,16 @@
             var snap = snapshot.val();
         });
     
-        
+     
     function setCarts (floor)
     {
-       
+       if(confirm("Are you sure you want to perrmanently change the number of Chromecarts available on this floor?"))
+           {
         var num = prompt("How many carts are on the floor?","0");
         if(num != null){
             alert("num" + num);
             weekLoop2(floor,num,temporary);
+        }
         }
     }
         
