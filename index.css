@@ -2,17 +2,17 @@
 body{
     
     background-size: cover;
-    color: white;
+    color: black;
     font-family: 'Courgette', cursive;
 }
 #whiteText{
-    color:antiquewhite;
+    color:black;
 }
 .btn-primary {
     font-family: 'Courgette', cursive;
-    color: antiquewhite;
+    color: black;
     background-image: none;
-    background-color:#09092a;
+    background-color:rgba(68,168,244,1);
     /*border-color: black;*/
 }
 form{
