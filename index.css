@@ -4,17 +4,34 @@ body{
     background-size: cover;
     color: black;
     font-family: 'Courgette', cursive;
+    background-image: url("https://static.pexels.com/photos/56030/pyrite-pyrites-mineral-sulfide-56030.jpeg");
 }
 #whiteText{
     color:black;
 }
-
+a{
+    color: white;
+}
 .btn-primary {
     font-family: 'Courgette', cursive;
-    color: black;
+    color: white;
     background-image: none;
-    background-color:rgba(68,168,244,1);
-    /*border-color: black;*/
+    background-color:rgba(30,30,30,1);
+    border-color: black;
+    /*border-color: black;
+    background-color: rbga(100,100,100);*/
+}
+#error{
+    margin-top: 5px;
+    display: none;
+    border: 3px solid red;
+    border-radius: 3px;
+    background-color: rgba(255,0,0,.7);
+    color:white;
+}
+#forgot{
+    color: rgb(0,0,55,);
+    display: none;
 }
 form{
     color:black;

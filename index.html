@@ -35,9 +35,10 @@
               <div id="whiteText">password:</div>
               <input type="password" name="password" id="password">
             </div>
-          <button type = "button" class="btn btn-primary" onclick="myFunction()">Sign Up</button>
-          <button type = "button" class="btn btn-primary" ><a href="signIn.html">Sign In</a></button>
-
+          <button type = "button" class="btn btn-primary" onclick="myFunction(0)">Sign Up</button>
+          <button type = "button" class="btn btn-primary" onclick="myFunction(1)">Sign In</button>
+         <div id='error'>error spiders</div>
+         <div id="forgot">Forgot Password?</div>
           <a id = "submit" href="table.html"></a>
         </form>
 
@@ -69,13 +70,18 @@
         //alert("day " + day);
         //alert("month " + month);
         //alert("year " + year);
-        function myFunction(){
+        function myFunction(mode){
             var email = $('#email').val();
             var password = $('#password').val();
-            console.log("xox");
-            //alert(email);
-            console.log(password);
-            Create(email,password);
+            if(mode == 0){
+                console.log("xox");
+                //alert(email);
+                console.log(password);
+                Create(email,password);
+            }
+            else{
+                Login(email,password);
+            }
             //reDirect();
             //window.location.href="table.html";
             
@@ -88,6 +94,9 @@
             
             
         }
+        $( "#forgot" ).click(function() {
+          document.location.href = "reset.html";
+        });
         function Create(email,password){
             localStorage.setItem('ready', 1);
             //alert(localStorage.getItem('ready'));
@@ -96,12 +105,45 @@
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
               // Handle Errors here.
               var errorCode = error.code;
+              console.log(errorCode);
               var errorMessage = error.message;
+              console.log(errorMessage);    
+              $("#error").text(errorMessage);
+              $("#error").show();
                 //window.location.href="table.html";
               //alert(error.message);
               // ...
             });
             //setTimeout(reDirect, 3000)
+        }
+        function Login(email,password){
+            
+            alert("in create");
+            //localStorage.setItem('ready', 1);
+            //alert(localStorage.getItem('ready'));
+            changedCount = 1;
+            console.log("creating");
+            alert("email " + email + " password " + password);
+            /*const auth = firebase.auth();
+            const promise = auth.signInUserWithEmailAndPassword(email, password);
+            promise.catch(e => alert(e.message));
+            /*const auth = firebase.auth();*/
+            //firebase.authDomain = "https://chromecalendar.github.io";
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              /*alert(error.message);
+              alert(error.code);
+              alert(user.uid);*/
+              
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log("that thing just happened");
+              $("#error").text(errorMessage);
+              $("#error").show();    
+              $("#forgot").show();
+               
+              // ...
+            });
         }
         firebase.auth().onAuthStateChanged(function(user) {
           //alert("auth state changed");
