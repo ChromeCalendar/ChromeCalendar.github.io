@@ -38,7 +38,7 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>-->
             <li><a href="admin.html" >Upcoming Reservations</a></li>
-          <!--<li><a onclick ="make52()">Refresh the Firebase</a></li>-->
+            <li><a onclick ="make52()">Refresh the Firebase</a></li>
         <!-- 
           <li><a onclick = "getCurrent(1,-1)">Back</a></li>
           <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
@@ -123,8 +123,20 @@
 		</table>
 		<button id = "clear" type ="button" class="btn btn-primary" onclick="Clear()">Submit</button>
     </div>
+    <div id="hide-show">
+        What's up bro
+    </div>
+    <div id="mySidenav" class="sidenav">
+      <!--<a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>-->
+    </div>
+    
     <script>
+        $("#hide-show").hide();
         var personalRoom;
+        var personalName;
         var mineMode = false;
         var config = {
           apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
@@ -139,6 +151,7 @@
                firebase.database().ref('/users/'+data).on("value", function(snapshot) {
                   var username = snapshot.val();
                   personalRoom = username.room;
+                  personalName = username.name;
                   console.log("personal Room " + personalRoom);
                   getCurrent(0,0);
                   // ...
@@ -182,7 +195,18 @@
         var onFloor = 0;
         //alert("floor is (waiting) " + floor);
         var CA = [];
+        var bartloFeature = [];
         var Months = [];
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            console.log("santa tracker is the literal worst");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            //clearBartlo();
+            $( "#mySidenav" ).empty();
+        }
         
         function Month (name,days) {
             //this.type = type;
@@ -234,20 +258,41 @@
                 }
             }
         }
+        function Triple(cart,room,name){
+            this.cart = cart;
+            this.room = room;
+            this.name  = name;
+            
+        }
+    
         function Cell (num,specific) {
             this.num = num;
             this.specific = [];
+            this.notAvail = [];
             
         }
         
+        
         for(var rr = 0;rr < 5;rr++){
              CA[rr] = [];
+             bartloFeature[rr] = [];
              for(var r = 0;r < 4;r++){
+                 bartloFeature[rr][r] = new Cell();
                  CA[rr][r] = new Cell();
                  CA[rr][r].num = 0;
                     //console.log("here's your stupid number " + CA[rr][r]);
              }
          }
+        function clearBartlo(){
+            for(var rr = 0;rr < 5;rr++){
+                bartloFeature[rr] = [];
+                /*for(var r = 0;r < 4;r++){
+                   // CA[rr][r].num = 0;
+                    //mineArray[rr][r] = 0;
+                    //console.log("here's your stupid number " + CA[rr][r].num);
+                }*/
+            }
+        }
         function clearCA(){
             for(var rr = 0;rr < 5;rr++){
                 //CA[rr] = [];
@@ -968,8 +1013,21 @@
             var numAvail = 0;
                 var cartsRef = firebase.database().ref("/weeks/" + currentWeek + "/floors/" + floor + '/carts/' + cartVal + "/availability/"+ kVal + "/" + j);
                 cartsRef.on("value", function(snapshot) {
+                    var hasNode = "true";
+                    var nodeName = "spider";
                     var available = snapshot.val()
-                    
+                    hasNode = snapshot.hasChild("resNode");
+                    console.log("too messed up for errors " + hasNode);
+                    inception(hasNode);
+                    function inception(thing){
+                        console.log("gravity falls " + thing);
+                        if(thing != false){
+                            nodeRoom = snapshot.child("resNode/room").val();
+                            nodeName = snapshot.child("resNode/name").val();
+                            console.log("literally a miracle " + nodeName);
+                        }
+                    }
+                    console.log("already moved on");
                     //console.log("availability " + available + " cartVal " + cartVal + " day " + kVal + " period " + j);
                     if(available == "true"){
                         //console.log("yo12");
@@ -977,7 +1035,7 @@
                         freeCarts = true;
                     }
                     else if(available != "true"){
-                        if(available == personalRoom){
+                        if(nodeName == personalRoom){
                             mineArray[kVal][j] = 1;
                         }
                         freeCarts = false;
@@ -1002,6 +1060,7 @@
                     }
                     else if(freeCarts == false){
                         //taken[j][k] = "no";
+                        bartloFeature[k][j].notAvail.push(new Triple(x,nodeRoom,nodeName));
                         console.log("say no");
                     }
                    /* if(x === 5){
@@ -1207,11 +1266,107 @@
                 }
                 //clearMine();
                 clicked++;
-                $('#myTable tr:last').after('<tr><td style="border: 3px solid black; border-collapse: separate;">'+(i+1)+'</td><td style="border: 3px solid ' + color1 + ';border-collapse: separate;" class=' + one +'  id= '+(1+i*5).toString()+'></td><td style="border: 3px solid ' + color2 + ';border-collapse: separate;" class=' + two +' id= '+(2+i*5).toString()+'></td><td style="border: 3px solid ' + color3 + ';border-collapse: separate;" class=' + three +' id= '+(3+i*5).toString()+'></td><td style="border: 3px solid ' + color4 + ';border-collapse: separate;" class=' + four +' id= '+(4+i*5).toString()+'></td><td style="border: 3px solid ' + color5 + ';border-collapse: separate;" class=' + five +' id= '+(5+i*5).toString()+'></td></tr>'); 
+                $('#myTable tr:last').after('<tr><td style="border: 3px solid black">'+(i+1)+'</td><td style="border: 3px solid black" class=' + one +'  id= '+(1+i*5).toString()+'></td><td style="border: 3px solid black" class=' + two +' id= '+(2+i*5).toString()+'></td><td style="border: 3px solid black" class=' + three +' id= '+(3+i*5).toString()+'></td><td style="border: 3px solid black" class=' + four +' id= '+(4+i*5).toString()+'></td><td style="border: 3px solid black" class=' + five +' id= '+(5+i*5).toString()+'></td></tr>'); 
             }
             clearMine();
             //$('#myTable tr:last').remove();
         }
+        $(document).ready(function() {
+            $("table").mouseleave(function(event) {
+                    //alert(event.target.id);
+                    /*var ID = event.target.id;
+                    console.log("fire and sadness " + ID);*/
+                    $("#hide-show").hide();
+      
+                    closeNav();
+            });
+        });
+        $(document).ready(function() {
+            $("table").mouseover(function() {
+                
+                var ID = event.target.id;
+                var tempInt = parseInt(ID,10);
+                if((tempInt >=0) && (tempInt < 19)){
+                console.log("fire and sadness " + ID);
+                var Color = $('#'+ID).attr("class");
+                var tempLocation = selected.indexOf(ID);
+                console.log("color " + Color);
+                var tempTwo;
+                var tempOne;
+               
+                var tagOne;
+                var tagTwo;
+                //alert("wup");
+                if((tempInt >= 1) && (tempInt <= 5)){
+                    tagOne = '0';
+                    tagTwo = tempInt ;
+                    tempOne = 0;
+                }
+                else if((tempInt  >= 6) && (tempInt <= 10)){
+                    tagOne = '1';
+                    tagTwo = tempInt  - 5;
+                    tempOne = 1;
+                }
+                else if((tempInt  >= 11) && (tempInt  <= 15)){
+                    tagOne = '2';
+                    tagTwo = tempInt  - 10;
+                    tempOne = 2;
+                }
+                else if((tempInt >= 16) && (tempInt  <= 20)){
+                    tagOne = '3';
+                    tagTwo = tempInt - 15;
+                    tempOne = 3;
+                }
+                
+                if(tagTwo === 1){
+                    tagTwo = "0";
+                    tempTwo = 0;
+                }
+                else if(tagTwo === 2){
+                    tagTwo = "1";
+                    tempTwo = 1;
+                }
+                else if(tagTwo === 3){
+                    tagTwo = "2";
+                    tempTwo = 2;
+                }
+                else if(tagTwo === 4){
+                    tagTwo = "3";
+                    tempTwo = 3;
+                }
+                else if(tagTwo === 5){
+                    tagTwo = "4";
+                    tempTwo = 4;
+                }
+                console.log("cookie " + tagTwo);
+                console.log("dough " + tagOne);
+                if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)
+                {
+                   // $("#hide-show").show();
+                    openNav();
+                    for(var y = 0;y <bartloFeature[tagTwo][tagOne].notAvail.length;y++){
+                        $( "#mySidenav" ).append( "<div id='outerlist'><div style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
+                    }
+                    console.log("what a great new feature");
+                    for(var count = 0;count < bartloFeature[tagTwo][tagOne].notAvail.length;count++){
+                        console.log("skull " + bartloFeature[tagTwo][tagOne].notAvail[count].name);
+                    }
+                }
+                    else{
+                        $("#hide-show").hide();
+
+                        closeNav();
+                    }
+                }
+                else{
+
+                    closeNav();
+                     $("#hide-show").hide();
+                }
+                
+            });
+            
+        });
         $(document).ready(function() {
             $("table").click(function(event) {
                 //alert(event.target.id);
@@ -1219,6 +1374,61 @@
                 var Color = $('#'+ID).attr("class");
                 var tempLocation = selected.indexOf(ID);
                 console.log("color " + Color);
+                var tempTwo;
+                var tempOne;
+                var tempInt = parseInt(ID,10);
+                
+                //alert("wup");
+                if((tempInt >= 1) && (tempInt <= 5)){
+                    tagOne = '0';
+                    tagTwo = tempInt ;
+                    tempOne = 0;
+                }
+                else if((tempInt  >= 6) && (tempInt <= 10)){
+                    tagOne = '1';
+                    tagTwo = tempInt  - 5;
+                    tempOne = 1;
+                }
+                else if((tempInt  >= 11) && (tempInt  <= 15)){
+                    tagOne = '2';
+                    tagTwo = tempInt  - 10;
+                    tempOne = 2;
+                }
+                else if((tempInt >= 16) && (tempInt  <= 20)){
+                    tagOne = '3';
+                    tagTwo = tempInt - 15;
+                    tempOne = 3;
+                }
+                
+                if(tagTwo === 1){
+                    tagTwo = "0";
+                    tempTwo = 0;
+                }
+                else if(tagTwo === 2){
+                    tagTwo = "1";
+                    tempTwo = 1;
+                }
+                else if(tagTwo === 3){
+                    tagTwo = "2";
+                    tempTwo = 2;
+                }
+                else if(tagTwo === 4){
+                    tagTwo = "3";
+                    tempTwo = 3;
+                }
+                else if(tagTwo === 5){
+                    tagTwo = "4";
+                    tempTwo = 4;
+                }
+                console.log("fire tagtwo " + tagTwo);
+                console.log("theater tagone " + tagOne);
+                if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)
+                {
+                    console.log("don't shout fire in a crowded theater");
+                    for(var count = 0;count < bartloFeature[tagTwo][tagOne].notAvail.length;count++){
+                        console.log("skull " + bartloFeature[tagTwo][tagOne].notAvail[count].name);
+                    }
+                }
                 if((Color === 'yes') || (Color == 'mine')){
                     console.log("HEY SPIDER " + selected.indexOf(ID));
                     if(selected.indexOf(ID) == -1){
@@ -1314,6 +1524,7 @@
                 //alert("tagTwo " + tagTwo);
                 //alert("tempOne " + tempOne + " tempTwo " + tempTwo);
                 //alert("tagThree " + CA[tempTwo][tempOne].specific[0]);
+                
                 tagThree = CA[tempTwo][tempOne].specific[0];
                 read(tempTwo,tempOne);
                 newUpdate(tagOne, tagTwo, tagThree);
@@ -1364,9 +1575,9 @@
                 tagThree = "cart5";
             }*/
             //alert("cart "+ tagThree);
-            var updates = {};
+           // var updates = {};
             //alert("floor now " + floor);
-            firebase.database().ref('/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne + "resNode").set({
+            firebase.database().ref('/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne + '/resNode').set({
                  room: personalRoom,
                  name: personalName
             });

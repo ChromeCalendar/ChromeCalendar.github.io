@@ -10,7 +10,13 @@ body{
     border-collapse: collapse;
     /* margin: 60px;*/
 }
-
+#hide-show{
+    display: none;
+    background-color: darkred;
+    color: white;
+    border: 3px solid black;
+    border-radius: 5px;
+}
 table, th, td {
     border: 1px solid black;
 }
@@ -82,9 +88,77 @@ thead{
     background-color: black;
     
 }
+#outerlist{
+    background-color: rgba(255,255,255,.7);
+    text-align: center;
+    border-color: white;
+    border-radius: 6px;
+}
+.span{
+    
+}
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    text-align: right;
+}
+.left{
+    position: absolute;
+    left: 0px;
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+}
 .navbar-default .navbar-nav>li>a {
     color: white;
 }
 .nonbutton{
 	color: white;
+}
+
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+#listing{
+    color:white;
+}
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
