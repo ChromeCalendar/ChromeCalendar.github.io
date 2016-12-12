@@ -203,9 +203,10 @@
         }
 
         function closeNav() {
+            $( "#mySidenav" ).empty();
             document.getElementById("mySidenav").style.width = "0";
             //clearBartlo();
-            $( "#mySidenav" ).empty();
+            
         }
         
         function Month (name,days) {
@@ -286,11 +287,15 @@
         function clearBartlo(){
             for(var rr = 0;rr < 5;rr++){
                 bartloFeature[rr] = [];
-                /*for(var r = 0;r < 4;r++){
-                   // CA[rr][r].num = 0;
-                    //mineArray[rr][r] = 0;
-                    //console.log("here's your stupid number " + CA[rr][r].num);
-                }*/
+                for(var r = 0;r < 4;r++){
+                    bartloFeature[rr][r] = new Cell();
+                    console.log("We are trying to clear mango");
+                    /*for(var r = 0;r < 4;r++){
+                       // CA[rr][r].num = 0;
+                        //mineArray[rr][r] = 0;
+                        //console.log("here's your stupid number " + CA[rr][r].num);
+                    }*/
+                }
             }
         }
         function clearCA(){
@@ -330,9 +335,12 @@
           floor = $("#sel1").val();
           //alert("floor now " + floor );
           //getNum();
+          console.log("pineapple");
           already = 0;
           arrayClearCA();
-          ClearTable(4)  
+          ClearTable(4)
+          closeNav();
+          clearBartlo();
           //beginAll();
         });
         function DropDown(newFloor){
@@ -343,6 +351,8 @@
           //getNum();
           already = 0;
           //clearMine();
+          closeNav();
+          clearBartlo();
           arrayClearCA();
           ClearTable(4)  
         }
@@ -1277,7 +1287,7 @@
                     /*var ID = event.target.id;
                     console.log("fire and sadness " + ID);*/
                     $("#hide-show").hide();
-      
+                    //$( "#mySidenav" ).empty();
                     closeNav();
             });
         });
@@ -1343,9 +1353,10 @@
                 if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)
                 {
                    // $("#hide-show").show();
+                    $( "#mySidenav" ).empty();
                     openNav();
                     for(var y = 0;y <bartloFeature[tagTwo][tagOne].notAvail.length;y++){
-                        $( "#mySidenav" ).append( "<div id='outerlist'><div style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
+                        $( "#mySidenav" ).append( "<div id='outerlist'><div id='innerlist'  style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div id='innerlist' style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
                     }
                     console.log("what a great new feature");
                     for(var count = 0;count < bartloFeature[tagTwo][tagOne].notAvail.length;count++){

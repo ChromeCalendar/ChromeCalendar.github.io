@@ -92,7 +92,17 @@ thead{
     background-color: rgba(255,255,255,.7);
     text-align: center;
     border-color: white;
+   /* border-radius: 6px;*/
+    border: 1.5px solid white;
+}
+#innerlist{
+    color: white;
+    text-align: center;
+    border-color: white;
     border-radius: 6px;
+   
+    /*border: 3px solid black;
+    border-left: none;*/
 }
 .span{
     
