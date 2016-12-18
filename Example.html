@@ -30,6 +30,7 @@
           </label>
         </div>
         <button onlclick = "signIn()" class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
+        <div id='error'>error spiders</div>
       </form>
     </div>  
   </body>
@@ -43,6 +44,10 @@
             storageBucket: "example-3d2c3.appspot.com",
             messagingSenderId: "806484495170"
       };
+      var starCountRef = firebase.database().ref('users');
+        starCountRef.on('value', function(snapshot) {
+        
+      });
       firebase.initializeApp(config);
       function signIn(){
           var email = $("#inputEmail").val();
