@@ -179,9 +179,14 @@
                 var info=snapshot.val();
                 if(info!="true")
                 {
+                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1)+'/resnode/room');
+                    resWatcher.on('value', function(snapshot) {
+                    var info2=snapshot.val();
                     //alert (info);
                     $('#Reservations tr:last').after('<tr><td>'+info+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                     return info;
+                })
+                                  
                 }
                 if(info=="true")
                 {
