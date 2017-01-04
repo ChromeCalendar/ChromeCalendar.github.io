@@ -161,14 +161,22 @@
                 var info=snapshot.val(); // get room num
                 if(info!="true")//if there is a reservation
                 {
-                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+p+'/resNode/room');
+                    var info2 = snapshot.child("resNode/room").val();
+                    //console.log("week " + week + " floors " + f + " carts " + c + " availability  " + n.toString() + " period " + p);
+                    console.log("info2.val " + info2);
+                    var to = info2;//where it is going 
+                    console.log("to " + to);
+                    var from=lastRes(f,temp,p,week,n,to); // call the weird function
+                        //alert(lastRes(f,temp,p,week,n));
+                    /*var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+n.toString()+'/'+p.toString() +'/resNode');
                     resWatcher.on('value', function(snapshot) {
-                        var info2=snapshot.val();
-                        var to = info2;//where it going 
+                        var info2 = snapshot.val();
+                        var to = info2.room;//where it is going 
                         console.log("to " + to);
                         var from=lastRes(f,temp,p,week,n,to); // call the weird function
                         //alert(lastRes(f,temp,p,week,n));
-                })
+                })*/
+                    
                 }
             });
         }
@@ -182,11 +190,11 @@
                 var info=snapshot.val();
                 if(info!="true")
                 {
-                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1)+'/resNode/room');
+                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1));
                     resWatcher.on('value', function(snapshot) {
-                    var info2=snapshot.val();
+                    var info2 = snapshot.child("resNode/room").val()
                     //alert (info);
-                    $('#Reservations tr:last').after('<tr><td>'+info+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
+                    $('#Reservations tr:last').after('<tr><td>'+info2+'</td><td>'+to+'</td><td>'+f+'</td><td>'+c+'</td><td>'+(p+1)+'</tr>');
                     return info;
                 })
                                   
