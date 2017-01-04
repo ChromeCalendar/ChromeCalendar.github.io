@@ -161,11 +161,14 @@
                 var info=snapshot.val(); // get room num
                 if(info!="true")//if there is a reservation
                 {
-                    var to = info;//where it going 
-                    console.log("to " + to);
-                    var from=lastRes(f,temp,p,week,n,to); // call the weird function
-                    //alert(lastRes(f,temp,p,week,n));
-                    
+                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+p+'/resNode/room');
+                    resWatcher.on('value', function(snapshot) {
+                        var info2=snapshot.val();
+                        var to = info2;//where it going 
+                        console.log("to " + to);
+                        var from=lastRes(f,temp,p,week,n,to); // call the weird function
+                        //alert(lastRes(f,temp,p,week,n));
+                })
                 }
             });
         }
@@ -179,7 +182,7 @@
                 var info=snapshot.val();
                 if(info!="true")
                 {
-                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1)+'/resnode/room');
+                    var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+c+'/availability/'+'/'+n.toString()+'/'+(p-1)+'/resNode/room');
                     resWatcher.on('value', function(snapshot) {
                     var info2=snapshot.val();
                     //alert (info);
