@@ -286,11 +286,12 @@
              }
          }
         function clearBartlo(){
+            console.log("We are trying to clear mango");
             for(var rr = 0;rr < 5;rr++){
                 bartloFeature[rr] = [];
                 for(var r = 0;r < 4;r++){
                     bartloFeature[rr][r] = new Cell();
-                    console.log("We are trying to clear mango");
+                    
                     /*for(var r = 0;r < 4;r++){
                        // CA[rr][r].num = 0;
                         //mineArray[rr][r] = 0;
@@ -344,7 +345,7 @@
           clearBartlo();
           //beginAll();
         });
-        function DropDown(newFloor){
+        function DropDown(newFloor){//we switch floors
           //floor = $("#sel1").val();
           floor = newFloor;
           //alert("floor now " + floor );
@@ -358,14 +359,15 @@
           ClearTable(4)  
         }
        // availability goes [day][period]
-        function mineView(){
+        function mineView(){//we want to see our carts
             
                 mineMode = !mineMode;
                 already = 0;
                 //clearMine();
                 arrayClearCA();
-                ClearTable(4);
                 clearBartlo();
+                ClearTable(4);
+                
                 getNum();
             
         }
@@ -442,7 +444,7 @@
                 if(clicked == 0){
                     decorate();
                 }
-                else if(clicked == 1){
+                else if(clicked == 1){//switching week
                     clearBartlo();
                     if(time == 1){
                         if(currentWeek < 49){
@@ -790,14 +792,14 @@
             //floor = $("#sel1").val();
             //alert("in get num " + floor);
             var floorCarts;
-            console.log("current week potato " + currentWeek);
-            var floorRef = firebase.database().ref("/weeks/"+currentWeek+"/floors/" + floor+"/carts");
+            console.log("current week potato " + currentWeek);//what week is it
+            var floorRef = firebase.database().ref("/weeks/"+currentWeek+"/floors/" + floor+"/carts");//
             floorRef.on("value", function(snapshot) {
                floorCarts = snapshot.numChildren();
                 //alert(floorCarts);
-                onFloor = floorCarts;
+                onFloor = floorCarts;//how many carts are on this floor
                 
-                if(onFloor != 0){
+                if(onFloor != 0){//if there are some carts
                    // alert("onFloor " + onFloor);
                     //callLock = 0;
                     beginAll();
@@ -814,7 +816,7 @@
                   //alert("Been set " + reset.beenSet);
                    if(reset.beenSet === "false"){
                        var updates = {};
-                       updates['/beenSet'] = "true";
+                       updates['/beenSet'] = "true";//if we haven't done this already
                        firebase.database().ref().update(updates);
                        //refill();
                        FEF();
@@ -989,6 +991,7 @@
             }
         }
         function checkAvailable(j,k,x){
+            console.log("Calling Check Available");
             //alert("checking availability");
             //alert("checkAvailable of " + x);
             //j is period, k is day
@@ -1054,7 +1057,7 @@
                     else{
                        console.log("bicycle " + nodeName + " " + personalName);
                        if(nodeName == personalName){
-                            console.log("airplaine");
+                            console.log("airplane");
                             mineArray[kVal][j] = 1;
                         }
                         freeCarts = false;
@@ -1077,11 +1080,12 @@
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
-                    else if(freeCarts == false){//if someone has reserved the carts
+                    else if(freeCarts == false){//if someone has reserved the cart in question
                         //taken[j][k] = "no";
                         //save the cart, the nodeRoom, and the nodeName
                         bartloFeature[k][j].notAvail.push(new Triple(x,nodeRoom,nodeName));
-                        console.log("adding a triplet");
+                        console.log("adding a triplet "+bartloFeature[k][j].notAvail.length);
+                        //bartloFeature[k][j].notAvail.length;
                     }
                    /* if(x === 5){
                         alert("done for this round");
@@ -1315,10 +1319,8 @@
                 console.log("color " + Color);
                 var tempTwo;
                 var tempOne;
-               
                 var tagOne;
                 var tagTwo;
-                //alert("wup");
                 if((tempInt >= 1) && (tempInt <= 5)){
                     tagOne = '0';
                     tagTwo = tempInt ;
@@ -1363,6 +1365,7 @@
                 console.log("cookie " + tagTwo);
                 console.log("dough " + tagOne);
                 //which cell is it
+                console.log("note " +  bartloFeature[tagTwo][tagOne].notAvail.length);//how many reserved on this cell
                 if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)//if there are some reserved for that cell
                 {
                    // $("#hide-show").show();
