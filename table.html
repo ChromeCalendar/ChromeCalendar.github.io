@@ -153,6 +153,7 @@
                   personalRoom = username.room;
                   personalName = username.name;
                   console.log("personal Room " + personalRoom);
+                  console.log("personal Name " + personalName);
                   getCurrent(0,0);
                   // ...
                 });
@@ -364,6 +365,7 @@
                 //clearMine();
                 arrayClearCA();
                 ClearTable(4);
+                clearBartlo();
                 getNum();
             
         }
@@ -1024,7 +1026,7 @@
             var numAvail = 0;
                 var cartsRef = firebase.database().ref("/weeks/" + currentWeek + "/floors/" + floor + '/carts/' + cartVal + "/availability/"+ kVal + "/" + j);
                 cartsRef.on("value", function(snapshot) {
-                    var hasNode = "true";
+                    var hasNode = "true";//is there a reservation
                     var nodeName = "spider";
                     var available = snapshot.val()
                     hasNode = snapshot.hasChild("resNode");
@@ -1036,17 +1038,23 @@
                             nodeRoom = snapshot.child("resNode/room").val();
                             nodeName = snapshot.child("resNode/name").val();
                             console.log("literally a miracle " + nodeName);
+                            
                         }
+                        finish(nodeName,personalName,available,j,k,x);
                     }
+                    function finish (nodeName,personalName,available,j,k,x){
                     console.log("already moved on");
                     //console.log("availability " + available + " cartVal " + cartVal + " day " + kVal + " period " + j);
+                    
                     if(available == "true"){
                         //console.log("yo12");
-                        if(cartVal == "cart2");
+                        //if(cartVal == "cart2");
                         freeCarts = true;
                     }
-                    else if(available != "true"){
-                        if(nodeName == personalRoom){
+                    else{
+                       console.log("bicycle " + nodeName + " " + personalName);
+                       if(nodeName == personalName){
+                            console.log("airplaine");
                             mineArray[kVal][j] = 1;
                         }
                         freeCarts = false;
@@ -1069,17 +1077,19 @@
                         //taken[j][k] += 1;
                         //alert("say yes");
                     }
-                    else if(freeCarts == false){
+                    else if(freeCarts == false){//if someone has reserved the carts
                         //taken[j][k] = "no";
+                        //save the cart, the nodeRoom, and the nodeName
                         bartloFeature[k][j].notAvail.push(new Triple(x,nodeRoom,nodeName));
-                        console.log("say no");
+                        console.log("adding a triplet");
                     }
                    /* if(x === 5){
                         alert("done for this round");
                         CA[x][j].specific = specificCarts;
                     }*/
-                    //console.log("j" + j);
-                    //console.log("k" + k);
+                    console.log("j " + j);
+                    console.log("k " + k);
+                    console.log("x " + x);
                     //console.log("count" + count);
                     //console.log("numcarts" + numCarts);
                     if((j === 3) && (k === 4) && (x === (onFloor - 1))){
@@ -1092,6 +1102,7 @@
                            }
                            //myFunction();
                      }
+                }
                     /*var numCarts = snapshot.numChildren();
                     var count = 0;
                   // The callback function will get called twice, once for "fred" and once for "barney"
@@ -1293,7 +1304,7 @@
             });
         });
         $(document).ready(function() {
-            $("table").mouseover(function() {
+            $("table").mouseover(function() {//if the mouse is over the table
                 
                 var ID = event.target.id;
                 var tempInt = parseInt(ID,10);
@@ -1351,18 +1362,22 @@
                 }
                 console.log("cookie " + tagTwo);
                 console.log("dough " + tagOne);
-                if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)
+                //which cell is it
+                if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)//if there are some reserved for that cell
                 {
                    // $("#hide-show").show();
                     $( "#mySidenav" ).empty();
                     openNav();
-                    for(var y = 0;y <bartloFeature[tagTwo][tagOne].notAvail.length;y++){
-                        $( "#mySidenav" ).append( "<div id='outerlist'><div id='innerlist'  style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div id='innerlist' style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
+                    console.log("note " +  bartloFeature[tagTwo][tagOne].notAvail.length);
+                    for(var y = 0;y < bartloFeature[tagTwo][tagOne].notAvail.length;y++){
+                        console.log("listen "  +bartloFeature[tagTwo][tagOne].notAvail[y].name);
+                        $( "#mySidenav" ).append( "<div id='outerlist' style='margin-top:30px;'><div id='innerlist'  style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div id='innerlist' style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
+                        
                     }
-                    console.log("what a great new feature");
+                    /*console.log("what a great new feature");
                     for(var count = 0;count < bartloFeature[tagTwo][tagOne].notAvail.length;count++){
                         console.log("skull " + bartloFeature[tagTwo][tagOne].notAvail[count].name);
-                    }
+                    }*/
                 }
                     else{
                         $("#hide-show").hide();
@@ -1589,6 +1604,7 @@
             //alert("cart "+ tagThree);
            // var updates = {};
             //alert("floor now " + floor);
+            console.log(" XOXO weeks " + currentWeek + " floors " + floor + " carts " + tagThree + " availability " + tagTwo + " tagone " + tagOne + " Personal name " + personalName + " personal room " + personalRoom);
             firebase.database().ref('/weeks/' + currentWeek + '/floors/'+ floor + '/carts/' + tagThree+'/availability/' + tagTwo + '/' + tagOne + '/resNode').set({
                  room: personalRoom,
                  name: personalName
