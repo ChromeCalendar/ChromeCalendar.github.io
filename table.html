@@ -338,11 +338,12 @@
           //alert("floor now " + floor );
           //getNum();
           console.log("pineapple");
+          clearBartlo();
           already = 0;
           arrayClearCA();
           ClearTable(4)
           closeNav();
-          clearBartlo();
+          
           //beginAll();
         });
         function DropDown(newFloor){//we switch floors
@@ -524,31 +525,32 @@
         function upday(newDay, relDay){
             //newDay is of the month
             //relDay is of the week
+            console.log("I'm david pumpkins yo");
             var upWeek = 0;
             var upMonth = 0;
-            if(relDay == 0){
+            if(relDay == 0){//its the first day of the week
                 console.log("david pumpkins");
-                if(currentWeek < 51){
-                    upWeek = (currentWeek + 1);
+                if(currentWeek < 51){//if we aren't at the end of the year
+                    upWeek = (currentWeek + 1);//advance a week
                     console.log("david pumpkins 2");
                 }
-                else{
+                else{//otherwise, reset week to 0
                     upWeek = (0);
                 }
             }
-            else{
+            else{//if it isn't the first day of the week, new week = current week
                 upWeek = currentWeek;
             }
-            if(newDay == 1){
+            if(newDay == 1){//if it is the first of the month
                 console.log("situation");
-                if(currentMonth < 11){
+                if(currentMonth < 11){//if there are more months left
                     console.log("current before " + currentMonth);
-                    currentMonth = currentMonth + 1;
+                    currentMonth = currentMonth + 1;//bump the month up by one
                     upMonth = (currentMonth);
                     console.log("current after " + currentMonth);
                 }
-                else{
-                    upMonth = (0);
+                else{//otherwise
+                    upMonth = (0);//month = 0
                     currentMonth = 0;
                     if(currentYear < 4){
                         currentYear++;
@@ -557,11 +559,11 @@
                         currentYear = 0;
                         
                     }
-                    make52();
+                    make52(); //reset the firebase
                 }
             }
             else{
-                upMonth = currentMonth;
+                upMonth = currentMonth;//if it is not the first of the month, leave things be. 
             }
             console.log("New day " + newDay);
             console.log("upMonth " + upMonth);
@@ -1384,7 +1386,6 @@
                 }
                     else{
                         $("#hide-show").hide();
-
                         closeNav();
                     }
                 }
@@ -1496,6 +1497,7 @@
         function Clear(){//called when the submit button is clicked
             //alert("submit function called");
             console.log("Submitting");
+            
             for(var q = 0;q < selected.length;q++){
                // console.log("rawr" + selected.length);
                 var tagOne;
@@ -1574,9 +1576,11 @@
             }
             selected.length = 0;
             //console.log("here's where it went south");
+            clearBartlo();
             already = 0;
             arrayClearCA();
             ClearTable(4);
+            
             //clearMine();
             //startFunc();
         }
@@ -1623,6 +1627,7 @@
             }
         }
         function ClearTable(until){
+            clearBartlo();
             console.log("deleting rows");
             //alert("deleting the rows of tables");
             for(var t = 0; t < until;t++){
