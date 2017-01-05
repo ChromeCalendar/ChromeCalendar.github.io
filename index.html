@@ -63,6 +63,7 @@
                 $("#submit").trigger('click');
             }
         });*/
+        var globalMode = 0;
         var today = new Date();
         var day = today.getDate() + 1;
         var month = today.getMonth();
@@ -71,6 +72,7 @@
         //alert("month " + month);
         //alert("year " + year);
         function myFunction(mode){
+            globalMode = mode;
             var email = $('#email').val();
             var password = $('#password').val();
             if(mode == 0){
@@ -118,7 +120,7 @@
         }
         function Login(email,password){
             
-            alert("in create");
+            alert("in login");
             //localStorage.setItem('ready', 1);
             //alert(localStorage.getItem('ready'));
             changedCount = 1;
@@ -165,7 +167,12 @@
               //function writeUserData(user.uid, name, email, imageUrl) {
                 
             alert("user exist");
-            setInfo(email,user.uid,reDirect);
+            if(globalMode == 0){
+                setInfo(email,user.uid,reDirect);
+            }
+            else{
+                window.reDirect("table.html");
+            }
               //}
              
             // User is signed in.
