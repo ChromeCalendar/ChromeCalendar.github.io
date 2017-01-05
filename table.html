@@ -1057,10 +1057,13 @@
                         freeCarts = true;
                     }
                     else{
+                        if(mineMode == true){
                        console.log("bicycle " + nodeName + " " + personalName);
+                        }
                        if(nodeName == personalName){
                             console.log("airplane");
                             mineArray[kVal][j] = 1;
+                           //alert(" kVal " + kVal + " j " + j);
                         }
                         freeCarts = false;
                     }
@@ -1200,34 +1203,40 @@
             var clicked = 0;
             //console.log("yoyoy");
             for(var i = 0;i < 4;i++){
+                
                 console.log("mineMode " + mineMode);
-                if((mineArray[0][i] != 1) || (mineArray[4][i] != 1)){//not minemode or my room
-                    var one = taken[0][i];
-                }
-                else{//minemode or mine
-                    if(taken[0][i] == "no"){ 
-                    var one = "mineTaken";
+                
+                if((mineArray[0][i] == 1) && (mineMode == true)){
+                    if(taken[0][i] == "no"){ //if taken,
+                        var one = "mineTaken";
                     }
-                    else{
-                    var one = "mine";
+                    else{//not taken
+                        var one = "mine";
                     }
                     //var color1 = "black";
                 }
-                if((taken[0][i] == "no") && (mineArray[4][i] != 1)){
+                else{// mine
+                    console.log("it is not mine");
+                    //if it isn't mine
+                    var one = taken[0][i]; //yes or no
+                }
+                /*if((taken[0][i] == "no") && (mineArray[4][i] != 1)){
                     var color1 = "white";
                 }
                 else{
                     var color1 = "black";
-                }
+                }*/
+                
+                
                 if((mineArray[1][i] != 1) || (mineMode === false)){
-                    var two = taken[1][i];wo = "mine";
+                    var two = taken[1][i];//wo = "mine";
                 }
                 else{
                     if(taken[1][i] == "no"){
-                    var two = "mineTaken";
+                        var two = "mineTaken";
                     }
                     else{
-                    var two = "mine";
+                        var two = "mine";
                     }
                 }
                 if((taken[1][i] == "no") && (mineArray[4][i] != 1)){
@@ -1236,6 +1245,8 @@
                 else{
                     var color2 = "black";
                 }
+                
+                
                 if((mineArray[2][i] != 1) || (mineMode === false)){    
                     var three = taken[2][i];
                     //var three = "mine";
@@ -1268,6 +1279,8 @@
                     var four = "mine";
                     }
                 }
+                
+                
                 if((taken[3][i] == "no") && (mineArray[4][i] != 1)){
                     var color4 = "white";
                 }
