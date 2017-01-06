@@ -111,14 +111,14 @@
         
     function resList()
     {
-        for(p=0; p<4; p++)
+        for(p=0; p<4; p++)//look at each of the 5 days
         { 
             floorLoop(p);
         }
     }
     function floorLoop(p)
     {
-        for(f=1; f<4; f++)
+        for(f=1; f<4; f++)//look at each of the 3 floors
                 {
                     cartCount(f,p);
                 }   
@@ -157,6 +157,7 @@
             var temp="cart"+c.toString();
             
             var resWatcher = firebase.database().ref('weeks/'+week+'/floors/'+f+'/carts/'+temp+'/availability/'+n.toString()+'/'+p.toString());//looking at specific period for a specific cart
+            console.log("weeks " + week + " carts " + temp + " day " + n.toString() + " period " + p.toString());
             resWatcher.on('value', function(snapshot) {
                 var info=snapshot.val(); // get room num
                 if(info!="true")//if there is a reservation

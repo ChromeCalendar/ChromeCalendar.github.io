@@ -66,14 +66,22 @@
       </div>
     </nav>
     <div class="container" ><!-- Move everything *useful* into here from Nav bar--><!-- rude! everything is useful >:( -->
-        <select id = "thing" class = "btn btn-default dropdown-toggle">
+        <!--<select id = "thing" class = "btn btn-default dropdown-toggle">
             <option onchange="DropDown(1)" value="Floor 1">Floor 1</option>
             <option onchange="DropDown(2)" value="Floor 2">Floor 2</option>
             <option onchange="DropDown(3)" value="Floor 3">Floor 3</option>
             
-        </select>
-        <button type = "button" class= "btn btn-primary" onclick = "getCurrent(1,-1)">Back</button>
-        <button type = "button" class= "btn btn-primary" onclick = "getCurrent(1,1)">Forward</button>
+        </select>-->
+        <table class="table table-bordered">
+            <thead >
+                <tr id="mySidenav">
+                    <th>Reserved by</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr></tr>
+            </tbody>
+        </table>
 
     </div>
         
@@ -97,11 +105,17 @@
           </select>
     </div>-->
     <div class="container">
+        
 		<table align="center">
+            
+     <!--<button type = "button" class= "btn btn-primary" onclick = "getCurrent(1,-1)">Back</button>
+        <button type = "button" class= "btn btn-primary" onclick = "getCurrent(1,1)">Forward</button>-->
+
 			<tr>
-				<td style="background-color:white"><b id = "MonthSlot" href="#">Month</b></td>
+				<td id="time" onclick = "getCurrent(1,-1)">Back</td><td style="background-color:white"><b id = "MonthSlot" href="#">Month</b></td><td id="time" onclick = "getCurrent(1,1)">Next</td>
 			</tr>
 		</table>
+        
 		</thead>
 			<tbody>
 			
@@ -126,12 +140,12 @@
     <div id="hide-show">
         What's up bro
     </div>
-    <div id="mySidenav" class="sidenav">
+    <!--<div id="mySidenav" class="sidenav">
       <!--<a href="#">About</a>
       <a href="#">Services</a>
       <a href="#">Clients</a>
-      <a href="#">Contact</a>-->
-    </div>
+      <a href="#">Contact</a>
+    </div>-->
     
     <script>
         $("#hide-show").hide();
@@ -152,6 +166,15 @@
                   var username = snapshot.val();
                   personalRoom = username.room;
                   personalName = username.name;
+                  if(personalRoom < 100){
+                      floor = 1;
+                  }
+                  else if((personalRoom >= 100) && (personalRoom < 200)){
+                      floor = 2;
+                  }
+                  else{
+                      floor = 3;
+                  }
                   console.log("personal Room " + personalRoom);
                   console.log("personal Name " + personalName);
                   getCurrent(0,0);
@@ -163,12 +186,13 @@
         var firstGet = false;
         var already = 0;
         var callLock = 0;
-        var tableRef = firebase.database().ref("/weeks/" + 0 + "/floors/" + 1);
+        var tableRef = firebase.database().ref("/weeks/" + 0 + "/floors/" + floor);
         //var currentDay = 0;
         var currentMonth = 0;
         var currentDay = 1;
         var currentWeek = 0;
         var currentYear;
+        var globalUntil = 0;
         
         firebase.database().ref('/Date').on("value", function(snapshot) {
               var yearType = snapshot.val();
@@ -199,14 +223,20 @@
         var bartloFeature = [];
         var Months = [];
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            console.log("santa tracker is the literal worst");
+            /*document.getElementById("mySidenav").style.width = "250px";
+            console.log("santa tracker is the literal worst");*/
         }
 
         function closeNav() {
-            $( "#mySidenav" ).empty();
-            document.getElementById("mySidenav").style.width = "0";
+            //$( "#mySidenav" ).empty();
+           /* document.getElementById("mySidenav").style.width = "0";*/
             //clearBartlo();
+            for(var t = 0; t < (globalUntil);t++){
+                //console.log("trying to clear here");
+                $('#mySidenav th:last').remove();
+                
+            }
+            globalUntil = 0;
             
         }
         
@@ -1384,12 +1414,14 @@
                 if(bartloFeature[tagTwo][tagOne].notAvail.length != 0)//if there are some reserved for that cell
                 {
                    // $("#hide-show").show();
-                    $( "#mySidenav" ).empty();
-                    openNav();
+                    //$( "#mySidenav" ).empty();
+                    closeNav();
                     console.log("note " +  bartloFeature[tagTwo][tagOne].notAvail.length);
+                    globalUntil = bartloFeature[tagTwo][tagOne].notAvail.length;
                     for(var y = 0;y < bartloFeature[tagTwo][tagOne].notAvail.length;y++){
                         console.log("listen "  +bartloFeature[tagTwo][tagOne].notAvail[y].name);
-                        $( "#mySidenav" ).append( "<div id='outerlist' style='margin-top:30px;'><div id='innerlist'  style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div id='innerlist' style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");
+                        /*$( "#mySidenav" ).append( "<div id='outerlist' style='margin-top:30px;'><div id='innerlist'  style='float:left;' id='listing' class='span'>"+bartloFeature[tagTwo][tagOne].notAvail[y].name+" </div><div id='innerlist' style='float:left;margin-left:25px;' id='listing' class='span'> room " + bartloFeature[tagTwo][tagOne].notAvail[y].room +"</div></div> <div style='clear:left'></div>");*/
+                        $('#mySidenav th:last').after('<th>'+bartloFeature[tagTwo][tagOne].notAvail[y].name+'</th>'); 
                         
                     }
                     /*console.log("what a great new feature");
