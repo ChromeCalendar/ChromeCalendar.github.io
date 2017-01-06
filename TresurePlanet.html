@@ -1,0 +1,236 @@
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<meta name="google-signin-client_id" content="583488732443-0qrkltufodphbtveim4vv0nhsf5qijog.apps.googleusercontent.com">
+<link rel="stylesheet" type="text/css" href="index.css">
+<html>
+    <head>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
+        <link rel="shortcut icon" type="image/x-icon" href="https://software.intel.com/sites/default/files/2D_Diecon_Working_Together_rgb_200_transparent_bkgrd.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Alegreya|Courgette|Lobster+Two" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+    </head>
+    <body>
+        <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+        
+        <form>
+            <div class = "form-group">
+              <div id="whiteText">email:</div>
+              <input type="text" name="email" id="email">
+              <div id="whiteText">password:</div>
+              <input type="password" name="password" id="password">
+            </div>
+          <button type = "button" class="btn btn-primary" onclick="myFunction(0)">Sign Up</button>
+          <button type = "button" class="btn btn-primary" onclick="myFunction(1)">Sign In</button>
+         <div id='error'>error spiders</div>
+         <div id="forgot">Forgot Password?</div>
+          <a id = "submit" href="table.html"></a>
+        </form>
+
+    </body>
+    <script>
+        //localStorage.setItem('ready', 0);
+      // Initialize Firebase
+       var changedCount = 0;
+       jQuery.ajaxSetup({async:false});
+        
+       var config = {
+        apiKey: "AIzaSyB7quSFbdzOHH_S4B1TOntym_xTj4Yx6To",
+        authDomain: "chrome-calendar.firebaseapp.com",
+        databaseURL: "https://chrome-calendar.firebaseio.com",
+        storageBucket: "chrome-calendar.appspot.com",
+        messagingSenderId: "583488732443"
+      };
+      firebase.initializeApp(config);
+        /*$(document).keypress(function(event){
+            if(event.keyCode == 13){
+                //alert("enter pressed");
+                $("#submit").trigger('click');
+            }
+        });*/
+        var globalMode = 0;
+        var today = new Date();
+        var day = today.getDate() + 1;
+        var month = today.getMonth();
+        var year = today.getFullYear();
+        //alert("day " + day);
+        //alert("month " + month);
+        //alert("year " + year);
+        function myFunction(mode){
+            globalMode = mode;
+            var email = $('#email').val();
+            var password = $('#password').val();
+            if(mode == 0){
+                console.log("xox");
+                //alert(email);
+                console.log(password);
+                Create(email,password);
+            }
+            else{
+                Login(email,password);
+            }
+            //reDirect();
+            //window.location.href="table.html";
+            
+            /*var newKey = firebase.database().ref().child('users').push().key;
+            console.log(newKey);
+            localStorage.setItem('UID', newKey);
+            var updates = {};
+            updates['/users/' + newKey] = postData;
+            firebase.database().ref().update(updates);*/
+            
+            
+        }
+        $( "#forgot" ).click(function() {
+          document.location.href = "reset.html";
+        });
+        function Create(email,password){
+            localStorage.setItem('ready', 1);
+            //alert(localStorage.getItem('ready'));
+            changedCount = 1;
+            console.log("creating");
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              console.log(errorCode);
+              var errorMessage = error.message;
+              console.log(errorMessage);    
+              $("#error").text(errorMessage);
+              $("#error").show();
+                //window.location.href="table.html";
+              //alert(error.message);
+              // ...
+            });
+            //setTimeout(reDirect, 3000)
+        }
+        function Login(email,password){
+            
+            alert("in login");
+            //localStorage.setItem('ready', 1);
+            //alert(localStorage.getItem('ready'));
+            changedCount = 1;
+            console.log("creating");
+            //alert("email " + email + " password " + password);
+            /*const auth = firebase.auth();
+            const promise = auth.signInUserWithEmailAndPassword(email, password);
+            promise.catch(e => alert(e.message));
+            /*const auth = firebase.auth();*/
+            //firebase.authDomain = "https://chromecalendar.github.io";
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              /*alert(error.message);
+              alert(error.code);
+              alert(user.uid);*/
+              
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log("that thing just happened");
+              $("#error").text(errorMessage);
+              $("#error").show();    
+              $("#forgot").show();
+               
+              // ...
+            });
+        }
+        firebase.auth().onAuthStateChanged(function(user) {
+          //alert("auth state changed");
+          //alert(user);
+          //alert("bro " + changedCount);
+          //var temp = localStorage.getItem('ready');
+          //alert("temp " + localStorage.getItem('ready'));
+          /*if(localStorage.getItem('ready') == 1){
+              localStorage.setItem('ready',0);
+              window.location.href="table.html";
+          }*/
+          var email = $('#email').val();
+          if (user) {
+              alert(user.uid);
+              /*var postData = {
+                email: email,
+                animal: "wolf"
+              };*/
+              //function writeUserData(user.uid, name, email, imageUrl) {
+                
+            alert("user exist");
+            if(globalMode == 0){
+                setInfo(email,user.uid,reDirect);
+            }
+            else{
+                window.reDirect("table.html");
+            }
+              //}
+             
+            // User is signed in.
+              //alert("we are going");
+             
+          } else {
+            // No user is signed in.
+          }
+        });
+        /*var userRef = firebase.database().ref('/users');
+        userRef.on('child_added', function(snapshot) {
+          //userRef(postElement, snapshot.val());
+            var newUser = snapshot.val();
+            alert(newUser.keyCode);
+        });*/
+        firebase.database().ref('/users').once('value').then(function(snapshot) {
+          var username = snapshot.val();
+          //alert(username);
+          // ...
+        });
+        function reDirect(newLoc){
+            alert("in reDirect");
+            
+            window.location.href = newLoc;
+        }
+        function setInfo(email,uid,callback){
+            alert("hello");
+            alert("user.uid" + uid);
+            localStorage.setItem('key', uid);
+
+            firebase.database().ref('users/' + uid).set({
+                    email: email,
+                    animal : "wolf"
+            });
+            callback("table.html");
+            //document.location.href = "table.html";
+        }
+      /*function myFunction(){
+          var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
+          usersRef.createUser({
+            email: "bobtony@firebase.com",
+            password: "correcthorsebatterystaple"
+            }, function(error, userData) {
+          if (error) {
+            switch (error.code) {
+              case "EMAIL_TAKEN":
+                console.log("The new user account cannot be created because the email is already in use.");
+                break;
+              case "INVALID_EMAIL":
+                console.log("The specified email is not a valid email.");
+                break;
+              default:
+                console.log("Error creating user:", error);
+            }
+          } else {
+            console.log("Successfully created user account with uid:", userData.uid);
+          }
+        });
+      }*/
+    </script>
+</html>
