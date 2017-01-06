@@ -71,10 +71,10 @@ thead{
     background-color: black;
 }
 .mineTaken{
-    background-color: maroon;
+    background-color: rgba(180,80,75,1);
 }
 .mine{
-    background-color:lightpink;
+    background-color:rgba(200,130,150,1);
 }
 .container{
 	text-align: center;
