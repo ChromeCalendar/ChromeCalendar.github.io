@@ -21,7 +21,7 @@ table, th, td {
     border: 1px solid black;
 }
 td{
-    background-color: rgba(160,220,250,1);
+    background-color: rgba(200,200,252,1);
 	padding: 8px;
 }
 thead{
@@ -54,7 +54,7 @@ thead{
 .yes{
     background-color: #00ccff;
     
-    background-color: rgba(200,130,150,1);
+    background-color: rgba(160,140,200,1);
     background-size: contain;
     color: black;
 }
