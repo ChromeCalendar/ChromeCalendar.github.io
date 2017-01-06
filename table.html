@@ -1355,7 +1355,8 @@
                 
                 var ID = event.target.id;
                 var tempInt = parseInt(ID,10);
-                if((tempInt >=0) && (tempInt < 19)){
+                console.log("fire and sadness " + ID);
+                if((tempInt >=0) && (tempInt <= 20)){
                 console.log("fire and sadness " + ID);
                 var Color = $('#'+ID).attr("class");
                 var tempLocation = selected.indexOf(ID);
@@ -1380,6 +1381,7 @@
                     tempOne = 2;
                 }
                 else if((tempInt >= 16) && (tempInt  <= 20)){
+                    console.log("butterfly " + tempInt);
                     tagOne = '3';
                     tagTwo = tempInt - 15;
                     tempOne = 3;
