@@ -77,9 +77,16 @@ thead{
     background-color:rgba(255,160,180,1);
 }
 .container{
-	text-align: center;
+    /*align-content: center;*/
+    margin: auto;
+    width: 80%;
+    margin-top: 5%;
+    /*border: 3px solid green;*/
+    padding: 30px;
+    
+	/*text-align: center;
     margin: 60px;
-    padding: 30;
+    padding: 30;*/
     border-radius: 15px;
     background-color: rgba(255,255,255,.4);
 }
