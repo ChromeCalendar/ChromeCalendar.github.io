@@ -31,7 +31,7 @@
         <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a onclick="signOut()">Sign Out</a></li>
-            <li><a onclick = "mineView()" >My Carts</a></li>
+            <!--<li><a onclick = "mineView()" >My Carts</a></li>-->
             <!--<div class="form-group">
               <input type="password" placeholder="Password" class="form-control">
             </div>-->
@@ -110,7 +110,7 @@
         <button type = "button" class= "btn btn-primary" onclick = "getCurrent(1,1)">Forward</button>-->
 
 			<tr>
-				<td id="time" onclick = "getCurrent(1,-1)">Back</td><td style="background-color:white"><b id = "MonthSlot" href="#">Month</b></td><td id="time" onclick = "getCurrent(1,1)">Next</td>
+				<td id="time" onclick = "getCurrent(1,-1)">Backward</td><td id="time" onclick = "getCurrent(1,1)">Forward</td><td style="background-color:white"><b id = "MonthSlot" href="#">Month</b></td><td id = "black-white" onclick = "mineView()">My Carts</td>
 			</tr>
 		</table>
         
@@ -1335,7 +1335,7 @@
                 }
                 //clearMine();
                 clicked++;
-                $('#myTable tr:last').after('<tr><td style="border: 3px solid black">'+(i+1)+'</td><td style="border: 3px solid black" class=' + one +'  id= '+(1+i*5).toString()+'></td><td style="border: 3px solid black" class=' + two +' id= '+(2+i*5).toString()+'></td><td style="border: 3px solid black" class=' + three +' id= '+(3+i*5).toString()+'></td><td style="border: 3px solid black" class=' + four +' id= '+(4+i*5).toString()+'></td><td style="border: 3px solid black" class=' + five +' id= '+(5+i*5).toString()+'></td></tr>'); 
+                $('#myTable tr:last').after('<tr><td>'+(i+1)+'</td><td  class=' + one +'  id= '+(1+i*5).toString()+'></td><td  class=' + two +' id= '+(2+i*5).toString()+'></td><td  class=' + three +' id= '+(3+i*5).toString()+'></td><td  class=' + four +' id= '+(4+i*5).toString()+'></td><td class=' + five +' id= '+(5+i*5).toString()+'></td></tr>'); 
             }
             clearMine();
             //$('#myTable tr:last').remove();
