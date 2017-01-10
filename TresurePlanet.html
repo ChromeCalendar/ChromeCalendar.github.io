@@ -57,14 +57,23 @@
         
         
         
-        function savename(name, room)
+        function savename()
         {
             var data =localStorage.getItem('key');
+            var name = $("#name").val();
+            var room = $("#room").val();
             
+          // Write the new post's data simultaneously in the posts list and the user's post list.
+          var updates = {};
+          updates['/users/' + data + "/name"] = name;
+          updates['/users/' + data + "/room"] = room;
+          //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+          firebase.database().ref().update(updates);/*
             firebase.database().ref('users/'+data).set({
                 name:name,
                 room:room
-            })
+            })*/
         }
         
         
