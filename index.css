@@ -4,7 +4,9 @@ body{
     background-size: cover;
     color: black;
     font-family: 'Courgette', cursive;
-    background-image: url("https://static.pexels.com/photos/56030/pyrite-pyrites-mineral-sulfide-56030.jpeg");
+    /*background-image: url("https://static.pexels.com/photos/56030/pyrite-pyrites-mineral-sulfide-56030.jpeg");*/
+    background-image: url("http://i.dailymail.co.uk/i/pix/2016/10/07/11/392FF45300000578-0-image-a-64_1475834766915.jpg");
+    background-position: 0px -250px;
 }
 #whiteText{
     color:black;
