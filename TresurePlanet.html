@@ -26,22 +26,13 @@
         <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
     </head>
     <body>
-        <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
-        
         <form>
-            <div class = "form-group">
-              <div id="whiteText">email:</div>
-              <input type="text" name="email" id="email">
-              <div id="whiteText">password:</div>
-              <input type="password" name="password" id="password">
-            </div>
-          <button type = "button" class="btn btn-primary" onclick="myFunction(0)">Sign Up</button>
-          <button type = "button" class="btn btn-primary" onclick="myFunction(1)">Sign In</button>
-         <div id='error'>error spiders</div>
-         <div id="forgot">Forgot Password?</div>
-          <a id = "submit" href="table.html"></a>
+            Name:<br>
+            <input id="name" type="text" name="name"><br>
+            Room Number:<br>
+            <input id="room" type="text" name="room">
         </form>
-
+        <button type="button" onclick="savename()">Submit</button>
     </body>
     <script>
         //localStorage.setItem('ready', 0);
@@ -63,90 +54,20 @@
                 $("#submit").trigger('click');
             }
         });*/
-        var globalMode = 0;
-        var today = new Date();
-        var day = today.getDate() + 1;
-        var month = today.getMonth();
-        var year = today.getFullYear();
-        //alert("day " + day);
-        //alert("month " + month);
-        //alert("year " + year);
-        function myFunction(mode){
-            globalMode = mode;
-            var email = $('#email').val();
-            var password = $('#password').val();
-            if(mode == 0){
-                console.log("xox");
-                //alert(email);
-                console.log(password);
-                Create(email,password);
-            }
-            else{
-                Login(email,password);
-            }
-            //reDirect();
-            //window.location.href="table.html";
+        
+        
+        
+        function savename(name, room)
+        {
+            var data =localStorage.getItem('key');
             
-            /*var newKey = firebase.database().ref().child('users').push().key;
-            console.log(newKey);
-            localStorage.setItem('UID', newKey);
-            var updates = {};
-            updates['/users/' + newKey] = postData;
-            firebase.database().ref().update(updates);*/
-            
-            
+            firebase.database().ref('users/'+data).set({
+                name:name,
+                room:room
+            })
         }
-        $( "#forgot" ).click(function() {
-          document.location.href = "reset.html";
-        });
-        function Create(email,password){
-            localStorage.setItem('ready', 1);
-            //alert(localStorage.getItem('ready'));
-            changedCount = 1;
-            console.log("creating");
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              console.log(errorCode);
-              var errorMessage = error.message;
-              console.log(errorMessage);    
-              $("#error").text(errorMessage);
-              $("#error").show();
-                //window.location.href="table.html";
-              //alert(error.message);
-              // ...
-            });
-            //setTimeout(reDirect, 3000)
-        }
-        function Login(email,password){
-            
-            alert("in login");
-            //localStorage.setItem('ready', 1);
-            //alert(localStorage.getItem('ready'));
-            changedCount = 1;
-            console.log("creating");
-            //alert("email " + email + " password " + password);
-            /*const auth = firebase.auth();
-            const promise = auth.signInUserWithEmailAndPassword(email, password);
-            promise.catch(e => alert(e.message));
-            /*const auth = firebase.auth();*/
-            //firebase.authDomain = "https://chromecalendar.github.io";
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-              // Handle Errors here.
-              /*alert(error.message);
-              alert(error.code);
-              alert(user.uid);*/
-              
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              console.log("that thing just happened");
-              $("#error").text(errorMessage);
-              $("#error").show();    
-              $("#forgot").show();
-               
-              // ...
-            });
-        }
+        
+        
         firebase.auth().onAuthStateChanged(function(user) {
           //alert("auth state changed");
           //alert(user);
@@ -210,27 +131,5 @@
             callback("table.html");
             //document.location.href = "table.html";
         }
-      /*function myFunction(){
-          var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
-          usersRef.createUser({
-            email: "bobtony@firebase.com",
-            password: "correcthorsebatterystaple"
-            }, function(error, userData) {
-          if (error) {
-            switch (error.code) {
-              case "EMAIL_TAKEN":
-                console.log("The new user account cannot be created because the email is already in use.");
-                break;
-              case "INVALID_EMAIL":
-                console.log("The specified email is not a valid email.");
-                break;
-              default:
-                console.log("Error creating user:", error);
-            }
-          } else {
-            console.log("Successfully created user account with uid:", userData.uid);
-          }
-        });
-      }*/
     </script>
 </html>

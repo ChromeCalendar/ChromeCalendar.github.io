@@ -36,6 +36,7 @@
               <input type="password" name="password" id="password">
             </div>
           <button type = "button" class="btn btn-primary" onclick="myFunction(0)">Sign Up</button>
+          <button type = "button" class="btn btn-primary" onclick="myFunction(0)">Sign Up</button>
           <button type = "button" class="btn btn-primary" onclick="myFunction(1)">Sign In</button>
          <div id='error'>error spiders</div>
          <div id="forgot">Forgot Password?</div>
@@ -80,6 +81,7 @@
                 //alert(email);
                 console.log(password);
                 Create(email,password);
+                
             }
             else{
                 Login(email,password);
@@ -112,7 +114,6 @@
               console.log(errorMessage);    
               $("#error").text(errorMessage);
               $("#error").show();
-                //window.location.href="table.html";
               //alert(error.message);
               // ...
             });
@@ -207,8 +208,9 @@
                     email: email,
                     animal : "wolf"
             });
-            callback("table.html");
-            //document.location.href = "table.html";
+            
+            //callback("table.html");
+            document.location.href = "TresurePlanet.html";
         }
       /*function myFunction(){
           var usersRef = new Firebase('https://chrome-calendar.firebaseio.com');
