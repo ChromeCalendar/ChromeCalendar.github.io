@@ -7,6 +7,8 @@ body{
     background-size: cover;
 }
 #MyTable {
+    margin-top: 20px;
+    padding-top:20px;
     border-collapse: collapse;
     /* margin: 60px;*/
 }
@@ -183,11 +185,17 @@ thead{
 #black-white{
     background-color: white;
     color: black;
+    /*border: 1px solid white;*/
     
 }
+b{
+    /*border: 1px solid white;*/
+}
 #MonthSlot{
+   /*border: 1px solid white;*/
 }
 #time{
+    /*border: 1px solid white;*/
     background-image: none;
     color:white;
     background-color: maroon;
