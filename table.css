@@ -80,15 +80,26 @@ thead{
 }
 .container{
     /*align-content: center;*/
+    /*text-align: center;
+    margin: 60px;
+    padding: 30;*/
+    /*border: 3px solid green;*/
+    
+    padding: 30;
+    margin: auto;
+    /*float: left;*/
+    width: 80%;
+    margin-top: 5%;
+    /*padding: 30px;*/
+    border-radius: 15px;
+    background-color: rgba(255,255,255,.4);
+}
+#img-tag{
+    /*float: right;*/
     margin: auto;
     width: 80%;
     margin-top: 5%;
-    /*border: 3px solid green;*/
-    padding: 30px;
-    
-	/*text-align: center;
-    margin: 60px;
-    padding: 30;*/
+    /*padding: 30px;*/
     border-radius: 15px;
     background-color: rgba(255,255,255,.4);
 }
