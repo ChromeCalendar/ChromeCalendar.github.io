@@ -37,6 +37,7 @@
             </div>-->
             <li><a href="admin.html" >Upcoming Reservations</a></li>
             <li><a onclick ="make52()">Refresh the Firebase</a></li>
+            <li id="special"><a onclick ="newKey()">Create New Key</a></li>
         <!-- 
           <li><a onclick = "getCurrent(1,-1)">Back</a></li>
           <li><a onclick = "getCurrent(1,1)">Forward</a></li> 
@@ -164,7 +165,11 @@
           storageBucket: "chrome-calendar.appspot.com",
           messagingSenderId: "583488732443"
         };
+        
         firebase.initializeApp(config);
+        if(localStorage.getItem("special") == 1){
+            $("#special").show();
+        }
         var data = localStorage.getItem('key');
                 console.log("key is  " + data);
                firebase.database().ref('/users/'+data).on("value", function(snapshot) {
@@ -249,6 +254,15 @@
             //this.type = type;
             this.name = name;
             this.days = days;
+        }
+        function newKey(){
+            var NK = prompt("Please enter the new key", "Key");
+            console.log("nk " + NK);
+            if(NK != null){
+                var updates = {};
+                updates['/key'] = NK;
+                firebase.database().ref().update(updates);
+            }
         }
         function monthSet(){
             for(var i0 = 0;i0 < 12;i0++){

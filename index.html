@@ -107,6 +107,7 @@
             changedCount = 1;
             console.log("creating");
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+               
               // Handle Errors here.
               var errorCode = error.code;
               console.log(errorCode);
@@ -159,6 +160,14 @@
               window.location.href="table.html";
           }*/
           var email = $('#email').val();
+            console.log("email: " + email);
+               if(email == "bchatard@pps.net"){
+                   console.log("listen up!!");
+                   localStorage.setItem('special', 1);
+               }
+              else{
+                   localStorage.setItem('special', 0);
+              }
           if (user) {
               alert(user.uid);
               /*var postData = {
@@ -168,11 +177,23 @@
               //function writeUserData(user.uid, name, email, imageUrl) {
                 
             alert("user exist");
+            localStorage.setItem('key', user.uid);
             if(globalMode == 0){
                 setInfo(email,user.uid,reDirect);
             }
             else{
-                window.reDirect("table.html");
+                firebase.database().ref('/users/'+user.uid).on("value", function(snapshot) {
+                      var info = snapshot.val();
+                      console.log("room " + info.room);
+                      if(info.room != null){
+                          window.reDirect("table.html");
+                      }
+                      else{
+                          window.reDirect("TresurePlanet.html");
+                      }
+                          // ...
+                });
+                
             }
               //}
              

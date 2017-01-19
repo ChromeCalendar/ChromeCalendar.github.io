@@ -30,14 +30,17 @@
             Name:<br>
             <input id="name" type="text" name="name"><br>
             Room Number:<br>
-            <input id="room" type="text" name="room">
+            <input id="room" type="text" name="room"><br>
+            Confirmation Key:<br>
+            <input id="CK" type="text" name="CK"><br>
+            <button type="button" onclick="savename()">Submit</button>
         </form>
-        <button type="button" onclick="savename()">Submit</button>
     </body>
     <script>
         //localStorage.setItem('ready', 0);
       // Initialize Firebase
        var changedCount = 0;
+       var DK;
        jQuery.ajaxSetup({async:false});
         
        var config = {
@@ -54,19 +57,31 @@
                 $("#submit").trigger('click');
             }
         });*/
-        
+        var data = localStorage.getItem('key');
+        console.log("Data " + data);
+        firebase.database().ref('/key').on("value", function(snapshot) {
+               DK = snapshot.val();
+              
+                  // ...
+        });
         
         
         function savename()
         {
-            var data =localStorage.getItem('key');
+            var data = localStorage.getItem('key');
+            console.log("Data " + data);
             var name = $("#name").val();
             var room = $("#room").val();
+            var CK = $("#CK").val();
             
           // Write the new post's data simultaneously in the posts list and the user's post list.
           var updates = {};
           updates['/users/' + data + "/name"] = name;
           updates['/users/' + data + "/room"] = room;
+          if(localStorage.getItem("special") == 1){
+            console.log("listen up!!");
+            updates['/users/' + data + "/special"] = "yes";
+          }
           //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
           firebase.database().ref().update(updates);/*
@@ -74,6 +89,13 @@
                 name:name,
                 room:room
             })*/
+            console.log("CK " + CK + " DK " + DK);
+            if(CK == DK){
+                window.location = "table.html";
+            }
+            else{
+                alert("wrong key");
+            }
         }
         
         
