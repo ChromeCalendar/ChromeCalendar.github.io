@@ -122,7 +122,7 @@
         }
         function Login(email,password){
             
-            alert("in login");
+            //alert("in login");
             //localStorage.setItem('ready', 1);
             //alert(localStorage.getItem('ready'));
             changedCount = 1;
@@ -169,14 +169,14 @@
                    localStorage.setItem('special', 0);
               }
           if (user) {
-              alert(user.uid);
+             // alert(user.uid);
               /*var postData = {
                 email: email,
                 animal: "wolf"
               };*/
               //function writeUserData(user.uid, name, email, imageUrl) {
                 
-            alert("user exist");
+            //alert("user exist");
             localStorage.setItem('key', user.uid);
             if(globalMode == 0){
                 setInfo(email,user.uid,reDirect);
@@ -216,13 +216,13 @@
           // ...
         });
         function reDirect(newLoc){
-            alert("in reDirect");
+            //alert("in reDirect");
             
             window.location.href = newLoc;
         }
         function setInfo(email,uid,callback){
-            alert("hello");
-            alert("user.uid" + uid);
+            //alert("hello");
+           // alert("user.uid" + uid);
             localStorage.setItem('key', uid);
 
             firebase.database().ref('users/' + uid).set({
